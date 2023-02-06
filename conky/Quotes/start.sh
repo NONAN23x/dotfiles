@@ -1,3 +1,3 @@
 #!/bin/bash
-conky -c ./Quotes.conf &> /dev/null &
+conky -c /home/nonan23x/.config/conky/Quotes/Quotes.conf &> /dev/null &
 exit
