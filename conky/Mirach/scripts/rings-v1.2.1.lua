@@ -24,13 +24,13 @@ settings_table = {
         max=100,
         bg_colour=0xFFFFFF,
         bg_alpha=0.2,
-        fg_colour=0xFFFFFF,
+        fg_colour=0xe81795,
         fg_alpha=0.8,
-        x=25, y=290,
-        radius=12,
+        x=25, y=740,
+        radius=22,
         thickness=12,
         start_angle=180,
-        end_angle=360,
+        end_angle=540,
     },
     {
         name='memperc',
@@ -38,13 +38,13 @@ settings_table = {
         max=100,
         bg_colour=0xFFFFFF,
         bg_alpha=0.2,
-        fg_colour=0xFFFFFF,
+        fg_colour=0xe81795,
         fg_alpha=0.8,
-        x=135, y=290,
-        radius=12,
+        x=245, y=740,
+        radius=22,
         thickness=12,
         start_angle=180,
-        end_angle=360
+        end_angle=540
     },
     {
         name='acpitemp',
@@ -52,13 +52,13 @@ settings_table = {
         max=100,
         bg_colour=0xFFFFFF,
         bg_alpha=0.2,
-        fg_colour=0xFFFFFF,
+        fg_colour=0xe81795,
         fg_alpha=0.8,
-        x=245, y=290,
-        radius=12,
+        x=470, y=740,
+        radius=22,
         thickness=12,
         start_angle=180,
-        end_angle=360
+        end_angle=540
     },
  
 }
