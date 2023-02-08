@@ -1,6 +1,6 @@
 #!/bin/bash
 		
-sleep 3s
+sleep 1s
 
 conky -c $HOME/.config/conky/Overlay/Overlay.conf &> /dev/null &
 
