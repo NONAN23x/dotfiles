@@ -1,2 +1,2 @@
 # dotfiles
-dotfiles for quick setup for my workflow
+dotfiles to quicky setup my workflow
