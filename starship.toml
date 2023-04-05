@@ -1,145 +1,63 @@
-format = """
-[](#DB0B7E)\
-$os\
-$username\
-[](bg:#5354FE fg:#DB0B7E)\
-$directory\
-[](fg:#5354FE bg:#0f37d9)\
-$git_branch\
-$git_status\
-[](fg:#0f37d9 bg:#86BBD8)\
-$c\
-$elixir\
-$elm\
-$golang\
-$haskell\
-$java\
-$julia\
-$nodejs\
-$nim\
-$python\
-$rust\
-$scala\
-[](fg:#86BBD8 bg:#d40611)\
-$docker_context\
-[](fg:#d40611 bg:#30d117)\
-$time\
-[ ](fg:#30d117)\
-"""
+## ░█▀▀░▀█▀░█▀█░█▀▄░█▀▀░█░█░▀█▀░█▀█
+## ░▀▀█░░█░░█▀█░█▀▄░▀▀█░█▀█░░█░░█▀▀
+## ░▀▀▀░░▀░░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░░
+# Setups
+format="$directory$git_branch$character"
+right_format = """$git_status$cmd_duration"""
+add_newline = true
 
-# Disable the blank line at the start of the prompt
-# add_newline = false
+# Other languages configurations:
+c.disabled = true
+cmake.disabled = true
+haskell.disabled = true
+python.disabled = true
+ruby.disabled = true
+rust.disabled = true
+perl.disabled = true
+package.disabled = true
+lua.disabled = true
+nodejs.disabled = true
+java.disabled = true
+golang.disabled = true
 
-# You can also replace your username with a neat symbol like   or disable this
-# and use the os module below
-[username]
-show_always = true
-style_user = "bg:#DB0B7E"
-style_root = "bg:#9A348E"
-format = '[$user@notebook ]($style)'
-disabled = false
+[conda]
+format = ' [$symbol$environment](dimmed green) '
 
-# An alternative to the username module which displays a symbol that
-# represents the current operating system
-[os]
-style = "bg:#9A348E"
-disabled = true # Disabled by default
+# Prompt symbols 
+[character]
+success_symbol = "[](#8EC07C bold) "
+error_symbol = "[](#AD685A) "
+vicmd_symbol = "[](#DD8F6E) "
 
 [directory]
-style = "bg:#5354FE fg:#09055c"
-format = "[ $path ]($style)"
+format = "[]($style)[ ](bg:#312C2E fg:#DD8F6E)[$path](bg:#312C2E fg:#83A598 bold)[ ]($style)"
+style = "bg:none fg:#312C2E"
 truncation_length = 3
-truncation_symbol = "…/"
-
-# Here is how you can shorten some long paths by text replacement
-# similar to mapped_locations in Oh My Posh:
-[directory.substitutions]
-"Documents" = " "
-"Downloads" = " "
-"Music" = " "
-"Pictures" = " "
-# Keep in mind that the order matters. For example:
-# "Important Documents" = "  "
-# will not be replaced, because "Documents" was already substituted before.
-# So either put "Important Documents" before "Documents" or use the substituted version:
-# "Important  " = "  "
-
-[c]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[docker_context]
-symbol = " "
-style = "bg:#d40611"
-format = '[ $symbol $context ]($style) $path'
-
-[elixir]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[elm]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
+truncate_to_repo=false
 
 [git_branch]
-symbol = ""
-style = "bg:#0f37d9"
-format = '[ $symbol $branch ]($style)'
+format = "[]($style)[[ ](bg:#312C2E fg:#8EC07C bold)$branch](bg:#312C2E fg:#83A598)[ ]($style)"
+style = "bg:none fg:#312C2E"
 
 [git_status]
-style = "bg:#0f37d9"
-format = '[$all_status$ahead_behind ]($style)'
+# $all status$ahead_behind
+format = "[]($style)[$all_status$ahead_behind](bg:#312C2E fg:#b4befe)[ ]($style)"
+style = "bg:none fg:#312C2E"
+conflicted = "="
+ahead =	"⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = ""
+untracked = "?${count}"
+stashed = ""
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "${count}"
 
-[golang]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[haskell]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[java]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[julia]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[nodejs]
-symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[nim]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[python]
-symbol = "🐍 "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[rust]
-symbol = ""
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[scala]
-symbol = " "
-style = "bg:#86BBD8"
-format = '[ $symbol ($version) ]($style)'
-
-[time]
+[cmd_duration]
+min_time = 1
+# duration & style 
+format = "[]($style)[[神](bg:#312C2E fg:#eba0ac bold)$duration](bg:#312C2E fg:#BBC3DF)[ ]($style)"
 disabled = false
-time_format = "%I:%M %p" # Hour:Minute Format
-style = "bg:#30d117 fg:#037320"
-format = '[ ♥ $time ]($style)'
+style = "bg:none fg:#312C2E"
