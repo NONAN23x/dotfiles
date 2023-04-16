@@ -25,19 +25,19 @@ format = ' [$symbol$environment](dimmed green) '
 
 # Prompt symbols 
 [character]
-success_symbol = "[](#8EC07C bold) "
-error_symbol = "[](#AD685A) "
+success_symbol = "[](#48e314 bold) "
+error_symbol = "[](#d43981) "
 vicmd_symbol = "[](#DD8F6E) "
 
 [directory]
-format = "[]($style)[ ](bg:#312C2E fg:#DD8F6E)[$path](bg:#312C2E fg:#83A598 bold)[ ]($style)"
-style = "bg:none fg:#312C2E"
+format = " []($style)[ ](bg:#4c32a8 fg:#DD8F6E)[$path](bg:#4c32a8 fg:#83A598 bold)[ ]($style)"
+style = "bg:none fg:#4c32a8"
 truncation_length = 3
 truncate_to_repo=false
 
 [git_branch]
-format = "[]($style)[[ ](bg:#312C2E fg:#8EC07C bold)$branch](bg:#312C2E fg:#83A598)[ ]($style)"
-style = "bg:none fg:#312C2E"
+format = "[]($style)[[ ](bg:#3a6341 fg:#8EC07C bold)$branch](bg:#3a6341 fg:#83A598)[ ]($style)"
+style = "bg:none fg:#3a6341"
 
 [git_status]
 # $all status$ahead_behind
@@ -58,6 +58,6 @@ deleted = "${count}"
 [cmd_duration]
 min_time = 1
 # duration & style 
-format = "[]($style)[[神](bg:#312C2E fg:#eba0ac bold)$duration](bg:#312C2E fg:#BBC3DF)[ ]($style)"
+format = "[]($style)[[神](bg:#cccccc fg:#821b3a bold)$duration](bg:#cccccc fg:#121210)[ ]($style)"
 disabled = false
-style = "bg:none fg:#312C2E"
+style = "bg:none fg:#cccccc"
