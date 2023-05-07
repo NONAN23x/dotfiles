@@ -2,7 +2,7 @@
 ## ░▀▀█░░█░░█▀█░█▀▄░▀▀█░█▀█░░█░░█▀▀
 ## ░▀▀▀░░▀░░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░░
 # Setups
-format="$directory$git_branch$character"
+format="$directory$git_branch$time$character"
 right_format = """$git_status$cmd_duration"""
 add_newline = true
 
@@ -61,3 +61,10 @@ min_time = 1
 format = "[]($style)[[神](bg:#cccccc fg:#821b3a bold)$duration](bg:#cccccc fg:#121210)[ ]($style)"
 disabled = false
 style = "bg:none fg:#cccccc"
+
+[time]
+disabled = false
+time_format = "%I:%M %p" # Hour:Minute Format
+style = "bg:none fg:#3a6341"
+#format = "[]($style)[[  $time ](fg:#a0a9cb bg:#1d2230)](bg:#cccccc fg:#121210)[ ]($style)"
+format = "[]($style)[[ ](bg:#3a6341 fg:#8EC07C bold)$time](bg:#3a6341 fg:#83A598)[ ]($style)"
