@@ -25,7 +25,7 @@ format = ' [$symbol$environment](dimmed green) '
 
 # Prompt symbols 
 [character]
-success_symbol = "[](#48e314 bold) "
+success_symbol = "[](#ffffff bold) "
 error_symbol = "[](#d43981) "
 vicmd_symbol = "[](#DD8F6E) "
 
@@ -36,8 +36,8 @@ truncation_length = 3
 truncate_to_repo=false
 
 [git_branch]
-format = "[]($style)[[ ](bg:#3a6341 fg:#8EC07C bold)$branch](bg:#3a6341 fg:#83A598)[ ]($style)"
-style = "bg:none fg:#3a6341"
+format = "[]($style)[[  ](bg:#25b041 fg:#074a14 bold)$branch](bg:#25b041 fg:#074a14)[ ]($style)"
+style = "bg:none fg:#25b041"
 
 [git_status]
 # $all status$ahead_behind
