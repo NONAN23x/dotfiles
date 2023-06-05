@@ -1,11 +1,13 @@
 #!/bin/bash
 
-killall conky
+sleep 3s
 
-sleep 2s
+killall conky
+killall glava
+
+sleep 3s
 
 conky -c /home/nonan23x/.config/conky/Overlay/Overlay.conf &>/dev/null &
 
-sleep 1s
+glava -d 
 
-conky -c /home/nonan23x/.config/conky/Quotes/Quotes.conf &>/dev/null &
