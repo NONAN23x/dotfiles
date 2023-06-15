@@ -1,7 +1,9 @@
 # dotfiles
 Setting Up my workflow in a jiffy :)
 
-## Only works on Arch Linux, or other Rolling Releases with bleeding-edge like OpenSuse, Fedora, etc...
+![alt text](images/rice.png "Rice")
+
+## Hyprland Only works on Arch Linux, and other Rolling Releases with bleeding-edge like OpenSuse, Fedora, etc...
 
 ## Software requirements/dependencies
 Install these first
