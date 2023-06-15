@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Define an array of values
+array=("~/.config/hypr/everest.png" "~/.config/hypr/wallpaper.jpg" "~/.config/hypr/wallpaper-dark.jpg" "~/.config/hypr/man.png" "~/.config/hypr/car.png")
+
+# Get the length of the array
+length=${#array[@]}
+
+# Generate a random index
+index=$(( RANDOM % length ))
+
+# Get the value at the random index
+random_value="${array[index]}"
+
+# Echo the random value
+swww img --transition-type random $random_value
+
+# echo "$random_value"
