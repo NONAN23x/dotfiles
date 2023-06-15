@@ -148,5 +148,5 @@ pokemon-colorscripts -r --no-title
 alias bat='bat --theme="Catppuccin-mocha"'
 alias hc=herbstclient
 set MOZ_ENABLE_WAYLAND 1
-set XDG_CURRENT_DESKTOP sway
+set XDG_CURRENT_DESKTOP hyprland
 
