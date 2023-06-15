@@ -3,10 +3,6 @@ if status is-interactive
 end
 starship init fish | source
 
-export OPENAIKEY='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'
-export IP=172.105.35.245
-export ASRURL='http://172.105.35.245:9000'
-export VOXURL='http://172.105.35.245:50021'
 set fish_greeting
 
 fish_add_path /home/nonan23x/.spicetify
