@@ -9,6 +9,6 @@ wallpaper = random.choice(os.listdir(paper))
 
 path = os.path.join("~/Pictures/walls/", wallpaper)
 
-print(f'swww img {path}')
+print(f"swww img {path}")
 
-os.system(f"swww img {path} --transition-type any")
+os.system(f"swww img {path} --transition-type random")
