@@ -1,21 +1,27 @@
 * {
-    border: none;
-    border-radius: 0px;
+    border-radius: 4px;
+    opacity: 1.0;
     /*font-family: VictorMono, Iosevka Nerd Font, Noto Sans CJK;*/
     font-family: Iosevka, FontAwesome, Noto Sans CJK;
-    font-size: 14px;
+    font-size: 18px;
     font-style: normal;
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(30, 30, 46, 0.5);
-    border-bottom: 1px solid #282828;
-    color: #f4d9e1
+
+	background: transparent;
+  padding: 5px 5px 5px 5px;
+	margin: 5px 5px 5px 5px;
+  border-radius: 8px;
+  background: rgba(30, 30, 46, 0.0);
+  /* border-bottom: 1px solid #282828; */
+  color: #f4d9e1
 }
 
 #workspaces {
-	background: #282828;
+	background: #000000;
+  background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(18,40,74,1) 43%, rgba(0,0,4,1) 80%, rgba(23,32,120,1) 100%);
 	margin: 5px 5px 5px 5px;
   padding: 0px 5px 0px 5px;
 	border-radius: 16px;
@@ -65,7 +71,8 @@ window#waybar {
 }
 
 #tray {
-    background: #282828;
+    background: rgb(28,69,38);
+    background: linear-gradient(45deg, rgba(28,69,38,1) 0%, rgba(23,46,44,1) 40%, rgba(0,0,0,1) 80%, rgba(137,180,250,1) 100%);
     margin: 5px 5px 5px 5px;
     border-radius: 16px;
     padding: 0px 5px;
@@ -73,13 +80,14 @@ window#waybar {
 }
 
 #clock {
-    color: #E6B9C6;
-    background-color: #282828;
-    border-radius: 0px 0px 0px 24px;
-    padding-left: 13px;
-    padding-right: 15px;
-    margin-right: 0px;
-    margin-left: 10px;
+    background: rgb(28,29,38);
+    /* background: linear-gradient(45deg, rgba(28,29,46,1) 0%, rgba(28,29,46,1) 40%, rgba(28,29,46,1) 80%, rgba(28,29,45,1) 100%); */
+    color: white;
+    border-radius: 0px 0px 12px 12px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-right: 1px;
+    margin-left: 1px;
     margin-top: 0px;
     margin-bottom: 0px;
     font-weight: bold;
@@ -87,10 +95,16 @@ window#waybar {
 }
 
 #custom-light_dark {
-  color: #E6B9C6;
-  background-color: #282828;
-  font-weight: bold;
-  margin-right: 0px;
+    /* background-color: #63702d; */
+    background: #687520;
+    background: linear-gradient(45deg, rgba(104,117,32,1) 0%, rgba(23,46,44,1) 43%, rgba(51,100,50,1) 80%, rgba(32,117,48,1) 100%);
+    /*color: #FABD2D;*/
+    border-radius: 16px;
+    margin: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: bold;
 }
 
 #battery {
@@ -125,8 +139,12 @@ window#waybar {
 
 #pulseaudio {
     color: #f4d9e1;
-    border-radius: 8px;
-    margin-left: 0px;
+    border-radius: 16px;
+    margin: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: bold;
 }
 
 #pulseaudio.muted {
@@ -143,8 +161,9 @@ window#waybar {
 }
 
 #custom-launcher {
-    color: #e5809e;
-    background-color: #282828;
+    color: #1a88b8;
+    background-color: #000000;
+    background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 43%, rgba(18,40,74,1) 80%, rgba(23,32,120,1) 100%);
     border-radius: 0px 24px 0px 0px;
     margin: 0px 0px 0px 0px;
     padding: 0 20px 0 13px;
@@ -189,7 +208,8 @@ window#waybar {
 }
 
 #window {
-    background: #282828;
+    background: #687520;
+    background: linear-gradient(45deg, rgba(104,117,32,1) 0%, rgba(23,46,44,1) 43%, rgba(51,100,50,1) 80%, rgba(32,117,48,1) 100%);
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 16px;
@@ -202,7 +222,22 @@ window#waybar {
 }
 
 #cpu {
-    background-color: #282828;
+    /* background-color: #63702d; */
+    background: rgb(28,69,38);
+    background: linear-gradient(45deg, rgba(28,69,38,1) 0%, rgba(23,46,44,1) 43%, rgba(0,0,0,1) 80%, rgba(137,180,250,1) 100%);
+    /*color: #FABD2D;*/
+    border-radius: 16px;
+    margin: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: bold;
+}
+
+#custom-lock_screen {
+    /* background-color: #63702d; */
+    background: #687520;
+    background: linear-gradient(45deg, rgba(104,117,32,1) 0%, rgba(23,46,44,1) 43%, rgba(51,100,50,1) 80%, rgba(32,117,48,1) 100%);
     /*color: #FABD2D;*/
     border-radius: 16px;
     margin: 5px;
@@ -213,19 +248,9 @@ window#waybar {
 }
 
 #memory {
-    background-color: #282828;
+    background: #687520;
+    background: linear-gradient(45deg, rgba(104,117,32,1) 0%, rgba(23,46,44,1) 43%, rgba(51,100,50,1) 80%, rgba(32,117,48,1) 100%);
     /*color: #83A598;*/
-    border-radius: 16px;
-    margin: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 0px 10px 0px 10px;
-    font-weight: bold;
-}
-
-#disk {
-    background-color: #282828;
-    /*color: #8EC07C;*/
     border-radius: 16px;
     margin: 5px;
     margin-left: 5px;

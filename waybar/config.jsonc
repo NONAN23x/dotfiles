@@ -6,16 +6,26 @@
     "margin-bottom": 0,
     "margin-left": 0,
     "margin-right": 0,
-    "modules-left": ["custom/launcher", "wlr/workspaces", "custom/playerctl", "custom/playerlabel"],
-    "modules-center": ["cpu", "memory", "disk"],
-    "modules-right": ["tray", "pulseaudio", "clock", "custom/light_dark"],
+    "modules-left": ["wlr/workspaces", "hyprland/window", "custom/playerctl", "custom/playerlabel"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "pulseaudio", "battery", "custom/light_dark", "custom/lock_screen"],
     // Modules configuration
 	"clock": {
-		"format": "  {:%H:%M %p}",
+		"format": "  It's    {:%I:%M %p}  ",
 		"tooltip": "true",
         	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         	"format-alt": "   {:%d/%m}"
 	},
+
+  "hyprland/window": {
+        "format": "{}"
+  },
+
+  "custom/lock_screen": {
+        "format": "",
+        "on-click": "sh -c '(sleep 0.5s; swaylock)' & disown",
+        "tooltip": false
+  },
 	
   "custom/light_dark": {
     "format":"󰐾",
@@ -67,8 +77,8 @@
       "on-click": "playerctl previous",
       "on-click-right": "playerctl next",
       "format-icons": {
-        "Playing": "<span foreground='#E5B9C6'>󰒮 󰐌 󰒭</span>",
-        "Paused": "<span foreground='#928374'>󰒮 󰏥 󰒭</span>"
+        "Playing": "<span foreground='#E5B9C6'> 󰒮 󰐌 󰒭 </span>",
+        "Paused": "<span foreground='#928374'> 󰒮 󰏥 󰒭 </span>"
       }
     },
 
@@ -99,16 +109,9 @@
     "interval": 5
   },
 
-  "disk": {
-    "format": "󰋊 {}%",
-    "format-alt": "󰋊 {used}/{total} GiB",
-    "interval": 5,
-    "path": "/dev/nvme0n1p2"
-  },
-	
 	"tray": {
 		"icon-size": 16,
-		"spacing": 6
+		"spacing": 12
 	},
 
 	"backlight": {
@@ -134,13 +137,6 @@
   "custom/randwall": {
     "format": "󰏘",
     "on-click": "~/.config/waybar/scripts/baraction.sh"
-  },
-
-  "custom/launcher": {
-    "format": "󰈸",
-    "on-click": "pkill wofi; wofi -n"
-//    "on-click": "wofi --show drun -I -a -n -W 500 -H 376 -s ~/.config/wofi/themes/gruvbox.css",
-//    "on-click-right": "wofi --show run -I -a -n -W 500 -H 376 -s ~/.config/wofi/themes/gruvbox.css"  
   },
 
   "custom/hyprpicker": {
