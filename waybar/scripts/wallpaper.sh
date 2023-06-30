@@ -11,4 +11,4 @@ path = os.path.join("~/Pictures/walls/", wallpaper)
 
 print(f"swww img {path}")
 
-os.system(f"swww img {path} --transition-type random")
+os.system(f"swww img {path} --transition-type any --transition-fps 90 --transition-duration 2")
