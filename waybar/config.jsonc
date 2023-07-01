@@ -9,9 +9,9 @@
     "modules-left": ["wlr/workspaces", "hyprland/window", "custom/playerctl", "custom/playerlabel"],
     "modules-center": ["clock"],
     "modules-right": ["tray", "pulseaudio", "battery", "custom/light_dark", "custom/lock_screen"],
-    // Modules configuration
+    // Modules configuration 
 	"clock": {
-		"format": "  It's    {:%I:%M %p}  ",
+		"format": "  It's  {:%I:%M %p}  ",
 		"tooltip": "true",
         	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         	"format-alt": "   {:%d/%m}"
@@ -23,14 +23,20 @@
 
   "custom/lock_screen": {
         "format": "",
-        "on-click": "sh -c '(sleep 0.5s; swaylock)' & disown",
+        "on-click": "wlogout --protocol layer-shell",
         "tooltip": false
   },
 	
   "custom/light_dark": {
     "format":"󰐾",
     "on-click":"~/.config/waybar/scripts/wallpaper.sh",
-    "tooltip": false
+    "tooltip": false,
+    "format-icons": {
+			"urgent": "",
+			"active": "",
+			"default": "󰧞"
+    }
+
   },
 
 	"wlr/workspaces": {
@@ -42,11 +48,6 @@
 		"format": "{icon}",
 		"on-click": "activate",
 		"format-icons": {
-//			"1": "一",
-//			"2": "二",
-//			"3": "三",
-//			"4": "四",
-//			"5": "五",
 			"urgent": "",
 			"active": "",
 			"default": "󰧞",
@@ -83,6 +84,8 @@
     },
 
 	"battery": {
+	"on-scroll-up": "bash ~/.scripts/brightness up",
+	"on-scroll-down": "bash ~/.scripts/brightness down",
         "states": {
             "good": 95,
             "warning": 30,
@@ -133,10 +136,6 @@
     "on-scroll-down": "bash ~/.scripts/volume down",
     "scroll-step": 5,
 		"on-click-right": "pavucontrol"
-  },
-  "custom/randwall": {
-    "format": "󰏘",
-    "on-click": "~/.config/waybar/scripts/baraction.sh"
   },
 
   "custom/hyprpicker": {
