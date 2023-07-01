@@ -29,6 +29,7 @@ window#waybar {
   font-weight: normal;
   font-style: normal;
 }
+
 #workspaces button {
     padding: 0px 5px;
     border-radius: 16px;
@@ -47,7 +48,7 @@ window#waybar {
 	border-radius: 16px;
 }
 
-#custom-date, #clock, #battery, #pulseaudio, #custom-randwall, #custom-launcher {
+#custom-date, #clock, #battery, #pulseaudio, #custom-launcher {
 	background: transparent;
 	padding: 5px 5px 5px 5px;
 	margin: 5px 5px 5px 5px;
@@ -72,17 +73,21 @@ window#waybar {
 
 #tray {
     background: rgb(28,69,38);
-    background: linear-gradient(45deg, rgba(28,69,38,1) 0%, rgba(23,46,44,1) 40%, rgba(0,0,0,1) 80%, rgba(137,180,250,1) 100%);
+    background: linear-gradient(45deg, rgba(235,101,152,1) 0%, rgba(230,158,186,1) 40%, rgba(134,177,235,1) 80%, rgba(137,180,250,1) 100%);
     margin: 5px 5px 5px 5px;
     border-radius: 16px;
     padding: 0px 5px;
     /*border-right: solid 1px #282738;*/
 }
-
+  
 #clock {
     background: rgb(28,29,38);
     /* background: linear-gradient(45deg, rgba(28,29,46,1) 0%, rgba(28,29,46,1) 40%, rgba(28,29,46,1) 80%, rgba(28,29,45,1) 100%); */
     color: white;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.377);
+    /* background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(18,40,74,1) 43%, rgba(0,0,4,1) 80%, rgba(23,32,120,1) 100%); */
+    /* animation: gradient 5s ease infinite; */
+    /* background-size: 300% 300%; */
     border-radius: 0px 0px 12px 12px;
     padding-left: 20px;
     padding-right: 20px;
@@ -97,7 +102,7 @@ window#waybar {
 #custom-light_dark {
     /* background-color: #63702d; */
     background: #687520;
-    background: linear-gradient(45deg, rgba(104,117,32,1) 0%, rgba(23,46,44,1) 43%, rgba(51,100,50,1) 80%, rgba(32,117,48,1) 100%);
+    background: linear-gradient(45deg, rgba(171, 93, 179,1) 0%, rgba(235, 47, 47,1) 43%, rgba(134,177,235,1) 80%, rgba(137,180,250,1) 40%);
     /*color: #FABD2D;*/
     border-radius: 16px;
     margin: 5px;
@@ -107,12 +112,27 @@ window#waybar {
     font-weight: bold;
 }
 
+@keyframes blink {
+  to {
+    background-color: #69915e;
+  }
+}
+
 #battery {
     color: #9ece6a;
 }
 
 #battery.charging {
     color: #9ece6a;
+    /* background-color:  #f38; */
+    animation-name: blink;
+    animation-duration: 3.0s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    /* margin: 8px 8px 8px 8px; */
+    /* border-radius: 8px; */
+    /* padding: 0px 5px; */
 }
 
 #battery.warning:not(.charging) {
@@ -131,39 +151,31 @@ window#waybar {
     padding: 0px 0px;
 }
 
-#network {
-    color: #f4d9e1;
-    border-radius: 8px;
-    margin-right: 5px;
-}
-
 #pulseaudio {
     color: #f4d9e1;
     border-radius: 16px;
     margin: 5px;
     margin-left: 5px;
     margin-right: 5px;
-    padding: 0px 10px 0px 10px;
+    padding: 0px 0px 0px 0px;
     font-weight: bold;
+    margin: 8px 8px 8px 8px;
+    border-radius: 8px;
+    padding: 0px 5px;
+
 }
 
 #pulseaudio.muted {
-    background: transparent;
+    background-color: darkred;
     color: #928374;
-    border-radius: 8px;
+    border-radius: 16px;
     margin-left: 0px;
-}
-
-#custom-randwall {
-    color: #f4d9e1;
-    border-radius: 8px;
-    margin-right: 0px;
 }
 
 #custom-launcher {
     color: #1a88b8;
     background-color: #000000;
-    background: linear-gradient(45deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 43%, rgba(18,40,74,1) 80%, rgba(23,32,120,1) 100%);
+    background: linear-gradient(45deg, rgba(171, 93, 179,1) 0%, rgba(235, 47, 47,1) 43%, rgba(134,177,235,1) 80%, rgba(137,180,250,1) 40%);
     border-radius: 0px 24px 0px 0px;
     margin: 0px 0px 0px 0px;
     padding: 0 20px 0 13px;
@@ -207,19 +219,33 @@ window#waybar {
     font-style: normal;
 }
 
-#window {
-    background: #687520;
-    background: linear-gradient(45deg, rgba(104,117,32,1) 0%, rgba(23,46,44,1) 43%, rgba(51,100,50,1) 80%, rgba(32,117,48,1) 100%);
+#window{
+    padding-right: 20px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.377);
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 16px;
-    /*border-left: solid 1px #282738;*/
-    /*border-right: solid 1px #282738;*/
     margin-top: 5px;
     margin-bottom: 5px;
-    font-weight: normal;
-    font-style: normal;
+    /* animation: gradient 5s ease infinite; */
+    background: rgb(202,158,230);
+    background: linear-gradient(45deg, rgba(171, 93, 179,1) 0%, rgba(235, 47, 47,1) 43%, rgba(134,177,235,1) 80%, rgba(137,180,250,1) 40%);
+    /* background-size: 300% 300%; */
+    color: #f4d9e1
 }
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 
 #cpu {
     /* background-color: #63702d; */
@@ -237,7 +263,7 @@ window#waybar {
 #custom-lock_screen {
     /* background-color: #63702d; */
     background: #687520;
-    background: linear-gradient(45deg, rgba(104,117,32,1) 0%, rgba(23,46,44,1) 43%, rgba(51,100,50,1) 80%, rgba(32,117,48,1) 100%);
+    background: linear-gradient(45deg, rgba(171, 93, 179,1) 0%, rgba(235, 47, 47,1) 43%, rgba(134,177,235,1) 80%, rgba(137,180,250,1) 40%);
     /*color: #FABD2D;*/
     border-radius: 16px;
     margin: 5px;
