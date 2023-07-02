@@ -5,7 +5,6 @@ starship init fish | source
 
 set fish_greeting
 
-fish_add_path /home/nonan23x/.spicetify
 alias ip="ip -c"
 alias dir="dir | lolcat"
 alias joke="fortune | cowsay | lolcat"
@@ -148,5 +147,5 @@ pokemon-colorscripts -r --no-title
 alias bat='bat --theme="Catppuccin-mocha"'
 alias hc=herbstclient
 set MOZ_ENABLE_WAYLAND 1
-set XDG_CURRENT_DESKTOP hyprland
+set XDG_CURRENT_DESKTOP Hyprland
 
