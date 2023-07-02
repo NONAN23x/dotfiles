@@ -1,8 +1,8 @@
-width=800
+width=600
 height=500
 location=center
 show=drun
-prompt=My Apps
+prompt=Nice weather today!
 filter_rate=100
 allow_markup=true
 no_actions=true
