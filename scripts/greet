@@ -1,0 +1,2 @@
+mpv --no-video --volume=180 ~/Music/xbox_one_startup.mp3
+notify-send -u normal -t 8000 "Welcome back NONAN23x"
