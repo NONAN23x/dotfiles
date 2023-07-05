@@ -11,7 +11,7 @@
     "modules-right": ["tray", "pulseaudio", "battery", "custom/light_dark", "custom/lock_screen"],
     // Modules configuration 
 	"clock": {
-		"format": "  It's  {:%I:%M %p}  ",
+		"format": "  {:%A %I:%M %p}  ",
 		"tooltip": "true",
         	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         	"format-alt": "   {:%d/%m}"
@@ -29,7 +29,8 @@
 	
   "custom/light_dark": {
     "format":"󰐾",
-    "on-click":"~/.config/waybar/scripts/wallpaper.sh",
+    // "on-click":"~/.config/waybar/scripts/wallpaper.sh",
+    "on-click":"~/.scripts/wall.sh",
     "tooltip": false,
     "format-icons": {
 			"urgent": "",
