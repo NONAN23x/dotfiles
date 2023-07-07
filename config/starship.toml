@@ -2,38 +2,64 @@
 ## ░▀▀█░░█░░█▀█░█▀▄░▀▀█░█▀█░░█░░█▀▀
 ## ░▀▀▀░░▀░░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░░
 # Setups
-format="$directory$git_branch$time$character"
+
+format="""$directory$git_branch$time\
+[](fg:#000000)\
+$c\
+$python\
+$elixir\
+$elm\
+$golang\
+$gradle\
+$haskell\
+$java\
+$julia\
+$nodejs\
+$nim\
+$rust\
+$scala\
+[ ](fg:#000000)\
+$character
+"""
 right_format = """$git_status$cmd_duration"""
 add_newline = true
 
-# Other languages configurations:
-c.disabled = true
-cmake.disabled = true
-haskell.disabled = true
-python.disabled = true
-ruby.disabled = true
-rust.disabled = true
-perl.disabled = true
-package.disabled = true
-lua.disabled = true
-nodejs.disabled = true
-java.disabled = true
-golang.disabled = true
+
+[c]
+symbol = ""
+style = "bg:#000000 fg:#ffffff"
+format = '[$symbol]($style)'
+
+[python]
+symbol = "🐍"
+style = "bg:#000000 fg:#ffffff"
+format = '[$symbol]($style)'
+
+[java]
+symbol = ""
+style = "bg:#FCA17D"
+format = '[$symbol]($style)'
 
 [conda]
 format = ' [$symbol$environment](dimmed green) '
 
 # Prompt symbols 
 [character]
-success_symbol = "[](#ffffff bold) "
+success_symbol = "[](#ffffff bold)"
 error_symbol = "[](#d43981) "
 vicmd_symbol = "[](#DD8F6E) "
 
 [directory]
-format = " []($style)[ ](bg:#0C22E8 fg:#43BDF0)[$path](bg:#0C22E8 fg:#43BDF0 )[ ]($style)"
+format = " []($style)[$path](bg:#0C22E8 fg:#43BDF0 )[ ]($style)"
 style = "bg:none fg:#0C22E8"
 truncation_length = 3
 truncate_to_repo=false
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
 
 [git_branch]
 format = "[]($style)[[  ](bg:#D92977 fg:#610859 bold)$branch](bg:#D92977 fg:#610859)[ ]($style)"
@@ -62,8 +88,42 @@ format = "[]($style)[[神](bg:#cccccc fg:#821b3a bold)$duration](bg:#cccccc f
 disabled = false
 style = "bg:none fg:#cccccc"
 
+[elixir]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[elm]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+[gradle]
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+
+[julia]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+
+[nim]
+symbol = "󰆥 "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
+
+[scala]
+symbol = " "
+style = "bg:#86BBD8"
+format = '[ $symbol ($version) ]($style)'
+
 [time]
 disabled = false
 time_format = "%I:%M %p" # Hour:Minute Format
 style = "bg:none fg:#40E68E"
 format = "[]($style)[[ ](bg:#40E68E fg:#292610 bold)$time](bg:#40E68E fg:#292610)[ ]($style)"
+
+
