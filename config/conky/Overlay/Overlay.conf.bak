@@ -17,11 +17,14 @@ conky.config = {
   default_color = 'white',
   default_outline_color = 'white',
   default_shade_color = 'white',
-  color1 = '#7D93FA',
-  color2 = '#44E001',
-  color3 = '#E1014F',
-  color4 = '#A85347',
-  
+  color1 = '#159E00',
+  color2 = '#9E104D',
+  color3 = '#EB0C6C',
+  color4 = '#EB5A48',
+  color5 = '#533DEB',
+  color6 = '#A85347',
+  color7 = '#000000', 
+
 -- Window Settings --
   background = false,
   border_width = 1,
@@ -56,16 +59,16 @@ conky.config = {
 
 conky.text = [[
 ${execi 300 ~/.config/conky/Overlay/scripts/weather.sh}\
-${offset 0}${color3}${font Bhineka:size=72}${time %^A}${font}
+${offset 0}${color1}${font Bhineka:size=72}${time %^A}${font}
 ${offset 0}${voffset -25}${color2}${font Monofur Nerd Font:bold:size=50}${time %d}${offset -10}${color4}${font Bhineka:italic:size=38}${execi 300 ~/.config/conky/Overlay/scripts/number}${font}
-${offset 0}${voffset 25}${color}${font Freshbot:bold:size=24}- - - - - - - - - -   ${time %I:%M %^p}${font Dosis:size=1}
-${offset 0}${voffset 25}${color2}${font Roboto:bold:size=14}Today in Hyderabad ~
-${offset 0}${voffset 5}${color3}${font Roboto:size=14}${execi 100 cat ~/.cache/weather.json | jq -r '.weather[0].main'} / ${color3}${font Monofur NF:size=14}${execi 300 cat ~/.cache/weather.json | jq -r '.weather[0].description'}
-${offset 0}${voffset 5}${color}${font Roboto:size=14}Temperature: ${color3}${execi 100 cat ~/.cache/weather.json | jq '.main.temp' | awk '{print int($1+0.5)}'}°C
-${offset 0}${voffset 5}${color}${font Monofur Nerd Font:size=14}Humidity: ${color3}${execi 300 (cat ~/.cache/weather.json | jq '.main.humidity')}%
-${offset 0}${voffset 5}${color}${font Monofur Nerd Font:size=14}Sunrise: ${color3}${execi 300 (cat ~/.cache/weather.json | jq '.sys.sunrise' | awk '{ print strftime("%I:%M %p", $1) }') }
-${offset 0}${voffset 5}${color4}${font Monofur Nerd Font:size=14}Sunset: ${color3}${execi 300 (cat ~/.cache/weather.json | jq '.sys.sunset' | awk '{ print strftime("%I:%M %p", $1) }') }
+${offset 0}${voffset 25}${color7}${font Freshbot:bold:size=24}- - - - - - - - - -   ${time %I:%M %^p}${font Dosis:size=1}
+${offset 0}${voffset 25}${color2}${font Monofur NF:bold:size=14}Today in Hyderabad ~
+${offset 0}${voffset 5}${color3}${font Monofur NF:size=14}${execi 100 cat ~/.cache/weather.json | jq -r '.weather[0].main'} / ${color3}${font Monofur NF:size=14}${execi 300 cat ~/.cache/weather.json | jq -r '.weather[0].description'}
+${offset 0}${voffset 5}${color3}${font Monofur NF:size=14}Temperature: ${color3}${execi 100 cat ~/.cache/weather.json | jq '.main.temp' | awk '{print int($1+0.5)}'}°C
+${offset 0}${voffset 5}${color3}${font Monofur Nerd Font:size=14}Humidity: ${color3}${execi 300 (cat ~/.cache/weather.json | jq '.main.humidity')}%
+${offset 0}${voffset 5}${color4}${font Monofur Nerd Font:bold:size=14}Sunrise: ${color7}${execi 300 (cat ~/.cache/weather.json | jq '.sys.sunrise' | awk '{ print strftime("%I:%M %p", $1) }') }
+${offset 0}${voffset 5}${color5}${font Monofur Nerd Font:bold:size=14}Sunset: ${color7}${execi 300 (cat ~/.cache/weather.json | jq '.sys.sunset' | awk '{ print strftime("%I:%M %p", $1) }') }
 ${offset 0}${voffset 25}${color}${font Material:size=14}${execi 300 ~/.config/conky/Overlay/scripts/day2dot}
 ${offset 27}${voffset 25}${font Dosis:bold:size=15}CPU:${goto 142}Mem:${goto 252}Temp:
-${offset 12}${voffset 5}${color3}${font Dosis:bold:size=15}${cpu cpu0}%${goto 142}${memperc} %${goto 252}${acpitemp}°C
+${offset 12}${voffset 5}${color6}${font Dosis:bold:size=15}${cpu cpu0}%${goto 142}${memperc} %${goto 252}${acpitemp}°C
 ]]
