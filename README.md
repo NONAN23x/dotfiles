@@ -16,3 +16,6 @@ The above dependencies assume that you already have a working and configured Arc
 ### paste all the folders inside `~/.config/`
 ### paste contents of scripts folder inside `~/.scripts/`
 Like what? Im busy to create a setup script for you! 
+
+### Credits
+Thanks to [@linuxmobile](https://github.com/linuxmobile) for some of the configs that I use
