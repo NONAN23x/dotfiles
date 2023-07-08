@@ -124,28 +124,10 @@ if test -d "$HOME/.local/share/omf/pkg/colorman/"
 	source ~/.local/share/omf/pkg/colorman/init.fish
 end
 
-# Make su launch fish
-function su
-   command su --shell=/usr/bin/fish $argv
-end
-
-# Get terminal emulator
-# set TERM_EMULATOR (ps -aux | grep (ps -p $fish_pid -o ppid=) | awk 'NR==1{print $11}')
-
-# Neofetch
-# switch "$TERM_EMULATOR"
-# case '*kitty*'
-#       neofetch --backend 'kitty'
-# case '*tmux*' '*login*' '*sshd*' '*konsole*'
-#	neofetch --backend 'ascii' --ascii_distro 'arch_small' 
-# case '*'
-# 	neofetch --backend 'w3m' --xoffset 34 --yoffset 34 --gap 0
-# end
 
 pokemon-colorscripts -r --no-title
 
 alias bat='bat --theme="Catppuccin-mocha"'
 alias hc=herbstclient
 set MOZ_ENABLE_WAYLAND 1
-set XDG_CURRENT_DESKTOP Hyprland
 
