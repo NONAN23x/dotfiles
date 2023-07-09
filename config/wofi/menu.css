@@ -1,6 +1,5 @@
 @import ".config/wofi/style.css";
 window {
-  background-image: url(~/.config/wofi/images/ajourney.jpg);
-	font-family: "FiraCode Nerd Font Mono";
+	font-family: "Product Sans Regular";
 	font-size: 1px;
 }
