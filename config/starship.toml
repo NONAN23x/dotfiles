@@ -1,9 +1,10 @@
 ## ░█▀▀░▀█▀░█▀█░█▀▄░█▀▀░█░█░▀█▀░█▀█
 ## ░▀▀█░░█░░█▀█░█▀▄░▀▀█░█▀█░░█░░█▀▀
 ## ░▀▀▀░░▀░░▀░▀░▀░▀░▀▀▀░▀░▀░▀▀▀░▀░░
+# Setups
 
 format="""$directory$git_branch$time\
-[](fg:#000000)\
+[](fg:#1b0d2b)\
 $c\
 $python\
 $elixir\
@@ -17,7 +18,7 @@ $nodejs\
 $nim\
 $rust\
 $scala\
-[ ](fg:#000000)\
+[ ](fg:#1b0d2b)\
 $character
 """
 right_format = """$git_status$cmd_duration"""
@@ -26,17 +27,17 @@ add_newline = true
 
 [c]
 symbol = ""
-style = "bg:#000000 fg:#ffffff"
+style = "bg:#1b0d2b fg:#ffffff"
 format = '[$symbol]($style)'
 
 [python]
 symbol = "🐍"
-style = "bg:#000000 fg:#ffffff"
+style = "bg:#1b0d2b fg:#ffffff"
 format = '[$symbol]($style)'
 
 [java]
 symbol = ""
-style = "bg:#FCA17D"
+style = "bg:#1b0d2b"
 format = '[$symbol]($style)'
 
 [conda]
@@ -49,8 +50,8 @@ error_symbol = "[](#d43981) "
 vicmd_symbol = "[](#DD8F6E) "
 
 [directory]
-format = " []($style)[$path](bg:#0C22E8 fg:#43BDF0 )[ ]($style)"
-style = "bg:none fg:#0C22E8"
+format = " []($style)[$path](bg:#e02f94 fg:#80033b )[ ]($style)"
+style = "bg:none fg:#e02f94"
 truncation_length = 3
 truncate_to_repo=false
 
@@ -61,8 +62,8 @@ truncate_to_repo=false
 "Pictures" = " "
 
 [git_branch]
-format = "[]($style)[[  ](bg:#D92977 fg:#610859 bold)$branch](bg:#D92977 fg:#610859)[ ]($style)"
-style = "bg:none fg:#D92977"
+format = "[]($style)[[  ](bg:#2dc458 fg:#005912 bold)$branch](bg:#2dc458 fg:#005912)[ ]($style)"
+style = "bg:none fg:#2dc458"
 
 [git_status]
 # $all status$ahead_behind
@@ -122,7 +123,7 @@ format = '[ $symbol ($version) ]($style)'
 [time]
 disabled = false
 time_format = "%I:%M %p" # Hour:Minute Format
-style = "bg:none fg:#40E68E"
-format = "[]($style)[[ ](bg:#40E68E fg:#292610 bold)$time](bg:#40E68E fg:#292610)[ ]($style)"
+style = "bg:none fg:#6d1eeb"
+format = "[]($style)[[ ](bg:#6d1eeb fg:#350075 bold)$time](bg:#6d1eeb fg:#350075)[ ]($style)"
 
 
