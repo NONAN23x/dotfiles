@@ -1,0 +1,7 @@
+# Vbox
+vboxdrv
+vboxnetadp
+vboxnetflt
+
+# optimizations
+zswap.enabled=0 rootflags=subvol=@ rw intel_pstate=active rootfstype=btrfs ibt=off quiet loglevel=3 systemd.show_status=auto rd.udev.log_level=3 i915.enable_rc6=1
