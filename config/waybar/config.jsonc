@@ -6,10 +6,10 @@
     "margin-bottom": 0,
     "margin-left": 0,
     "margin-right": 0,
-    "modules-left": ["wlr/workspaces", "hyprland/window", "custom/playerctl", "custom/playerlabel"],
+    "modules-left": ["wlr/workspaces","hyprland/window"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "pulseaudio", "battery", "custom/light_dark", "custom/lock_screen"],
-    // Modules configuration 
+    "modules-right": ["custom/playerlabel", "custom/playerctl", "tray", "pulseaudio", "battery", "custom/light_dark", "custom/lock_screen"],
+
 	"clock": {
 		"format": "  {:%A %I:%M %p}  ",
 		"tooltip": "true",

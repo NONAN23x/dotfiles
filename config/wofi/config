@@ -1,5 +1,5 @@
-width=400
-height=400
+width=500
+height=500
 location=center
 show=drun
 prompt=Nice weather today!
@@ -11,5 +11,5 @@ orientation=vertical
 content_halign=left
 insensitive=true
 allow_images=true
-image_size=28
+image_size=42
 gtk_dark=true
