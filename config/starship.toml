@@ -50,8 +50,8 @@ error_symbol = "[](#d43981) "
 vicmd_symbol = "[](#DD8F6E) "
 
 [directory]
-format = " []($style)[$path](bg:#e02f94 fg:#80033b )[ ]($style)"
-style = "bg:none fg:#e02f94"
+format = " []($style)[$path](bg:#E3CBD8 fg:#80033b )[ ]($style)"
+style = "bg:none fg:#E3CBD8"
 truncation_length = 3
 truncate_to_repo=false
 
@@ -62,8 +62,8 @@ truncate_to_repo=false
 "Pictures" = " "
 
 [git_branch]
-format = "[]($style)[[  ](bg:#2dc458 fg:#005912 bold)$branch](bg:#2dc458 fg:#005912)[ ]($style)"
-style = "bg:none fg:#2dc458"
+format = "[]($style)[[  ](bg:#B075A8 fg:#005912 bold)$branch](bg:#B075A8 fg:#005912)[ ]($style)"
+style = "bg:none fg:#B075A8"
 
 [git_status]
 # $all status$ahead_behind
@@ -123,7 +123,7 @@ format = '[ $symbol ($version) ]($style)'
 [time]
 disabled = false
 time_format = "%I:%M %p" # Hour:Minute Format
-style = "bg:none fg:#6d1eeb"
-format = "[]($style)[[ ](bg:#6d1eeb fg:#350075 bold)$time](bg:#6d1eeb fg:#350075)[ ]($style)"
+style = "bg:none fg:#A22878"
+format = "[]($style)[[ ](bg:#A22878 fg:#350075 bold)$time](bg:#A22878 fg:#350075)[ ]($style)"
 
 
