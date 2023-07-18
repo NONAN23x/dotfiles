@@ -1,7 +1,7 @@
 * {
     border-radius: 4px;
     font-family: Torus;
-    font-size: 24px;
+    font-size: 20px;
     font-style: normal;
     min-height: 0;
 }
@@ -21,8 +21,9 @@ window#waybar {
 }
 
 #workspaces {
-  background: rgb(204,204,204);
-background: linear-gradient(45deg, rgba(204,204,204,0.6) 0%, rgba(153,153,153,0.3) 46%, rgba(181,181,181,0.5) 100%);
+    background: rgb(204,204,204);
+background: linear-gradient(45deg, rgba(204,204,204,0.7) 0%, rgba(153,153,153,0.5) 46%, rgba(181,181,181,0.7) 100%);
+
 	margin: 5px 5px 5px 5px;
   border-radius: 16px;
   margin-top: 4px;
@@ -74,8 +75,9 @@ background: linear-gradient(135deg, rgba(35,37,47,1) 3%, rgba(24,35,110,1) 33%, 
 }
 
 #tray {
-  background: rgb(204,204,204);
-    background: linear-gradient(135deg, rgba(204,204,204,0.3) 0%, rgba(204,204,204,0.6) 30%, rgba(171,41,125,0.7) 56%, rgba(188,188,188,0.5) 85%, rgba(181,181,181,0.6) 100%);
+      background: rgb(204,204,204);
+background: linear-gradient(45deg, rgba(204,204,204,0.7) 0%, rgba(153,153,153,0.5) 46%, rgba(181,181,181,0.7) 100%);
+
     border-radius: 16px;
     margin: 5px 5px 5px 5px;
     padding: 0px 5px;
@@ -87,9 +89,9 @@ background: linear-gradient(135deg, rgba(35,37,47,1) 3%, rgba(24,35,110,1) 33%, 
 }
   
 #clock {
-  background: rgb(204,204,204);
-  background: linear-gradient(135deg, rgba(204,204,204,0.3) 0%, rgba(204,204,204,0.6) 30%, rgba(171,41,125,0.7) 56%, rgba(188,188,188,0.5) 85%, rgba(181,181,181,0.6) 100%);
 
+    background: rgb(204,204,204);
+background: linear-gradient(45deg, rgba(204,204,204,0.7) 0%, rgba(153,153,153,0.5) 46%, rgba(181,181,181,0.7) 100%);
     /* margin: 5px 5px 5px 5px; */
     /* animation: gradient 1s ease infinite; */
     /* background-size: 300% 300%; */
@@ -153,7 +155,7 @@ background: linear-gradient(180deg, rgba(204,204,204,0.6) 0%, rgba(153,153,153,0
 
 #pulseaudio {
   background: rgb(204,204,204);
-background: linear-gradient(45deg, rgba(204,204,204,0.3) 0%, rgba(153,153,153,0.6) 46%, rgba(181,181,181,0.4) 100%);
+background: linear-gradient(45deg, rgba(204,204,204,0.7) 0%, rgba(153,153,153,0.6) 46%, rgba(181,181,181,0.7) 100%);
     /* border-radius: 16px; */
     /* background: linear-gradient(45deg, rgba(27, 40, 59,1) 0%, rgba(92, 165, 198,1) 43%, rgba(11, 120, 179,1) 80%, rgba(44, 94, 137,1) 100%); */
     margin: 5px;
@@ -210,8 +212,9 @@ background: linear-gradient(45deg, rgba(204,204,204,0.3) 0%, rgba(153,153,153,0.
 }
 
 #window{
-  background: rgb(204,204,204);
-background: linear-gradient(135deg, rgba(204,204,204,0.3) 0%, rgba(204,204,204,0.6) 30%, rgba(171,41,125,0.7) 56%, rgba(188,188,188,0.5) 85%, rgba(181,181,181,0.6) 100%);
+
+    background: rgb(204,204,204);
+background: linear-gradient(45deg, rgba(204,204,204,0.7) 0%, rgba(153,153,153,0.5) 46%, rgba(181,181,181,0.7) 100%);
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
   margin: 5px 5px 5px 5px;
     padding-left: 15px;
@@ -221,7 +224,8 @@ background: linear-gradient(135deg, rgba(204,204,204,0.3) 0%, rgba(204,204,204,0
     margin-top: 4px;
     /* margin-bottom: 8px; */
     color: #f4d9e1;
-    /* animation: gradient 1s ease infinite; */
+    /* animation: gradient 10s ease infinite; */
+
     /* background-size: 300% 300%; */
 }
 
@@ -233,7 +237,7 @@ background: linear-gradient(135deg, rgba(204,204,204,0.3) 0%, rgba(204,204,204,0
     background-position: 100% 150%;
   }
   100% {
-    background-position: 200% 0%;
+    background-position: 200% 250%;
   }
 }
 
