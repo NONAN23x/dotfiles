@@ -1,14 +1,14 @@
 {
-    "position": "top",
+    "position": "bottom",
     "layer": "top",
     "height": 16,
     "margin-top": 0,
-    "margin-bottom": 0,
-    "margin-left": 0,
-    "margin-right": 0,
+    "margin-bottom": 4,
+    "margin-left": 80,
+    "margin-right": 80,
     "modules-left": ["wlr/workspaces","hyprland/window"],
-    "modules-center": ["clock"],
-    "modules-right": ["custom/playerlabel", "custom/playerctl", "tray", "pulseaudio", "battery", "custom/light_dark", "custom/lock_screen"],
+    "modules-center": [],
+    "modules-right": ["tray", "pulseaudio", "battery", "clock" , "custom/light_dark", "custom/lock_screen"],
 
 	"clock": {
 		"format": "  {:%A %I:%M %p}  ",

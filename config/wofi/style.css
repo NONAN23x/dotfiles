@@ -2,8 +2,8 @@ window {
   font-family: Torus;
     margin: 0px;
     width: 500px;
-  background: rgb(204,204,204);
-background: linear-gradient(180deg, rgba(204,204,204,0.3) 0%, rgba(153,153,153,0.3) 46%, rgba(181,181,181,0.3) 100%);
+  background: rgba(49, 50, 68, 0.6);
+/* background: linear-gradient(135deg, rgba(204,204,204,0.4) 0%, rgba(153,153,153,0.5) 46%, rgba(181,181,181,0.5) 100%); */
 }
 
 
@@ -29,7 +29,7 @@ background: linear-gradient(180deg, rgba(204,204,204,0.3) 0%, rgba(153,153,153,0
     margin: 4px;
     margin-left: 8px;
     border: 10px solid transparent;
-    color: #262626;
+    color: rgba(200, 200, 200, 0.8);
     background-color: transparent;
     border-radius: 15px;
 }
@@ -66,8 +66,8 @@ background: linear-gradient(180deg, rgba(204,204,204,0.3) 0%, rgba(153,153,153,0
 #entry:selected {
     margin: 0px 0px;
     border: none;
-    border-radius: 15px;
-    /* background: linear-gradient(45deg, rgba(203,166,247,1) 30%, rgba(245,194,231,1) 100%); */
-    background: #282828;
+    border-radius: 16px;
+background: rgb(40,40,40);
+background: linear-gradient(135deg, rgba(40,40,40,0.8) 10%, rgba(50,36,45,0.5) 36%, rgba(181,181,181,0.1) 100%);
 }
 

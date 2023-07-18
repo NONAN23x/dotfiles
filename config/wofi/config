@@ -11,5 +11,5 @@ orientation=vertical
 content_halign=left
 insensitive=true
 allow_images=true
-image_size=42
+image_size=38
 gtk_dark=true
