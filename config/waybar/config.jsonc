@@ -1,14 +1,21 @@
 {
-    "position": "bottom",
+    "position": "top",
     "layer": "top",
     "height": 16,
-    "margin-top": 0,
-    "margin-bottom": 4,
-    "margin-left": 80,
-    "margin-right": 80,
+    "margin-top": 8,
+    "margin-bottom": 0,
+    "margin-left": 20,
+    "margin-right": 20,
     "modules-left": ["wlr/workspaces","hyprland/window"],
-    "modules-center": [],
+    "modules-center": ["custom/weather"],
     "modules-right": ["tray", "pulseaudio", "battery", "clock" , "custom/light_dark", "custom/lock_screen"],
+
+  "custom/weather": {
+      "exec": "~/.scripts/weather.sh",
+      "tooltip": "Pulls up weather information",
+      "format": "{}",
+      "interval": 500
+  },
 
 	"clock": {
 		"format": "  {:%A %I:%M %p}  ",
@@ -56,33 +63,6 @@
     }
     },
 
-    "custom/playerctl": {
-      "format": "{icon}",
-      "return-type": "json",
-      "max-length": 64,
-      "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
-      "on-click-middle": "playerctl play-pause",
-      "on-click": "playerctl previous",
-      "on-click-right": "playerctl next",
-      "format-icons": {
-        "Playing": "<span foreground='#E5B9C6'>󰒮 󰐌 󰒭</span>",
-        "Paused": "<span foreground='#928374'>󰒮 󰏥 󰒭</span>"
-      }
-    },
-
-    "custom/playerlabel": {
-      "format": "<span>{}</span>",
-      "return-type": "json",
-      "max-length": 44,
-      "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{playerName}} : {{markup_escape(title)}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
-      "on-click-middle": "playerctl play-pause",
-      "on-click": "playerctl previous",
-      "on-click-right": "playerctl next",
-      "format-icons": {
-        "Playing": "<span foreground='#E5B9C6'> 󰒮 󰐌 󰒭 </span>",
-        "Paused": "<span foreground='#928374'> 󰒮 󰏥 󰒭 </span>"
-      }
-    },
 
 	"battery": {
 	"on-scroll-up": "bash ~/.scripts/brightness up",
