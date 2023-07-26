@@ -133,3 +133,5 @@ set MOZ_ENABLE_WAYLAND 1
 
 alias ls=lsd
 alias neofetch="neofetch --source ~/.config/neofetch/images/"
+alias sudo='doas'
+alias sudoedit='doas rnano'

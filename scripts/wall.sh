@@ -7,5 +7,5 @@ random_file=$(ls "$directory" | shuf -n 1)
 
 
 # Echo the randomly selected file
-swww img $directory$random_file --transition-type any --transition-duration 2 --transition-fps=60
+swww img $directory$random_file --transition-step 90 --transition-type any --transition-fps 90 --transition-duration 2
 

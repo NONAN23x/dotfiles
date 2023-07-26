@@ -6,6 +6,7 @@
 window {
     background: rgba(0, 0, 0, 0.4);
     background-color: #1A1B26;
+    opacity: 0.9;
     /* background-image: url("background"); */
     /* background-size: cover; */
     /* background-repeat: no-repeat; */
@@ -63,7 +64,7 @@ window {
 } */
 
 #clock-label {
-    font-family: 'Lexend';
+    font-family: 'Torus';
     font-size: 6rem;
     font-weight: 500;
     /* background-color: rgba(26, 27, 38, 1); */

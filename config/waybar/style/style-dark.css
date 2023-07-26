@@ -12,7 +12,7 @@ window#waybar {
   /* max-width: 100px; */
 	background: rgba(24, 25, 38, 0.84);
   padding: 5px 5px 5px 5px;
-  border-radius: 16px 16px 16px 16px;
+  border-radius: 20px 20px 20px 20px;
   /* background: linear-gradient(45deg, rgba(204,204,204,0.6) 0%, rgba(153,153,153,0.3) 46%, rgba(181,181,181,0.5) 100%); */
 
   /* color: #f4d9e1 */
@@ -22,7 +22,7 @@ window#waybar {
     background: rgb(204,204,204);
 background: linear-gradient(45deg, rgba(204,204,204,0.3) 0%, rgba(153,153,153,0.3) 46%, rgba(181,181,181,0.3) 100%);
 
-  border-radius: 16px 16px 16px 16px;
+  border-radius: 0px 16px 16px 0px;
   /* margin-top: 4px; */
 
   padding: 5px 5px 5px 5px;
@@ -86,14 +86,16 @@ background: linear-gradient(45deg, rgba(204,204,204,0.3) 0%, rgba(153,153,153,0.
   
 #clock {
 
+  margin-top: 5px;
+  margin: 5px 5px 5px 5px;
     text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
     background: rgb(204,204,204);
 background: linear-gradient(45deg, rgba(204,204,204,0.3) 0%, rgba(153,153,153,0.3) 46%, rgba(181,181,181,0.3) 100%);
     /* margin: 5px 5px 5px 5px; */
     /* animation: gradient 1s ease infinite; */
     /* background-size: 300% 300%; */
-    border-radius: 16px;
-    margin-top: 4px;
+    padding: 5px 5px 5px 5px;
+    border-radius: 16px 16px 16px 16px;
     color: rgb(243, 139, 168)	;
 }
 
