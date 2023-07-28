@@ -4,9 +4,9 @@
 
 > :warning: **Dependencies:**
 
-Using paru as a AUR helper
+Using Paru as a AUR helper
 ```
-paru -S hyprland-git kitty waybar-hyprland-git swww swaylock-effects wofi wlogout mako xdg-desktop-portal-hyprland-git swappy grim slurp thunar pamixer pavucontrol brightnessctl network-manager-applet gvfs thunar-archive-plugin file-roller ttf-jetbrains-mono-nerd noto-fonts-emoji --needed
+paru -S hyprland-git kitty waybar-hyprland-git swww swaylock-effects wofi wlogout mako xdg-desktop-portal-hyprland-git swappy grim slurp thunar pamixer pavucontrol brightnessctl network-manager-applet gvfs gvfs-smb thunar-media-tags-plugin thunar-shares-plugin thunar-archive-plugin file-roller ttf-jetbrains-mono-nerd noto-fonts-emoji --needed
 ```
 The above dependencies assume that you already have a working and configured Arch Linux system, with at least one Wayland Desktop Environment or Window Manager configured.
 
