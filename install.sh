@@ -10,7 +10,7 @@ echo "Installed dotfiles to config"
 
 # copying scripts to home direcotry
 mkdir -p ~/.scripts/
-cp -r $(pwd)/scripts/ ~/.scripts/
+cp -r $(pwd)/scripts/* ~/.scripts/
 
 # copying wallpapers to home directory
 mkdir -p ~/.wallpapers/
