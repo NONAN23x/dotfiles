@@ -8,7 +8,7 @@
 
 Using Paru as a AUR helper
 ```
-paru -S hyprland-git kitty waybar-hyprland-git swww swaylock-effects wofi wlogout mako xdg-desktop-portal-hyprland-git swappy grim slurp thunar pamixer brightnessctl network-manager-applet gvfs thunar-archive-plugin gvfs-smb thunar-shares-plugin thunar-media-tags-plugin file-roller ttf-jetbrains-mono-nerd noto-fonts-emoji gvfs-smb gtklock --needed
+paru -S hyprland-git kitty waybar-hyprland-git swww swaylock-effects wofi wlogout mako xdg-desktop-portal-hyprland-git swappy grim slurp thunar pamixer brightnessctl network-manager-applet gvfs thunar-archive-plugin gvfs-smb thunar-shares-plugin thunar-media-tags-plugin file-roller ttf-jetbrains-mono-nerd noto-fonts-emoji gvfs-smb gtklock fish neofetch htop btop cava cmatrix-git --needed
 ```
 The above dependencies assume that you already have a working and configured Arch Linux system, with at least one Wayland Desktop Environment or Window Manager configured.
 
