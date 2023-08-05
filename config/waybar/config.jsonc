@@ -4,10 +4,10 @@
     "height": 0,
     "margin-top": 8,
     "margin-bottom": 0,
-    "margin-left": 20,
-    "margin-right": 20,
-    "modules-left": ["wlr/workspaces","hyprland/window"],
-    "modules-center": ["custom/weather"],
+    "margin-left": 0,
+    "margin-right": 0,
+    "modules-left": ["custom/weather","hyprland/window"],
+    "modules-center": ["hyprland/workspaces"],
     "modules-right": ["tray", "pulseaudio", "battery", "clock" , "custom/light_dark", "custom/lock_screen"],
 
   "custom/weather": {
@@ -30,7 +30,7 @@
 
   "custom/lock_screen": {
         "format": "",
-        "on-click": "wlogout --protocol layer-shell",
+        "on-click": "~/.scripts/lock.sh",
         "tooltip": false
   },
 	
