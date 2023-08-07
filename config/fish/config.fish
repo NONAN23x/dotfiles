@@ -135,3 +135,4 @@ alias ls=lsd
 alias neofetch="neofetch --source ~/.config/neofetch/images/"
 alias sudo='doas'
 alias sudoedit='doas rnano'
+wal -q -i ~/.wallpapers/\ currentWall

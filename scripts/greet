@@ -1,2 +1,3 @@
-mpv --no-video --volume=100 ~/Music/computerBoot.mp3
+mpv --no-video --volume=100 ~/Music/boot_symbian.mp3
+sleep 5
 notify-send -u normal -t 8000 "Welcome back NONAN23x"

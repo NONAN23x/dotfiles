@@ -5,13 +5,13 @@
 
 > :warning: **Dependencies:**
 
-Using Paru as a AUR helper
 ```
-paru -S hyprland-git kitty waybar-hyprland-git swww swaylock-effects wofi wlogout mako xdg-desktop-portal-hyprland-git swappy grim slurp thunar pamixer pavucontrol brightnessctl network-manager-applet gvfs gvfs-smb thunar-media-tags-plugin thunar-shares-plugin thunar-archive-plugin file-roller ttf-jetbrains-mono-nerd noto-fonts-emoji gvfs-smb gtklock --needed
+hyprland-git kitty waybar-hyprland-git swww-git swaylock-effects rofi wlogout xdg-desktop-portal-hyprland-git swappy grim slurp thunar pamixer pavucontrol brightnessctl network-manager-applet gvfs gvfs-smb nautilus gnome-clocks gnome-music file-roller ttf-jetbrains-mono-nerd noto-fonts-emoji gtklock pywal-git pywal-discord-git --needed
 ```
-The above dependencies assume that you already have a working and configured Arch Linux system, with at least one Wayland Desktop Environment or Window Manager configured.
 
 > :memo: **Installation:**
+
+Read the script before installing, also you should have atleast read the Hyprland wiki before trying out anyone's dotfiles...
 
 `./install.sh`
 

@@ -11,7 +11,9 @@ echo "Installed dotfiles to config"
 # copying scripts to home direcotry
 mkdir -p ~/.scripts/
 cp -r $(pwd)/scripts/* ~/.scripts/
+echo "Installed necessary scripts"
 
 # copying wallpapers to home directory
 mkdir -p ~/.wallpapers/
 cp -r $(pwd)/wallpapers/* ~/.wallpapers/
+echo "Installed some wallpapers"

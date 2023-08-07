@@ -38,7 +38,7 @@ background: linear-gradient(45deg, rgba(204,204,204,0.3) 0%, rgba(153,153,153,0.
 
 #workspaces button.active {
   color: white;
-    background-color: #818181;
+    background-color: #818;
     border-radius: 16px;
   border-radius: 16px 16px 16px 16px;
   margin: 5px;
