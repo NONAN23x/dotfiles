@@ -7,7 +7,7 @@
 > :warning: **Dependencies:**
 
 ```
-hyprland-git kitty waybar-hyprland-git swww wofi wlogout xdg-desktop-portal-hyprland-git swappy grim slurp pamixer brightnessctl network-manager-applet gvfs gvfs-smb file-roller ttf-jetbrains-mono-nerd noto-fonts-emoji gvfs-smb gtklock fish neofetch htop btop cava cmatrix-git --needed
+hyprland-git kitty waybar-hyprland-git swww swaync wofi wlogout xdg-desktop-portal-hyprland-git swappy grim slurp pamixer brightnessctl network-manager-applet gvfs gvfs-smb file-roller ttf-jetbrains-mono-nerd noto-fonts-emoji python-pywal zathura-pywal gvfs-smb gtklock fish neofetch htop btop cava cmatrix-git --needed
 ```
 The above dependencies assume that you already have a working and configured Arch Linux system, with at least one Wayland Desktop Environment or Window Manager configured.
 
