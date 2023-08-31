@@ -1,6 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+
 down() {
-pamixer -d 5 --allow-boost --set-limit 200
+pamixer -d 5 --allow-boost --set-limit 150
 volume=$(pamixer --get-volume)
 [$volume -gt 0 ] && volume=`expr $volume`  
 dunstify -a "VOLUME" "Decreasing to $volume%" -h int:value:"$volume" -i audio-volume-low-symbolic -r 2593 -u normal
@@ -8,9 +9,9 @@ canberra-gtk-play -i dialog-error -d "error"
 }
 
 up() {
-pamixer -i 5 --allow-boost --set-limit 200
+pamixer -i 5 --allow-boost --set-limit 150
 volume=$(pamixer --get-volume)
-[ $volume -lt 200 ] && volume=`expr $volume`  
+[ $volume -lt 150 ] && volume=`expr $volume`  
 dunstify -a "VOLUME" "Increasing to $volume%" -h int:value:"$volume" -i audio-volume-high-symbolic -r 2593 -u normal
 canberra-gtk-play -i dialog-error -d "error"
 }

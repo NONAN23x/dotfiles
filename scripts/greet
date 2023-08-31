@@ -1,2 +1,3 @@
-mpv --no-video --volume=110 ~/Music/computerBoot.mp3
+mpv --no-video --volume=100 ~/Music/ubuntu_startup_sound.mp3
+sleep 5
 notify-send -u normal -t 8000 "Welcome back NONAN23x"
