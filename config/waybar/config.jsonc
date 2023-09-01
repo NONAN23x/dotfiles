@@ -24,6 +24,14 @@
 
   },
 
+  "user": {
+        "format": "{user} (up {work_d} days ↑)",
+        "interval": 60,
+        "height": 30,
+        "width": 30,
+        "icon": true
+},
+
   "custom/spotify": {
     "format": "{icon} {}",
     // "escape": true,
