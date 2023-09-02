@@ -23,10 +23,10 @@ configuration {
 /*****----- Global Properties -----*****/
 * {
     font:                        "Torus Regular 10";
-    background:                  #101010;
+    background:                  rgba(10,10,10, 0.6);
     background-alt:              #252525;
     foreground:                  #FFFFFF;
-    selected:                    #505050;
+    selected:                    rgba(45, 45, 45, 0.8);
     active:                      #909090;
     urgent:                      #707070;
 }
@@ -44,7 +44,7 @@ window {
 
     /* properties for all widgets */
     enabled:                     true;
-    border-radius:               16px;
+    border-radius:               24px;
     cursor:                      "default";
     background-color:            @background;
 }
@@ -83,7 +83,7 @@ inputbar {
     enabled:                     true;
     spacing:                     10px;
     padding:                     15px;
-    border-radius:               10px;
+    border-radius:               24px;
     background-color:            @background-alt;
     text-color:                  @foreground;
     children:                    [ "textbox-prompt-colon", "entry" ];
@@ -113,7 +113,7 @@ mode-switcher{
 }
 button {
     padding:                     15px;
-    border-radius:               10px;
+    border-radius:               24px;
     background-color:            @background-alt;
     text-color:                  inherit;
     cursor:                      pointer;
@@ -147,7 +147,7 @@ element {
     enabled:                     true;
     spacing:                     15px;
     padding:                     8px;
-    border-radius:               10px;
+    border-radius:               24px;
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      pointer;
@@ -196,7 +196,7 @@ message {
 }
 textbox {
     padding:                     15px;
-    border-radius:               16px;
+    border-radius:               24px;
     background-color:            @background-alt;
     text-color:                  @foreground;
     vertical-align:              0.5;
@@ -204,7 +204,7 @@ textbox {
 }
 error-message {
     padding:                     16px;
-    border-radius:               20px;
+    border-radius:               24px;
     background-color:            @background;
     text-color:                  @foreground;
 }
