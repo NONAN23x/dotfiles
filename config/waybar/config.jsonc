@@ -1,17 +1,17 @@
 {
-    "position": "bottom",
+    "position": "top",
     "layer": "top",
     "height": 16,
-    "margin-top": 0,
+    "margin-top": 8,
     "margin-bottom": 0,
-    "margin-left": 0,
-    "margin-right": 0,
-    "modules-left": ["custom/launcher", "custom/notifications", "hyprland/workspaces", "hyprland/window"],
-    "modules-center": ["cpu", "memory", "disk", "custom/pacman"],
-    "modules-right": ["custom/weather", "tray", "custom/randwall", "network", "wireplumber", "backlight", "battery", "clock"],
+    "margin-left": 8,
+    "margin-right": 8,
+    "modules-left": ["custom/launcher", "custom/notifications", "mpris","custom/weather", "hyprland/window"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["tray", "network", "wireplumber", "backlight", "battery", "custom/randwall", "clock"],
     // Modules configuration
 	"clock": {
-		"format": "  {:%I:%M %p}",
+		"format": "  {:%A %I:%M %p}",
 		"tooltip": "true",
         	"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         	"format-alt": " {:%d/%m}"
@@ -22,6 +22,19 @@
     "format": " {} 🌡 ",
     "interval": 500
 
+  },
+
+  "mpris": {
+	"format": "{player_icon} {title}",
+	"format-paused": "{status_icon} <i>{title}</i>",
+	"player-icons": {
+		"default": "▶",
+		"mpv": "🎵"
+	},
+	"status-icons": {
+		"paused": "⏸"
+	}
+	// "ignored-players": ["firefox"]
   },
 
   "user": {
@@ -95,9 +108,9 @@
 
 	"battery": {
         "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 15
+            "good": 80,
+            "warning": 35,
+            "critical": 25
         },
         "format":"{icon}  {capacity}%",
         "format-charging": "{capacity}% ",
