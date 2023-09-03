@@ -22,10 +22,10 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    font:                        "Torus Regular 10";
+    font:                        "Lexend Regular 12";
     background:                  rgba(10,10,10, 0.6);
     background-alt:              #252525;
-    foreground:                  #FFFFFF;
+    foreground:                  darkcyan;
     selected:                    rgba(45, 45, 45, 0.8);
     active:                      #909090;
     urgent:                      #707070;
@@ -38,7 +38,7 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       1000px;
+    width:                       900px;
     x-offset:                    0px;
     y-offset:                    0px;
 
@@ -59,7 +59,7 @@ mainbox {
 }
 
 imagebox {
-    padding:                     20px;
+    padding:                     30px;
     background-color:            transparent;
     background-image:            url("~/.wallpapers/currentWall", height);
     orientation:                 vertical;
@@ -91,7 +91,7 @@ inputbar {
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
-    str:                         "";
+    str:                         " ";
     background-color:            inherit;
     text-color:                  inherit;
 }
@@ -126,7 +126,7 @@ button selected {
 /*****----- Listview -----*****/
 listview {
     enabled:                     true;
-    columns:                     1;
+    columns:                     2;
     lines:                       8;
     cycle:                       true;
     dynamic:                     true;
