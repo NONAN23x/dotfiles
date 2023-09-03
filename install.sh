@@ -17,3 +17,8 @@ echo "Installed necessary scripts"
 mkdir -p ~/.wallpapers/
 cp -r $(pwd)/wallpapers/* ~/.wallpapers/
 echo "Installed some wallpapers"
+
+# installing all the sounds
+ mkdir -p ~/.sounds
+ cp -r $(pwd)/sounds/* ~/.sounds/
+ echo "Installed sound packs"
