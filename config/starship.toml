@@ -21,7 +21,7 @@ $scala\
 [ ](fg:#1b0d2b)\
 $character
 """
-right_format = """$git_status$cmd_duration"""
+# right_format = """$git_status$cmd_duration"""
 add_newline = true
 
 

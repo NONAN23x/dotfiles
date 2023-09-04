@@ -32,7 +32,7 @@ rm "$directory"currentWall
 ln -s "$next_wallpaper" "$directory"currentWall
 
 # Apply the next wallpaper
-swww img "$next_wallpaper" --transition-step 150 --transition-type grow --transition-fps 180 --transition-duration 2 --transition-pos "2500,150"
+swww img "$next_wallpaper" --transition-step 150 --transition-type grow --transition-fps 90 --transition-duration 2 --transition-pos "2500,150"
 
 # trigger pywal for terminal color scheme
 wal -q -i ~/.wallpapers/currentWall

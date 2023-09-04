@@ -1,5 +1,4 @@
 #!/bin/bash
-#
 
-# ~/.config/rofi/powermenu/type-4/powermenu.sh
+mpv $HOME/.sounds/goodbye.mp3 &
 gtklock

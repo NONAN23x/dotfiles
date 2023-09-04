@@ -2,10 +2,10 @@
     "position": "top",
     "layer": "top",
     "height": 16,
-    "margin-top": 8,
+    "margin-top": 12,
     "margin-bottom": 0,
-    "margin-left": 8,
-    "margin-right": 8,
+    "margin-left": 16,
+    "margin-right": 16,
     "modules-left": ["custom/launcher", "custom/notifications", "mpris","custom/weather", "hyprland/window"],
     "modules-center": ["hyprland/workspaces"],
     "modules-right": ["tray", "network", "wireplumber", "backlight", "battery", "custom/randwall", "clock"],
@@ -25,8 +25,9 @@
   },
 
   "mpris": {
-	"format": "{player_icon} {title}",
-	"format-paused": "{status_icon} <i>{title}</i>",
+	"format": "{title}",
+  "[title]-len": 30,
+	"format-paused": "{status_icon} {title}",
 	"player-icons": {
 		"default": "▶",
 		"mpv": "🎵"
@@ -85,7 +86,7 @@
     "return-type": "json",
     "exec-if": "which swaync-client",
     "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
+    "on-click": "~/.scripts/sidebar.sh",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   },

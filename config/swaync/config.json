@@ -7,9 +7,9 @@
     "layer-shell": true,
     "cssPriority": "application",
     "control-center-margin-top": 8,
-    "control-center-margin-bottom": 8,
-    "control-center-margin-right": 8,
-    "control-center-margin-left": 8,
+    "control-center-margin-bottom": 16,
+    "control-center-margin-right": 16,
+    "control-center-margin-left": 0,
     "notification-icon-size": 64,
     "notification-body-image-height": 100,
     "notification-body-image-width": 200,
@@ -27,13 +27,13 @@
     "hide-on-action": true,
     "script-fail-notify": true,
     "widgets": [
-        "buttons-grid",
+        "dnd",
+        "title",
+        "notifications",
         "mpris",
         "volume",
         "backlight",
-        "title",
-        "dnd",
-        "notifications"
+        "buttons-grid"
     ],
     "widget-config": {
         "title": {
@@ -49,8 +49,8 @@
             "text": "Notification Center"
         },
         "mpris": {
-            "image-size": 96,
-            "image-radius": 12
+            "image-size": 128,
+            "image-radius": 20
         },
         "volume": {
             "label": "󰕾 "
@@ -82,7 +82,7 @@
                 },
                 {
                     "label": "󰍬",
-                    "command": "pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+                    "command": "hyprshade toggle bluefilter"
                 },
                 {
                     "label": "󰂯",

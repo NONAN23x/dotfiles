@@ -1,16 +1,16 @@
 * {
     border-radius: 24px;
-    font-family: Torus;
+    font-family: Lexend;
     /* font-family: Iosevka, Noto Sans CJK; */
-    font-size: 16px;
+    font-size: 18px;
     font-style: normal;
     min-height: 0;
 }
 
 window#waybar {
-    background: rgba(20,20,20, 0.7);
+    background: rgba(20,20,20, 0.6);
 
-    color: #FF828A;
+    color: rgba(45, 105, 130, 0.9);
 }
 
 #workspaces {
