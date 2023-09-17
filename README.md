@@ -18,3 +18,4 @@ Read the script before you execute it!!!
 > :bulb: **Attributions**
 
 - Hybridised [@linuxmobile](https://github.com/linuxmobile) and [@end-4](https://github.com/end-4) dots with my narative and a little magic :)
+- Thanks @adi1090x for the rofi configs !
