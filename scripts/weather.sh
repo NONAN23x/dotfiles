@@ -19,5 +19,5 @@ temp=$(echo "$data" | jq -r '.main.temp | round')
 
 capitalized_description=$(echo "${description^}")
 iconifiedtemp=$(echo "$temp°C")
-echo "$capitalized_description | 🌡 $iconifiedtemp"
+echo "$capitalized_description | $iconifiedtemp"
 

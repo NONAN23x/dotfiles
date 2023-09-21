@@ -1,4 +1,4 @@
 #!/bin/bash
-
-/home/nonan23x/.config/rofi/launchers/type-6/launcher.sh
-mpv --no-video --volume=80 ~/Music/button-124476.mp3 & pkill wofi;
+mpv --no-video --volume=100 $HOME/.sounds/check-off.wav &
+# killall rofi || $HOME/.config/rofi/launcher.sh 
+killall rofi || rofi -modi emoji -show drun -theme ~/.config/rofi/style.rasi
