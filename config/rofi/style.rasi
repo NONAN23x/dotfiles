@@ -14,7 +14,7 @@ configuration {
 /*****----- Global Properties -----*****/
 * {
     font:                        "Lexend Regular 12";
-    background:                  rgba(42, 23, 10, 0.7);
+    background:                  rgba(20, 20, 20, 0.7);
 
     background-alt:              #252525;
     foreground:                  #F56756;

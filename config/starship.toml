@@ -21,7 +21,7 @@ $scala\
 [ ](fg:#1b0d2b)\
 $character
 """
-right_format = """$git_status$cmd_duration"""
+# right_format = """$git_status$cmd_duration"""
 add_newline = true
 
 
@@ -50,8 +50,8 @@ error_symbol = "[](#d43981) "
 vicmd_symbol = "[](#DD8F6E) "
 
 [directory]
-format = " []($style)[$path](bg:#E3CBD8 fg:#80033b )[ ]($style)"
-style = "bg:none fg:#E3CBD8"
+format = " []($style)[$path](bg:#111f3b fg:#8d9aa1 )[ ]($style)"
+style = "bg:none fg:#111f3b"
 truncation_length = 3
 truncate_to_repo=false
 
@@ -123,7 +123,7 @@ format = '[ $symbol ($version) ]($style)'
 [time]
 disabled = false
 time_format = "%I:%M %p" # Hour:Minute Format
-style = "bg:none fg:#A22878"
-format = "[]($style)[[ ](bg:#A22878 fg:#350075 bold)$time](bg:#A22878 fg:#350075)[ ]($style)"
+style = "bg:none fg:#C7714F"
+format = "[]($style)[[ ](bg:#C7714F fg:#0b1f10 bold)$time](bg:#C7714F fg:#0b1f10)[ ]($style)"
 
 
