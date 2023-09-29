@@ -6,9 +6,9 @@
     "control-center-layer": "top",
     "layer-shell": true,
     "cssPriority": "application",
-    "control-center-margin-top": 8,
+    "control-center-margin-top": 16,
     "control-center-margin-bottom": 16,
-    "control-center-margin-right": 16,
+    "control-center-margin-right": 6,
     "control-center-margin-left": 0,
     "notification-icon-size": 64,
     "notification-body-image-height": 100,
@@ -85,8 +85,8 @@
                     "command": "hyprshade toggle bluefilter"
                 },
                 {
-                    "label": "󰂯",
-                    "command": "blueman-manager"
+                    "label": "󰏘",
+                    "command": "bash $HOME/.scripts/wall.sh"
                 }
             ]
         }

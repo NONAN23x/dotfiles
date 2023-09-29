@@ -1,4 +1,4 @@
 #!/bin/bash
 
 mpv $HOME/.sounds/goodbye.mp3 &
-gtklock
+swaylock
