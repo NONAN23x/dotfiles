@@ -1,11 +1,3 @@
-/**
- *
- * Author : Aditya Shakya (adi1090x)
- * Github : @adi1090x
- * 
- * Configuration For Rofi Version: 1.7.3
- **/
-
 configuration {
 	/*---------- General setting ----------*/
 	modi: "drun,run,emoji,window";
@@ -15,9 +7,9 @@ configuration {
 	scroll-method: 0;
 	normalize-match: true;
 	show-icons: true;
-	icon-theme: "Papirus";
+	icon-theme: "We10X-black";
 /*	cache-dir: ;*/
-	steal-focus: false;
+	steal-focus: true;
 /*	dpi: -1;*/
 
 	/*---------- Matching setting ----------*/

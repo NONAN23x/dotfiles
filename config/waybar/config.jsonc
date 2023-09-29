@@ -2,13 +2,13 @@
     "position": "top",
     "layer": "top",
     "height": 16,
-    "margin-top": 12,
+    "margin-top": 4,
     "margin-bottom": 0,
     "margin-left": 16,
     "margin-right": 16,
-    "modules-left": ["custom/launcher", "custom/notifications", "mpris","custom/weather", "hyprland/window"],
-    "modules-center": ["hyprland/workspaces"],
-    "modules-right": ["tray", "network", "wireplumber", "backlight", "battery", "custom/randwall", "clock"],
+    "modules-left": ["custom/weather", "mpris"],
+    "modules-center": [],
+    "modules-right": ["network", "tray","clock", "battery", "custom/notifications"],
     // Modules configuration
 	"clock": {
 		"format": "  {:%A %I:%M %p}",
@@ -19,23 +19,30 @@
 	
   "custom/weather": {
     "exec": "bash $HOME/.scripts/weather.sh",
-    "format": " {} 🌡 ",
+    "format": "{}",
     "interval": 500
+    // "format": " {} 🌡 ",
 
   },
 
-  "mpris": {
-	"format": "{title}",
-  "[title]-len": 30,
-	"format-paused": "{status_icon} {title}",
-	"player-icons": {
-		"default": "▶",
-		"mpv": "🎵"
-	},
-	"status-icons": {
-		"paused": "⏸"
-	}
-	// "ignored-players": ["firefox"]
+      "mpris": {
+      "format": "{player_icon} {title}",
+      "format-paused": "{player_icon} {status_icon} {title}",
+      "max-length": 45,
+      "player-icons": {
+        "chromium": "爵",
+        "default": "",
+        "firefox": "",
+        "kdeconnect": "",
+        "mopidy": "",
+        "mpv": "",
+        "spotify": "阮"
+      },
+      "status-icons": {
+        "paused": "",
+        "playing": "契",
+        "stopped": "栗"
+      }
   },
 
   "user": {
@@ -44,21 +51,6 @@
         "height": 30,
         "width": 30,
         "icon": true
-},
-
-  "custom/spotify": {
-    "format": "{icon} {}",
-    // "escape": true,
-    "return-type": "json",
-    "max-length": 40,
-    "interval": 30, // Remove this if your script is endless and write in loop
-    "on-click": "playerctl -p spotify play-pause",
-    "on-click-right": "killall spotify",
-    "smooth-scrolling-threshold": 10, // This value was tested using a trackpad, it should be lowered if using a mouse.
-    "on-scroll-up" : "playerctl -p spotify next",
-    "on-scroll-down" : "playerctl -p spotify previous",
-    "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null", // Script in resources/custom_modules folder
-    "exec-if": "pgrep spotify"
 },
 
   "custom/pacman": {

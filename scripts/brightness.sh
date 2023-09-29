@@ -1,17 +1,15 @@
 #!/bin/bash
 
-max=96000
+# max=96000
 
 down() {
-brightnessctl set 5%-
-volume=$(($(brightnessctl g) * 100 / $max))
-[$volume -gt 0 ] && volume=`expr $volume`  
+mpv ~/.sounds/attaboy_01.ogg &
+lightctl down
 }
 
 up() {
-brightnessctl set 5%+
-volume=$(($(brightnessctl g) * 100 / $max))
-[ $volume -lt 100 ] && volume=`expr $volume`  
+mpv ~/.sounds/attaboy_01.ogg &
+lightctl up
 }
 
 case "$1" in
