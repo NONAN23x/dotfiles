@@ -1,6 +1,6 @@
 # dotfiles
 
-![alt text](images/rice.png "Rice")
+![alt text](images/output.png "Rice")
 
 > Strawberry Branch UwU :)
 
