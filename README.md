@@ -7,7 +7,7 @@
 > :warning: **Dependencies:**
 
 ```
-hyprland-git kitty waybar-hyprland-git swww swaync wlogout xdg-desktop-portal-hyprland-git swappy grim slurp pamixer brightnessctl network-manager-applet gvfs gvfs-smb file-roller ttf-jetbrains-mono-nerd noto-fonts-emoji python-pywal zathura-pywal gvfs-smb adw-gtk3 gtklock --needed
+hyprland xdg-desktop-portal-hyprland swww waybar swaync wlogout gtklock kitty swappy grim slurp pamixer brightnessctl network-manager-applet gvfs gvfs-smb file-roller ttf-jetbrains-mono-nerd ttf-nerd-fonts-symbols pywal-git zathura-pywal adw-gtk3 lsd neofetch bat --needed
 ```
 The above dependencies assume that you already have a working and configured Arch Linux system, with at least one Wayland Desktop Environment or Window Manager configured.
 
@@ -18,4 +18,4 @@ Read the script before you execute it!!!
 > :bulb: **Attributions**
 
 - Hybridised [@linuxmobile](https://github.com/linuxmobile) and [@end-4](https://github.com/end-4) dots with my narative and a little magic :)
-- Thanks @adi1090x for the rofi configs !
+- Thanks to [@adi1090x](https://github.com/adii1090x) for the rofi configs !
