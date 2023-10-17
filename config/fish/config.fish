@@ -5,10 +5,6 @@ starship init fish | source
 
 set fish_greeting
 
-alias ip="ip -c"
-alias dir="dir | lolcat"
-alias joke="fortune | cowsay | lolcat"
-alias vim=nvim
 if status is-interactive
     # Commands to run in interactive sessions can go here
 end
@@ -107,24 +103,10 @@ abbr -a -g genpass 'openssl rand -base64 20'													# Generate a random, 20
 abbr -a -g ipe 'curl ifconfig.co'																				# Get external IP address
 abbr -a -g ips 'ip link show'																					# Get network interfaces information
 
-# Source plugins
-# Useful plugins: archlinux bang-bang cd colorman sudope vcs
-if test -d "$HOME/.local/share/omf/pkg/colorman/"
-	source ~/.local/share/omf/pkg/colorman/init.fish
-end
-
-
 pokemon-colorscripts -r --no-title
-
 alias bat='bat --theme="Catppuccin-mocha"'
 alias hc=herbstclient
 set MOZ_ENABLE_WAYLAND 1
-
 alias ls=lsd
 alias neofetch="neofetch --source ~/.config/neofetch/images/"
-alias sudo='doas'
-alias sudoedit='doas rnano'
-
 wal -q -i ~/.wallpapers/currentWall
-
-fish_add_path /home/nonan23x/.spicetify
