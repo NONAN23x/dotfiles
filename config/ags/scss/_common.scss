@@ -1,0 +1,49 @@
+// * {
+//     border: 1px solid white; // Debugging
+// }
+
+// *:focus {
+//     outline-width: 1px;
+//     outline-color: $t_onSurface;
+//     outline-css: inset;
+// }
+
+.menu {
+    padding: 0.681rem;
+    background: $surfaceVariant;
+    color: $onSurfaceVariant;
+    border-radius: 1.159rem;
+    -gtk-outline-radius: 1.159rem;
+}
+
+.menubar>menuitem {
+    border-radius: 0.545rem;
+    -gtk-outline-radius: 0.545rem;
+    min-width: 13.636rem;
+    min-height: 2.727rem;
+}
+
+.menu>menuitem {
+    padding: 0.4em 1.5rem;
+    background: transparent;
+    transition: 0.2s ease background;
+    border-radius: 0.545rem;
+    -gtk-outline-radius: 0.545rem;
+}
+
+.menu>menuitem:hover {
+    background-color: mix($surfaceVariant, $onSurfaceVariant, 90%);
+}
+
+.separator-line {
+    background-color: $surfaceVariant;
+    min-width: 0.068rem;
+    min-height: 0.068rem;
+}
+
+tooltip {
+    @include large-rounding;
+    background-color: $surfaceVariant;
+    color: $onSurfaceVariant;
+    border: 1px solid $onSurfaceVariant;
+}

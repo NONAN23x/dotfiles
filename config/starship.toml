@@ -4,7 +4,7 @@
 # Setups
 
 format="""$directory$git_branch$time\
-[](fg:#1b0d2b)\
+[](fg:black)\
 $c\
 $python\
 $elixir\
@@ -18,7 +18,7 @@ $nodejs\
 $nim\
 $rust\
 $scala\
-[ ](fg:#1b0d2b)\
+[ ](fg:black)\
 $character
 """
 # right_format = """$git_status$cmd_duration"""
@@ -50,8 +50,8 @@ error_symbol = "[](#d43981) "
 vicmd_symbol = "[](#DD8F6E) "
 
 [directory]
-format = " []($style)[$path](bg:#111f3b fg:#8d9aa1 )[ ]($style)"
-style = "bg:none fg:#111f3b"
+format = " []($style)[$path](bg:red fg:green)[ ]($style)"
+style = "bg:none fg:red"
 truncation_length = 3
 truncate_to_repo=false
 
@@ -123,7 +123,7 @@ format = '[ $symbol ($version) ]($style)'
 [time]
 disabled = false
 time_format = "%I:%M %p" # Hour:Minute Format
-style = "bg:none fg:#C7714F"
-format = "[]($style)[[ ](bg:#C7714F fg:#0b1f10 bold)$time](bg:#C7714F fg:#0b1f10)[ ]($style)"
+style = "bg:none fg:yellow"
+format = "[]($style)[[ ](bg:yellow fg:#0b1f10 bold)$time](bg:yellow fg:#0b1f10)[ ]($style)"
 
 
