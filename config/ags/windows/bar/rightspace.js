@@ -31,7 +31,7 @@ export const ModuleRightSpace = () => Widget.EventBox({
                             Widget.Label({
                                 className: 'weather',
                                 connections: [[5000, label => {
-                                    execAsync([`/home/nonan23x/.scripts/weather.sh`]).then(timeString => {
+                                    execAsync([`./weather.sh`]).then(timeString => {
                                         label.label = timeString;
                                     }).catch(print);
                                 }]],
