@@ -57,7 +57,7 @@ const SessionButton = (name, icon, command, props = {}) => {
 
 export default () => {
     // lock, logout, sleep
-    const lockButton = SessionButton('Lock', 'lock', () => { App.closeWindow('session'); execAsync('swaylock') });
+    const lockButton = SessionButton('Lock', 'lock', () => { App.closeWindow('session'); execAsync('gtklock') });
     const logoutButton = SessionButton('Logout', 'logout', () => { App.closeWindow('session'); execAsync(['bash', '-c', 'loginctl terminate-user $USER']) });
     const sleepButton = SessionButton('Sleep', 'sleep', () => { App.closeWindow('session'); execAsync('systemctl suspend') });
     // hibernate, shutdown, reboot
@@ -68,9 +68,9 @@ export default () => {
     return Widget.Box({
         className: 'session-bg',
         css: `
-        min-width: ${SCREEN_WIDTH * 2}px; 
-        min-height: ${SCREEN_HEIGHT * 2}px;
-        `, // Hack to draw over reserved bar space
+        min-width: ${SCREEN_WIDTH * 1.5}px; 
+        min-height: ${SCREEN_HEIGHT * 1.5}px;
+        `, // idk why but height = screen height doesn't fill
         vertical: true,
         children: [
             Widget.EventBox({

@@ -4,8 +4,12 @@ export const keybindList = [[
         "name": "Workspaces: navigation",
         "binds": [
             { "keys": ["", "+", "#"], "action": "Go to workspace #" },
-            { "keys": ["", "+", "S"], "action": "Take a Screenshot" },
+            { "keys": ["", "+", "S"], "action": "Toggle special workspace" },
             { "keys": ["", "+", "(Scroll ↑↓)"], "action": "Go to workspace -1/+1" },
+            { "keys": ["Ctrl", "", "+", "←"], "action": "Go to workspace on the left" },
+            { "keys": ["Ctrl", "", "+", "→"], "action": "Go to workspace on the right" },
+            { "keys": ["", "+", "PageUp"], "action": "Go to workspace on the left" },
+            { "keys": ["", "+", "PageDown"], "action": "Go to workspace on the right" }
         ],
         "appeartick": 1
     },
@@ -13,10 +17,10 @@ export const keybindList = [[
         "icon": "overview_key",
         "name": "Workspaces: management",
         "binds": [
-            { "keys": ["", "Shift", "+", "#"], "action": "Move window to workspace #" },
-            { "keys": ["", "Shift", "+", "S"], "action": "Move window to special workspace" },
-            { "keys": ["", "Shift", "+", "PageUp"], "action": "Move window to workspace on the left" },
-            { "keys": ["", "Shift", "+", "PageDown"], "action": "Move window to workspace on the right" }
+            { "keys": ["", "Alt", "+", "#"], "action": "Move window to workspace #" },
+            { "keys": ["", "Alt", "+", "S"], "action": "Move window to special workspace" },
+            { "keys": ["", "Alt", "+", "PageUp"], "action": "Move window to workspace on the left" },
+            { "keys": ["", "Alt", "+", "PageDown"], "action": "Move window to workspace on the right" }
         ],
         "appeartick": 1
     },
@@ -42,15 +46,15 @@ export const keybindList = [[
         "icon": "widgets",
         "name": "Widgets (AGS)",
         "binds": [
-            { "keys": [""], "action": "Toggle overview/launcher" },
+            { "keys": ["", "OR", "", "+", "Tab"], "action": "Toggle overview/launcher" },
             { "keys": ["Ctrl", "", "+", "R"], "action": "Restart AGS" },
             { "keys": ["", "+", "/"], "action": "Toggle this cheatsheet" },
-            { "keys": ["", "+", "O"], "action": "Toggle sidebar" },
+            { "keys": ["", "+", "N"], "action": "Toggle sidebar" },
             { "keys": ["", "+", "K"], "action": "Toggle virtual keyboard" },
             { "keys": ["Ctrl", "Alt", "+", "Del"], "action": "Power/Session menu" },
 
-            { "keys": ["ALT", "+", "Q"], "action": "Exit a window" },
-            { "keys": ["ESC"], "action": "Dismiss/close sidebar" },
+            { "keys": ["Esc"], "action": "Exit a window" },
+            { "keys": ["rightCtrl"], "action": "Dismiss/close sidebar" },
 
             { "keys": ["Ctrl", "", "+", "T"], "action": "Change wallpaper+colorscheme" },
 
@@ -66,6 +70,7 @@ export const keybindList = [[
         "icon": "construction",
         "name": "Utilities",
         "binds": [
+            { "keys": ["PrtSc"], "action": "Screenshot  >>  clipboard" },
             { "keys": ["", "Shift", "+", "S"], "action": "Screen snip  >>  clipboard" },
             { "keys": ["", "Shift", "+", "T"], "action": "Image to text  >>  clipboard" },
             { "keys": ["", "Shift", "+", "C"], "action": "Color picker" },
@@ -95,10 +100,11 @@ export const keybindList = [[
         "icon": "apps",
         "name": "Apps",
         "binds": [
-            { "keys": ["", "+", "Q"], "action": "Launch terminal: Kitty" },
-            { "keys": ["", "+", "B"], "action": "Launch browser: Google Chrome" },
-            { "keys": ["", "+", "C"], "action": "Launch Calculator: GNOME Calculator" },
-            { "keys": ["", "+", "R"], "action": "Launch File Manager: GNOME Files" },
+            { "keys": ["", "+", "T"], "action": "Launch terminal: foot" },
+            { "keys": ["", "+", "W"], "action": "Launch browser: Firefox" },
+            { "keys": ["", "+", "C"], "action": "Launch editor: vscode" },
+            { "keys": ["", "+", "X"], "action": "Launch editor: GNOME Text Editor" },
+            { "keys": ["", "+", "I"], "action": "Launch settings: GNOME Control center" }
         ],
         "appeartick": 3
     },

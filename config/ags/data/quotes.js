@@ -10,9 +10,5 @@ export const quotes = [
     {
         quote: "haha pointers hee hee i love pointe-\\\nProcess Vaxry exited with signal SIGSEGV",
         author: 'vaxry',
-    },
-    {
-        quote: "If there is a will there is a way",
-        author: "N/A",
-    },
+    }
 ];
