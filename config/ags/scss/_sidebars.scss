@@ -354,6 +354,10 @@
     padding-right: 0.545rem;
 }
 
+.sidebar-todo-item-even {
+    background-color: $t_t_surfaceVariant;
+}
+
 .sidebar-todo-item-action {
     border-radius: 9999px;
     min-width: 1.705rem;
@@ -366,6 +370,19 @@
 
 .sidebar-todo-item-action:active {
     background-color: mix($t_surface, $t_onSurface, 65%);
+}
+
+.sidebar-todo-crosser {
+    transition: margin 200ms cubic-bezier(0.1, 1, 0, 1), background-color 0ms;
+    min-width: 0rem;
+}
+
+.sidebar-todo-crosser-crossed {
+    background-color: $onBackground;
+}
+
+.sidebar-todo-crosser-removed {
+    background-color: $error;
 }
 
 .sidebar-clipboard-item {
@@ -450,4 +467,18 @@
 
 .sidebar-todo-entry:focus {
     border: 0.068rem solid mix($onSurfaceVariant, $surfaceVariant, 90%);
+}
+
+.sidebar-module {
+    @include normal-rounding;
+    @include group-padding;
+    background-color: $t_surface;
+}
+
+.sidebar-module-btn-arrow {
+    @include full-rounding;
+    @include icon-material;
+    background-color: $t_surfaceVariant;
+    min-width: 1.705rem;
+    min-height: 1.705rem;
 }

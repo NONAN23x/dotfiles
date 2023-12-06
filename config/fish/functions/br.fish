@@ -1,1 +1,0 @@
-/home/nonan23x/.local/share/broot/launcher/fish/br.fish

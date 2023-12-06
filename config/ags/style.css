@@ -32,76 +32,76 @@
   font-size: 1.364rem; }
 
 .techfont {
-  font-family: 'JetBrains Mono Nerd Font', 'JetBrains Mono NL', 'SpaceMono Nerd Font', monospace; }
+  font-family: 'JetBrains Mono NF', 'JetBrains Mono Nerd Font', 'JetBrains Mono NL', 'SpaceMono NF', 'SpaceMono Nerd Font', monospace; }
 
 .no-anim {
   transition: 0ms; }
 
 .txt {
-  color: #e8e1e5; }
+  color: #282D29; }
 
 .txt-primary {
-  color: #e6b4ff; }
+  color: #e1d796; }
 
 .txt-onSecondaryContainer {
-  color: #efdcf5; }
+  color: #b2b2b2; }
 
 .txt-shadow {
   text-shadow: 1px 2px 8px rgba(0, 0, 0, 0.69);
   margin: 10px; }
 
 .txt-badonkers {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 3rem; }
 
 .txt-tiddies {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 2.7273rem; }
 
 .txt-hugerass {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 2.045rem; }
 
 .txt-hugeass {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 1.8182rem; }
 
 .txt-larger {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 1.6363rem; }
 
 .txt-large {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 1.4545rem; }
 
 .txt-norm {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 1.2727rem; }
 
 .txt-small {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 1.0909rem; }
 
 .txt-smallie {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 1rem; }
 
 .txt-smaller {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 0.9091rem; }
 
 .txt-smaller-offset {
   margin-top: -0.136rem; }
 
 .txt-tiny {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 0.7273rem; }
 
 .txt-subtext {
-  color: #a8a3a7; }
+  color: #666963; }
 
 .txt-action {
-  color: #c8c2c6; }
+  color: #474b46; }
 
 .txt-semibold {
   font-weight: 500; }
@@ -113,86 +113,44 @@
   font-family: 'Gabarito', 'Lexend', sans-serif; }
 
 .mainfont {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif; }
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif; }
 
 .icon-material {
   font-family: 'Material Symbols Rounded', 'Material Symbols Outlined', 'Material Symbols Sharp'; }
 
 .icon-nerd {
-  font-family: 'SpaceMono Nerd Font', 'JetBrainsMono Nerd Font', monospace; }
+  font-family: 'SpaceMono NF', 'SpaceMono Nerd Font', 'JetBrains Mono NF', 'JetBrains Mono Nerd Font', monospace; }
 
 .separator-circle {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  background-color: #e8e1e5;
+  background-color: #282D29;
   margin: 0rem 0.682rem;
   min-width: 0.545rem;
   min-height: 0.545rem; }
 
-.spacing-h-3 > box {
+.spacing-h-3 > * {
   margin-right: 0.205rem; }
 
-.spacing-h-3 > box:last-child {
+.spacing-h-3 > *:last-child {
   margin-right: 0rem; }
 
-.spacing-h-3 > button {
-  margin-right: 0.205rem; }
-
-.spacing-h-3 > button:last-child {
-  margin-right: 0rem; }
-
-.spacing-v-15 > box {
+.spacing-v-15 > * {
   margin-bottom: 1.023rem; }
 
-.spacing-v-15 > box:last-child {
+.spacing-v-15 > *:last-child {
   margin-bottom: 0rem; }
 
-.spacing-v-15 > scrolledwindow {
-  margin-bottom: 1.023rem; }
-
-.spacing-v-15 > scrolledwindow:last-child {
-  margin-bottom: 0rem; }
-
-.spacing-v-15 > revealer {
-  margin-bottom: 1.023rem; }
-
-.spacing-v-15 > revealer:last-child {
-  margin-bottom: 0rem; }
-
-.spacing-v-15 > label {
-  margin-bottom: 1.023rem; }
-
-.spacing-v-15 > label:last-child {
-  margin-bottom: 0rem; }
-
-.spacing-h-15 > box {
+.spacing-h-15 > * {
   margin-right: 1.023rem; }
 
-.spacing-h-15 > box:last-child {
+.spacing-h-15 > *:last-child {
   margin-right: 0rem; }
 
-.spacing-h-15 > stack {
+.spacing-h-15 > revealer > * {
   margin-right: 1.023rem; }
 
-.spacing-h-15 > stack:last-child {
-  margin-right: 0rem; }
-
-.spacing-h-15 > revealer > box {
-  margin-right: 1.023rem; }
-
-.spacing-h-15 > revealer:last-child > box {
-  margin-right: 0rem; }
-
-.spacing-h-15 > label {
-  margin-right: 1.023rem; }
-
-.spacing-h-15 > label:last-child {
-  margin-right: 0rem; }
-
-.spacing-h-15 > button {
-  margin-right: 1.023rem; }
-
-.spacing-h-15 > button:last-child {
+.spacing-h-15 > revealer:last-child > * {
   margin-right: 0rem; }
 
 .spacing-v-5 > box {
@@ -201,178 +159,76 @@
 .spacing-v-5 > box:last-child {
   margin-bottom: 0rem; }
 
-.spacing-v-5 > label {
+.spacing-v-5 > * {
   margin-bottom: 0.341rem; }
 
-.spacing-v-5 > label:last-child {
+.spacing-v-5 > *:last-child {
   margin-bottom: 0rem; }
 
-.spacing-v-5 > button {
+.spacing-v-5-revealer > revealer > * {
   margin-bottom: 0.341rem; }
 
-.spacing-v-5 > button:last-child {
+.spacing-v-5-revealer > revealer:last-child > * {
   margin-bottom: 0rem; }
 
-.spacing-v-5-revealer > revealer > box {
-  margin-bottom: 0.341rem; }
-
-.spacing-v-5-revealer > revealer:last-child > box {
-  margin-bottom: 0rem; }
-
-.spacing-h-5 > box {
+.spacing-h-5 > * {
   margin-right: 0.341rem; }
 
-.spacing-h-5 > box:last-child {
+.spacing-h-5 > *:last-child {
   margin-right: 0rem; }
 
-.spacing-h-5 > button {
+.spacing-h-5 > widget > * {
   margin-right: 0.341rem; }
 
-.spacing-h-5 > button:last-child {
+.spacing-h-5 > widget:last-child > * {
   margin-right: 0rem; }
 
-.spacing-h-5 > label {
+.spacing-h-5 > revealer > * {
   margin-right: 0.341rem; }
 
-.spacing-h-5 > label:last-child {
+.spacing-h-5 > revealer:last-child > * {
   margin-right: 0rem; }
 
-.spacing-h-5 > widget > box {
-  margin-right: 0.341rem; }
-
-.spacing-h-5 > widget:last-child > box {
-  margin-right: 0rem; }
-
-.spacing-h-5 > revealer > button {
-  margin-right: 0.341rem; }
-
-.spacing-h-5 > revealer:last-child > button {
-  margin-right: 0rem; }
-
-.spacing-h-5 > revealer > entry {
-  margin-right: 0.341rem; }
-
-.spacing-h-5 > revealer:last-child > entry {
-  margin-right: 0rem; }
-
-.spacing-h-5 > progressbar {
-  margin-right: 0.341rem; }
-
-.spacing-h-5 > progressbar:last-child {
-  margin-right: 0rem; }
-
-.spacing-h-5 > scrolledwindow {
-  margin-right: 0.341rem; }
-
-.spacing-h-5 > scrolledwindow:last-child {
-  margin-right: 0rem; }
-
-.spacing-h-5 > scrollbar {
-  margin-right: 0.341rem; }
-
-.spacing-h-5 > scrollbar:last-child {
-  margin-right: 0rem; }
-
-.spacing-v-minus5 > box {
+.spacing-v-minus5 > * {
   margin-bottom: -0.341rem; }
 
-.spacing-v-minus5 > box:last-child {
+.spacing-v-minus5 > *:last-child {
   margin-bottom: 0rem; }
 
-.spacing-v-minus5 > label {
-  margin-bottom: -0.341rem; }
-
-.spacing-v-minus5 > label:last-child {
-  margin-bottom: 0rem; }
-
-.spacing-h-10 > box {
+.spacing-h-10 > * {
   margin-right: 0.682rem; }
 
-.spacing-h-10 > box:last-child {
+.spacing-h-10 > *:last-child {
   margin-right: 0rem; }
 
-.spacing-h-10 > revealer > box {
+.spacing-h-10 > revealer > * {
   margin-right: 0.682rem; }
 
-.spacing-h-10 > revealer:last-child > box {
+.spacing-h-10 > revealer:last-child > * {
   margin-right: 0rem; }
 
-.spacing-h-10 > flowboxchild > button {
+.spacing-h-10 > flowboxchild > * {
   margin-right: 0.682rem; }
 
-.spacing-h-10 > flowboxchild:last-child > button {
+.spacing-h-10 > flowboxchild:last-child > * {
   margin-right: 0rem; }
 
-.spacing-h-10 > label {
-  margin-right: 0.682rem; }
-
-.spacing-h-10 > label:last-child {
-  margin-right: 0rem; }
-
-.spacing-h-10 > revealer {
-  margin-right: 0.682rem; }
-
-.spacing-h-10 > revealer:last-child {
-  margin-right: 0rem; }
-
-.spacing-h-10 > overlay {
-  margin-right: 0.682rem; }
-
-.spacing-h-10 > overlay:last-child {
-  margin-right: 0rem; }
-
-.spacing-h-10 > button {
-  margin-right: 0.682rem; }
-
-.spacing-h-10 > button:last-child {
-  margin-right: 0rem; }
-
-.spacing-h-10 > label {
-  margin-right: 0.682rem; }
-
-.spacing-h-10 > label:last-child {
-  margin-right: 0rem; }
-
-.spacing-h-10 > widget {
-  margin-right: 0.682rem; }
-
-.spacing-h-10 > widget:last-child {
-  margin-right: 0rem; }
-
-.spacing-h-10 > stack {
-  margin-right: 0.682rem; }
-
-.spacing-h-10 > stack:last-child {
-  margin-right: 0rem; }
-
-.spacing-v-10 > box {
+.spacing-v-10 > * {
   margin-bottom: 0.682rem; }
 
-.spacing-v-10 > box:last-child {
+.spacing-v-10 > *:last-child {
   margin-bottom: 0rem; }
 
-.spacing-v-10 > label {
-  margin-bottom: 0.682rem; }
-
-.spacing-v-10 > label:last-child {
-  margin-bottom: 0rem; }
-
-.spacing-v-10 > button {
-  margin-bottom: 0.682rem; }
-
-.spacing-v-10 > button:last-child {
-  margin-bottom: 0rem; }
-
-.spacing-h-20 > box {
+.spacing-h-20 > * {
   margin-right: 1.364rem; }
 
-.spacing-h-20 > box:last-child {
+.spacing-h-20 > *:last-child {
   margin-right: 0rem; }
 
-.spacing-v-20 > box {
+.spacing-v-20 > * {
   margin-bottom: 1.364rem; }
 
-.spacing-v-20 > box:last-child {
+.spacing-v-20 > *:last-child {
   margin-bottom: 0rem; }
 
 .anim-enter {
@@ -469,12 +325,16 @@
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1); }
 
 *:focus {
-  outline: 1px solid #1e1b20; }
+  outline: 1px solid #f7f6ee; }
 
 menu {
+  border-top: 1px solid rgba(222, 222, 214, 0.21);
+  border-left: 1px solid rgba(222, 222, 214, 0.21);
+  border-right: 1px solid rgba(234, 234, 226, 0.205);
+  border-bottom: 1px solid rgba(234, 234, 226, 0.205);
   padding: 0.681rem;
-  background: #29252a;
-  color: #cdc3cd;
+  background: #b0c0a4;
+  color: #282D29;
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem; }
 
@@ -492,22 +352,22 @@ menu > menuitem {
   -gtk-outline-radius: 0.545rem; }
 
 menu > menuitem:hover {
-  background-color: #39353a; }
+  background-color: #a2b198; }
 
 .separator-line {
-  background-color: #29252a;
+  background-color: #b0c0a4;
   min-width: 0.068rem;
   min-height: 0.068rem; }
 
 tooltip {
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  background-color: #29252a;
-  color: #cdc3cd;
-  border: 1px solid #cdc3cd; }
+  background-color: #b0c0a4;
+  color: #282D29;
+  border: 1px solid #282D29; }
 
 .bar-bg {
-  background-color: #141215;
+  background-color: #f6f4e9;
   min-height: 2.727rem; }
 
 .bar-sidespace {
@@ -517,7 +377,7 @@ tooltip {
   padding: 0.2rem; }
 
 .bar-group {
-  background-color: rgba(30, 27, 32, 0.31); }
+  background-color: rgba(247, 246, 238, 0.3); }
 
 .bar-group-center {
   border-bottom-left-radius: 1.364rem;
@@ -589,24 +449,24 @@ tooltip {
   -gtk-outline-radius: 9999px;
   min-width: 0.341rem;
   min-height: 0.341rem;
-  background-color: rgba(50, 47, 52, 0.31);
+  background-color: rgba(226, 226, 218, 0.3);
   margin: 0rem 0.341rem; }
 
 .bar-clock {
   font-family: 'Gabarito', 'Lexend', sans-serif;
   font-size: 1.2727rem;
-  color: #e8e1e5; }
+  color: #282D29; }
 
 .bar-date {
   font-family: 'Gabarito', 'Lexend', sans-serif;
   font-size: 1rem;
-  color: #e8e1e5; }
+  color: #282D29; }
 
 .bar-ws {
   min-height: 1.636rem;
   min-width: 1.772rem;
   font-size: 1.091rem;
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   border-top: 0.068rem solid;
   border-bottom: 0.068rem solid;
   border-color: transparent;
@@ -619,9 +479,9 @@ tooltip {
   min-height: 1.5rem;
   min-width: 1.5rem;
   font-size: 1.091rem;
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
-  background-color: #e6b4ff;
-  color: #481866;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
+  background-color: #7d7327;
+  color: #d6c76e;
   border-radius: 999px;
   margin: 0.068rem; }
 
@@ -633,52 +493,52 @@ tooltip {
   margin: 0rem 0.409rem; }
 
 .bar-ws-occupied {
-  background-color: #4f4255;
-  color: #efdcf5;
+  background-color: #b2b2b2;
+  color: #51504b;
   min-width: 1.772rem;
-  border-top: 0.068rem solid #efdcf5;
-  border-bottom: 0.068rem solid #efdcf5; }
+  border-top: 0.068rem solid #51504b;
+  border-bottom: 0.068rem solid #51504b; }
 
 .bar-ws-occupied-left {
-  background-color: #4f4255;
-  color: #efdcf5;
+  background-color: #b2b2b2;
+  color: #51504b;
   min-width: 1.704rem;
   border-top-left-radius: 999px;
   border-bottom-left-radius: 999px;
-  border-left: 0.068rem solid #efdcf5;
-  border-top: 0.068rem solid #efdcf5;
-  border-bottom: 0.068rem solid #efdcf5;
+  border-left: 0.068rem solid #51504b;
+  border-top: 0.068rem solid #51504b;
+  border-bottom: 0.068rem solid #51504b;
   border-right: 0px solid transparent; }
 
 .bar-ws-occupied-right {
-  background-color: #4f4255;
-  color: #efdcf5;
+  background-color: #b2b2b2;
+  color: #51504b;
   min-width: 1.704rem;
   border-top-right-radius: 999px;
   border-bottom-right-radius: 999px;
-  border-right: 0.068rem solid #efdcf5;
-  border-top: 0.068rem solid #efdcf5;
-  border-bottom: 0.068rem solid #efdcf5;
+  border-right: 0.068rem solid #51504b;
+  border-top: 0.068rem solid #51504b;
+  border-bottom: 0.068rem solid #51504b;
   border-left: 0px solid transparent; }
 
 .bar-ws-occupied-left-right {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  background-color: #4f4255;
-  color: #efdcf5;
+  background-color: #b2b2b2;
+  color: #51504b;
   min-width: 1.636rem;
-  border: 0.068rem solid #efdcf5; }
+  border: 0.068rem solid #51504b; }
 
 .bar-ws-empty {
-  color: #e8e1e5;
+  color: #282D29;
   border-color: transparent; }
 
 .bar-batt {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
   padding: 0rem 0.341rem;
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .bar-sidemodule {
   min-width: 26rem; }
@@ -688,38 +548,38 @@ tooltip {
   color: #930006; }
 
 .bar-batt-full {
-  background-color: #374b3e;
-  color: #d1e9d6; }
+  background-color: #d1e8d5;
+  color: #0c1f13; }
 
 .bar-batt-prog-low {
   background-color: #ffb4a9;
   color: #930006; }
 
 .bar-batt-prog-full {
-  background-color: #374b3e;
-  color: #d1e9d6; }
+  background-color: #d1e8d5;
+  color: #0c1f13; }
 
 .bar-music-playstate {
   min-height: 1.770rem;
   min-width: 1.770rem;
   border-radius: 10rem;
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .bar-music-circprog {
   transition: 1000ms cubic-bezier(0.1, 1, 0, 1);
   min-width: 0.068rem;
   min-height: 1.770rem;
   padding: 0rem;
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .bar-music-playstate-playing {
   min-height: 1.770rem;
   min-width: 1.770rem;
   border-radius: 10rem;
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .bar-music-playstate-txt {
   transition: 100ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -786,13 +646,13 @@ tooltip {
     min-width: 0.680rem;
     margin: 0rem 0.137rem;
     border-radius: 10rem;
-    background-color: #efdcf5; }
+    background-color: #b2b2b2; }
 
 .bar-prog-batt-low progress {
   background-color: #930006; }
 
 .bar-prog-batt-full progress {
-  background-color: #d1e9d6; }
+  background-color: #0c1f13; }
 
 .bar-batt-chargestate {
   border-radius: 10rem;
@@ -802,13 +662,13 @@ tooltip {
   border-radius: 10rem;
   min-width: 0.681rem;
   min-height: 0.681rem;
-  background-color: #efdcf5; }
+  background-color: #b2b2b2; }
 
 .bar-batt-chargestate-low {
   background-color: #930006; }
 
 .bar-batt-chargestate-full {
-  background-color: #d1e9d6; }
+  background-color: #0c1f13; }
 
 .bar-batt-percentage {
   font-size: 1rem;
@@ -816,7 +676,7 @@ tooltip {
   font-weight: 500; }
 
 .corner {
-  background-color: #141215;
+  background-color: #f6f4e9;
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem; }
 
@@ -828,7 +688,7 @@ tooltip {
 .bar-topdesc {
   margin-top: -0.136rem;
   margin-bottom: -0.341rem;
-  color: #a8a3a7; }
+  color: #666963; }
 
 .bar-space-button {
   padding: 0.341rem; }
@@ -869,42 +729,42 @@ tooltip {
   padding: 0rem 0.614rem; }
 
 .bar-statusicons-hover {
-  background-color: #29272a; }
+  background-color: #e1e0d6; }
 
 .bar-statusicons-active {
-  background-color: #3e3b3f; }
+  background-color: #cdccc3; }
 
 .cheatsheet-bg {
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(167, 161, 166, 0.19);
-  border-left: 1px solid rgba(167, 161, 166, 0.19);
-  border-right: 1px solid rgba(131, 126, 131, 0.145);
-  border-bottom: 1px solid rgba(131, 126, 131, 0.145);
+  border-top: 1px solid rgba(144, 146, 140, 0.28);
+  border-left: 1px solid rgba(144, 146, 140, 0.28);
+  border-right: 1px solid rgba(180, 181, 175, 0.24);
+  border-bottom: 1px solid rgba(180, 181, 175, 0.24);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
   margin-bottom: 0.682rem;
-  background-color: #141215;
+  background-color: #f6f4e9;
   padding: 1.364rem; }
 
 .cheatsheet-key {
-  font-family: 'JetBrains Mono Nerd Font', 'JetBrains Mono NL', 'SpaceMono Nerd Font', monospace;
+  font-family: 'JetBrains Mono NF', 'JetBrains Mono Nerd Font', 'JetBrains Mono NL', 'SpaceMono NF', 'SpaceMono Nerd Font', monospace;
   min-height: 1.364rem;
   min-width: 1.364rem;
   margin: 0.17rem;
   padding: 0.136rem 0.205rem;
   border-radius: 0.409rem;
   -gtk-outline-radius: 0.409rem;
-  color: #e6b4ff;
-  border: 0.068rem solid #e6b4ff;
-  box-shadow: 0rem 0.136rem 0rem #e6b4ff;
+  color: #e1d796;
+  border: 0.068rem solid #e1d796;
+  box-shadow: 0rem 0.136rem 0rem #e1d796;
   font-weight: 500; }
 
 .cheatsheet-key-notkey {
   min-height: 1.364rem;
   padding: 0.136rem 0.205rem;
   margin: 0.17rem;
-  color: #f5d9ff; }
+  color: #d6c76e; }
 
 .cheatsheet-closebtn {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -914,10 +774,10 @@ tooltip {
   min-height: 2.386rem; }
 
 .cheatsheet-closebtn:hover {
-  background-color: #29252a; }
+  background-color: #b0c0a4; }
 
 .cheatsheet-closebtn:active {
-  background-color: #5a545b; }
+  background-color: #87947f; }
 
 .cheatsheet-category-title {
   font-family: 'Gabarito', 'Lexend', sans-serif;
@@ -932,12 +792,12 @@ tooltip {
 .bg-time-clock {
   font-family: 'Gabarito';
   font-size: 5.795rem;
-  color: #e8e1e5; }
+  color: #282D29; }
 
 .bg-time-date {
   font-family: 'Gabarito';
   font-size: 2.591rem;
-  color: #e8e1e5; }
+  color: #282D29; }
 
 .bg-distro-box {
   border-radius: 1.705rem;
@@ -948,12 +808,12 @@ tooltip {
 .bg-distro-txt {
   font-family: 'Gabarito';
   font-size: 1.432rem;
-  color: #e8e1e5; }
+  color: #282D29; }
 
 .bg-distro-name {
   font-family: 'Gabarito';
   font-size: 1.432rem;
-  color: #efdcf5; }
+  color: #b2b2b2; }
 
 .bg-graph {
   color: rgba(255, 255, 255, 0.5);
@@ -961,25 +821,25 @@ tooltip {
   border: 0.682rem solid; }
 
 .bg-quicklaunch-title {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
-  color: #cdc3cd; }
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
+  color: #282D29; }
 
 .bg-quicklaunch-btn {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  background-color: #29252a;
-  color: #cdc3cd;
-  border: 0.068rem solid #a8a3a7;
+  background-color: #b0c0a4;
+  color: #282D29;
+  border: 0.068rem solid #666963;
   min-width: 4.432rem;
   min-height: 2.045rem;
   padding: 0.273rem 0.682rem; }
 
 .bg-quicklaunch-btn:hover {
-  background-color: #312d32; }
+  background-color: #a9b99e; }
 
 .bg-quicklaunch-btn:active {
-  background-color: #39353a; }
+  background-color: #a2b198; }
 
 .bg-system-bg {
   border-radius: 1.159rem;
@@ -991,14 +851,14 @@ tooltip {
   min-height: 4.091rem;
   font-size: 0px;
   padding: 0rem;
-  background-color: #29252a; }
+  background-color: #b0c0a4; }
 
 .dock-bg {
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
-  background-color: #141215;
+  background-color: #f6f4e9;
   padding: 0.682rem; }
 
 .dock-app-btn {
@@ -1007,10 +867,10 @@ tooltip {
   padding: 0.273rem; }
 
 .dock-app-btn:hover {
-  background-color: rgba(40, 37, 42, 0.31); }
+  background-color: rgba(237, 236, 228, 0.3); }
 
 .dock-app-btn:active {
-  background-color: rgba(60, 57, 62, 0.31); }
+  background-color: rgba(216, 216, 208, 0.3); }
 
 .dock-app-icon {
   min-width: 3.409rem;
@@ -1018,14 +878,14 @@ tooltip {
 
 .dock-separator {
   min-width: 0.068rem;
-  background-color: #29252a; }
+  background-color: #b0c0a4; }
 
 .osd-bg {
   min-width: 8.864rem;
   min-height: 3.409rem; }
 
 .osd-value {
-  background-color: #141215;
+  background-color: #f6f4e9;
   border-radius: 1.023rem;
   padding: 0.625rem 1.023rem;
   padding-top: 0.313rem;
@@ -1043,60 +903,121 @@ tooltip {
     min-height: 0.954rem;
     min-width: 0.068rem;
     border-radius: 10rem;
-    background-color: #4f4255; }
+    background-color: #51504b; }
   .osd-progress progress {
     transition: 200ms cubic-bezier(0.1, 1, 0, 1);
     min-height: 0.680rem;
     min-width: 0.680rem;
     margin: 0rem 0.137rem;
     border-radius: 10rem;
-    background-color: #efdcf5; }
+    background-color: #b2b2b2; }
 
 .osd-icon {
-  color: #f5d9ff; }
+  color: #d6c76e; }
 
 .osd-label {
   font-size: 1.023rem;
   font-weight: 500;
-  color: #e8e1e5;
+  color: #282D29;
   margin-top: 0.341rem; }
 
 .osd-value-txt {
   font-family: 'Gabarito', 'Lexend', sans-serif;
   font-size: 1.688rem;
   font-weight: 500;
-  color: #e8e1e5; }
+  color: #282D29; }
 
 .osd-notifs {
   padding-top: 0.313rem; }
+
+.osd-colorscheme {
+  border-radius: 1.023rem;
+  background-color: #f6f4e9;
+  padding: 1.023rem;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
+  margin: 7px; }
+
+.osd-color {
+  border-radius: 9999px;
+  -gtk-outline-radius: 9999px;
+  min-width: 2.727rem;
+  min-height: 1.705rem;
+  padding: 0rem 0.341rem;
+  font-weight: bold; }
+  .osd-color box {
+    border-radius: 9999px;
+    -gtk-outline-radius: 9999px;
+    margin: 0.409rem; }
+
+.osd-color-primary {
+  background-color: #e1d796;
+  color: #564f1b; }
+  .osd-color-primary box {
+    background-color: #564f1b; }
+
+.osd-color-primaryContainer {
+  background-color: #7d7327;
+  color: #d6c76e; }
+  .osd-color-primaryContainer box {
+    background-color: #d6c76e; }
+
+.osd-color-secondary {
+  background-color: #b2b2b2;
+  color: #51504b; }
+  .osd-color-secondary box {
+    background-color: #51504b; }
+
+.osd-color-secondaryContainer {
+  background-color: #51504b;
+  color: #b2b2b2; }
+  .osd-color-secondaryContainer box {
+    background-color: #b2b2b2; }
+
+.osd-color-surfaceVariant {
+  background-color: #b0c0a4;
+  color: #282D29; }
+  .osd-color-surfaceVariant box {
+    background-color: #282D29; }
+
+.osd-color-surface {
+  background-color: #f7f6ee;
+  color: #282D29; }
+  .osd-color-surface box {
+    background-color: #282D29; }
+
+.osd-color-background {
+  background-color: #f6f4e9;
+  color: #282D29; }
+  .osd-color-background box {
+    background-color: #282D29; }
 
 .overview-search-box {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(167, 161, 166, 0.19);
-  border-left: 1px solid rgba(167, 161, 166, 0.19);
-  border-right: 1px solid rgba(131, 126, 131, 0.145);
-  border-bottom: 1px solid rgba(131, 126, 131, 0.145);
+  border-top: 1px solid rgba(144, 146, 140, 0.28);
+  border-left: 1px solid rgba(144, 146, 140, 0.28);
+  border-right: 1px solid rgba(180, 181, 175, 0.24);
+  border-bottom: 1px solid rgba(180, 181, 175, 0.24);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
   min-width: 13.636rem;
   min-height: 3.409rem;
   padding: 0rem 1.364rem;
   padding-right: 2.864rem;
-  background-color: #141215;
-  color: #e8e1e5;
+  background-color: #f6f4e9;
+  color: #282D29;
   caret-color: transparent; }
   .overview-search-box selection {
-    background-color: #d2c0d8;
-    color: #382c3e; }
+    background-color: #b2b2b2;
+    color: #51504b; }
 
 .overview-search-box-extended {
   min-width: 25.909rem;
-  caret-color: #efdcf5; }
+  caret-color: #b2b2b2; }
 
 .overview-search-prompt {
-  color: #a8a3a7; }
+  color: #666963; }
 
 .overview-search-icon {
   margin: 0rem 1.023rem; }
@@ -1112,16 +1033,16 @@ tooltip {
 .overview-search-results {
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(167, 161, 166, 0.19);
-  border-left: 1px solid rgba(167, 161, 166, 0.19);
-  border-right: 1px solid rgba(131, 126, 131, 0.145);
-  border-bottom: 1px solid rgba(131, 126, 131, 0.145);
+  border-top: 1px solid rgba(144, 146, 140, 0.28);
+  border-left: 1px solid rgba(144, 146, 140, 0.28);
+  border-right: 1px solid rgba(180, 181, 175, 0.24);
+  border-bottom: 1px solid rgba(180, 181, 175, 0.24);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
   min-width: 28.773rem;
   padding: 0.682rem;
-  background-color: #141215;
-  color: #e8e1e5; }
+  background-color: #f6f4e9;
+  color: #282D29; }
 
 .overview-search-results-icon {
   margin: 0rem 0.682rem;
@@ -1134,7 +1055,7 @@ tooltip {
 
 .overview-search-results-txt-cmd {
   margin-right: 0.682rem;
-  font-family: 'JetBrains Mono Nerd Font', 'JetBrains Mono NL', 'SpaceMono Nerd Font', monospace;
+  font-family: 'JetBrains Mono NF', 'JetBrains Mono Nerd Font', 'JetBrains Mono NL', 'SpaceMono NF', 'SpaceMono Nerd Font', monospace;
   font-size: 1.227rem; }
 
 .overview-search-result-btn {
@@ -1155,61 +1076,63 @@ tooltip {
 .overview-tasks {
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(167, 161, 166, 0.19);
-  border-left: 1px solid rgba(167, 161, 166, 0.19);
-  border-right: 1px solid rgba(131, 126, 131, 0.145);
-  border-bottom: 1px solid rgba(131, 126, 131, 0.145);
+  border-top: 1px solid rgba(144, 146, 140, 0.28);
+  border-left: 1px solid rgba(144, 146, 140, 0.28);
+  border-right: 1px solid rgba(180, 181, 175, 0.24);
+  border-bottom: 1px solid rgba(180, 181, 175, 0.24);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
   padding: 0.341rem;
-  background-color: #141215;
-  color: #e8e1e5; }
+  background-color: #f6f4e9;
+  color: #282D29; }
 
 .overview-tasks-workspace {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   margin: 0.341rem;
-  background-color: rgba(51, 47, 52, 0.1147); }
+  background-color: rgba(230, 229, 221, 0.207); }
 
 .overview-tasks-workspace-number {
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
-  color: rgba(218, 211, 215, 0.31); }
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
+  color: rgba(54, 59, 55, 0.3); }
 
 .overview-tasks-window {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background-color: rgba(79, 66, 85, 0.5);
-  color: #efdcf5;
-  border: 0.068rem solid rgba(239, 220, 245, 0.07); }
+  background-color: rgba(81, 80, 75, 0.4);
+  color: #b2b2b2;
+  border: 0.068rem solid rgba(178, 178, 178, 0.07); }
 
 .overview-tasks-window:hover {
-  background-color: rgba(100, 82, 108, 0.525); }
+  background-color: rgba(106, 103, 88, 0.43); }
 
 .overview-tasks-window:focus {
-  background-color: rgba(100, 82, 108, 0.525); }
+  background-color: rgba(106, 103, 88, 0.43); }
 
 .overview-tasks-window:active {
-  background-color: rgba(117, 95, 128, 0.55); }
+  background-color: rgba(125, 122, 98, 0.46); }
 
 .overview-tasks-window-selected {
-  background-color: rgba(117, 95, 128, 0.55); }
+  background-color: rgba(125, 122, 98, 0.46); }
 
 .overview-tasks-window-dragging {
   opacity: 0.2; }
 
 .osk-window {
-  transition: 170ms cubic-bezier(0.05, 0.7, 0.1, 1);
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(167, 161, 166, 0.19);
-  border-left: 1px solid rgba(167, 161, 166, 0.19);
-  border-right: 1px solid rgba(131, 126, 131, 0.145);
-  border-bottom: 1px solid rgba(131, 126, 131, 0.145);
+  border-top: 1px solid rgba(144, 146, 140, 0.28);
+  border-left: 1px solid rgba(144, 146, 140, 0.28);
+  border-right: 1px solid rgba(180, 181, 175, 0.24);
+  border-bottom: 1px solid rgba(180, 181, 175, 0.24);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
-  background-color: #141215;
-  padding: 1.023rem; }
+  background-color: #f6f4e9; }
+
+.osk-body {
+  padding: 1.023rem;
+  padding-top: 0px; }
 
 .osk-show {
   transition: 170ms cubic-bezier(0.05, 0.7, 0.1, 1); }
@@ -1219,23 +1142,32 @@ tooltip {
   margin-bottom: -30.682rem;
   transition: 100ms cubic-bezier(0.3, 0, 0.8, 0.15); }
 
+.osk-dragline {
+  border-radius: 9999px;
+  -gtk-outline-radius: 9999px;
+  background-color: #b0c0a4;
+  min-height: 0.273rem;
+  min-width: 10.227rem;
+  margin-top: 0.545rem;
+  margin-bottom: 0.205rem; }
+
 .osk-key {
   border-radius: 0.682rem;
-  background-color: rgba(41, 37, 42, 0.31);
-  color: #cdc3cd;
+  background-color: rgba(176, 192, 164, 0.3);
+  color: #282D29;
   padding: 0.188rem;
   font-weight: 500;
   font-size: 1.091rem; }
 
 .osk-key:hover {
-  background-color: rgba(57, 53, 58, 0.31); }
+  background-color: rgba(162, 177, 152, 0.3); }
 
 .osk-key:active {
-  background-color: rgba(90, 84, 91, 0.31);
+  background-color: rgba(135, 148, 127, 0.3);
   font-size: 1.091rem; }
 
 .osk-key-active {
-  background-color: rgba(90, 84, 91, 0.31); }
+  background-color: rgba(135, 148, 127, 0.3); }
 
 .osk-key-normal {
   min-width: 2.5rem;
@@ -1263,30 +1195,30 @@ tooltip {
 
 .osk-control-button {
   border-radius: 0.682rem;
-  background-color: rgba(41, 37, 42, 0.31);
-  color: #cdc3cd;
+  background-color: rgba(176, 192, 164, 0.3);
+  color: #282D29;
   font-weight: 500;
   font-size: 1.091rem;
   padding: 0.682rem; }
 
 .osk-control-button:hover {
-  background-color: rgba(57, 53, 58, 0.31); }
+  background-color: rgba(162, 177, 152, 0.3); }
 
 .osk-control-button:active {
-  background-color: rgba(90, 84, 91, 0.31);
+  background-color: rgba(135, 148, 127, 0.3);
   font-size: 1.091rem; }
 
 .sidebar-right {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(167, 161, 166, 0.19);
-  border-left: 1px solid rgba(167, 161, 166, 0.19);
-  border-right: 1px solid rgba(131, 126, 131, 0.145);
-  border-bottom: 1px solid rgba(131, 126, 131, 0.145);
+  border-top: 1px solid rgba(144, 146, 140, 0.28);
+  border-left: 1px solid rgba(144, 146, 140, 0.28);
+  border-right: 1px solid rgba(180, 181, 175, 0.24);
+  border-bottom: 1px solid rgba(180, 181, 175, 0.24);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
-  background-color: #141215;
+  background-color: #f6f4e9;
   padding: 1.023rem; }
 
 .sideright-show {
@@ -1300,13 +1232,13 @@ tooltip {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(167, 161, 166, 0.19);
-  border-left: 1px solid rgba(167, 161, 166, 0.19);
-  border-right: 1px solid rgba(131, 126, 131, 0.145);
-  border-bottom: 1px solid rgba(131, 126, 131, 0.145);
+  border-top: 1px solid rgba(144, 146, 140, 0.28);
+  border-left: 1px solid rgba(144, 146, 140, 0.28);
+  border-right: 1px solid rgba(180, 181, 175, 0.24);
+  border-bottom: 1px solid rgba(180, 181, 175, 0.24);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
-  background-color: #141215;
+  background-color: #f6f4e9;
   padding: 1.023rem; }
 
 .sideleft-show {
@@ -1320,12 +1252,12 @@ tooltip {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   padding: 0.341rem;
-  background-color: rgba(30, 27, 32, 0.31); }
+  background-color: rgba(247, 246, 238, 0.3); }
 
 .sidebar-group-nopad {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
-  background-color: rgba(30, 27, 32, 0.31); }
+  background-color: rgba(247, 246, 238, 0.3); }
 
 .sidebar-group-invisible {
   padding: 0.341rem; }
@@ -1337,38 +1269,38 @@ tooltip {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  color: #e8e1e5;
+  color: #282D29;
   min-width: 2.727rem;
   min-height: 2.727rem; }
 
 .sidebar-iconbutton:hover {
-  background-color: #6f6175; }
+  background-color: #646460; }
 
 .sidebar-iconbutton:active {
-  background-color: #8f8095; }
+  background-color: #787774; }
 
 .sidebar-button {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   padding: 0rem 0.818rem;
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .sidebar-button-nopad {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .sidebar-button:hover {
-  background-color: #6f6175; }
+  background-color: #646460; }
 
 .sidebar-button:active {
-  background-color: #8f8095; }
+  background-color: #787774; }
 
 .sidebar-button-nopad:hover {
-  background-color: #6f6175; }
+  background-color: #646460; }
 
 .sidebar-button-nopad:active {
-  background-color: #8f8095; }
+  background-color: #787774; }
 
 .sidebar-button-left {
   border-top-left-radius: 0.818rem;
@@ -1387,19 +1319,19 @@ tooltip {
   -gtk-outline-radius: 0.818rem; }
 
 .sidebar-button-active {
-  background-color: #e6b4ff;
-  color: #481866; }
+  background-color: #e1d796;
+  color: #564f1b; }
 
 .sidebar-button-active:hover {
-  background-color: rgba(228, 179, 253, 0.93); }
+  background-color: rgba(223, 213, 150, 0.93); }
 
 .sidebar-button-active:active {
-  background-color: rgba(223, 176, 246, 0.79); }
+  background-color: rgba(218, 209, 148, 0.79); }
 
 .sidebar-buttons-separator {
   min-width: 0.068rem;
   min-height: 0.068rem;
-  background-color: #cdc3cd; }
+  background-color: #282D29; }
 
 .sidebar-navrail {
   padding: 0rem 1.159rem; }
@@ -1410,18 +1342,18 @@ tooltip {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1); }
 
 .sidebar-navrail-btn:hover > box > label:first-child {
-  background-color: rgba(103, 97, 103, 0.379); }
+  background-color: rgba(123, 135, 116, 0.37); }
 
 .sidebar-navrail-btn:active > box > label:first-child {
-  background-color: #524d53; }
+  background-color: #8e9b85; }
 
 .sidebar-navrail-btn-active > box > label:first-child {
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .sidebar-navrail-btn-active:hover > box > label:first-child {
-  background-color: rgba(80, 67, 86, 0.93);
-  color: rgba(237, 218, 243, 0.93); }
+  background-color: rgba(82, 81, 76, 0.93);
+  color: rgba(177, 177, 177, 0.93); }
 
 .sidebar-sysinfo-grouppad {
   padding: 1.159rem; }
@@ -1431,8 +1363,8 @@ tooltip {
   min-width: 0.818rem;
   min-height: 4.091rem;
   padding: 0.409rem;
-  background-color: #4f4255;
-  color: #efdcf5;
+  background-color: #51504b;
+  color: #b2b2b2;
   font-size: 0px; }
 
 .sidebar-memory-swap-circprog {
@@ -1441,16 +1373,16 @@ tooltip {
   min-height: 2.255rem;
   padding: 0.409rem;
   margin: 0.918rem;
-  background-color: #4f4255;
-  color: #efdcf5;
+  background-color: #51504b;
+  color: #b2b2b2;
   font-size: 0px; }
 
 .sidebar-cpu-circprog {
   min-width: 0.818rem;
   min-height: 3.409rem;
   padding: 0.409rem;
-  background-color: #4f4255;
-  color: #efdcf5;
+  background-color: #51504b;
+  color: #b2b2b2;
   transition: 1000ms cubic-bezier(0.1, 1, 0, 1);
   font-size: 0px; }
 
@@ -1469,13 +1401,13 @@ tooltip {
   -gtk-outline-radius: 9999px;
   min-width: 0.273rem;
   min-height: 2.045rem;
-  background-color: rgba(205, 195, 205, 0.31); }
+  background-color: rgba(40, 45, 41, 0.3); }
 
 .sidebar-scrollbar slider:hover {
-  background-color: rgba(205, 195, 205, 0.448); }
+  background-color: rgba(40, 45, 41, 0.44); }
 
 .sidebar-scrollbar slider:active {
-  background-color: #7b747c; }
+  background-color: #6c7767; }
 
 .sidebar-calendar-btn {
   border-radius: 9999px;
@@ -1483,7 +1415,7 @@ tooltip {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   min-height: 2.523rem;
   min-width: 2.523rem;
-  color: #e8e1e5; }
+  color: #282D29; }
 
 .sidebar-calendar-btn:hover {
   background-color: rgba(128, 128, 128, 0.3); }
@@ -1496,17 +1428,17 @@ tooltip {
   margin-right: -10.341rem; }
 
 .sidebar-calendar-btn-today {
-  background-color: #e6b4ff;
-  color: #481866; }
+  background-color: #e1d796;
+  color: #564f1b; }
 
 .sidebar-calendar-btn-today:hover {
-  background-color: rgba(228, 179, 253, 0.93); }
+  background-color: rgba(223, 213, 150, 0.93); }
 
 .sidebar-calendar-btn-today:active {
-  background-color: rgba(223, 176, 246, 0.79); }
+  background-color: rgba(218, 209, 148, 0.79); }
 
 .sidebar-calendar-btn-othermonth {
-  color: #837e83; }
+  color: #90928c; }
 
 .sidebar-calendar-header {
   margin: 0.341rem; }
@@ -1515,48 +1447,48 @@ tooltip {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
   padding: 0rem 0.682rem;
-  background-color: rgba(41, 37, 42, 0.31);
-  color: #cdc3cd; }
+  background-color: rgba(176, 192, 164, 0.3);
+  color: #282D29; }
 
 .sidebar-calendar-monthyear-btn:hover {
-  background-color: rgba(78, 72, 78, 0.3445);
-  color: #c5bbc5; }
+  background-color: rgba(145, 158, 136, 0.335);
+  color: #2f342f; }
 
 .sidebar-calendar-monthyear-btn:active {
-  background-color: #423d42;
-  color: #b4abb5; }
+  background-color: #9caa92;
+  color: #3c433b; }
 
 .sidebar-calendar-monthshift-btn {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
   min-width: 2.045rem;
   min-height: 2.045rem;
-  background-color: rgba(41, 37, 42, 0.31);
-  color: #cdc3cd; }
+  background-color: rgba(176, 192, 164, 0.3);
+  color: #282D29; }
 
 .sidebar-calendar-monthshift-btn:hover {
-  background-color: rgba(78, 72, 78, 0.3445);
-  color: #c5bbc5; }
+  background-color: rgba(145, 158, 136, 0.335);
+  color: #2f342f; }
 
 .sidebar-calendar-monthshift-btn:active {
-  background-color: #423d42;
-  color: #b4abb5; }
+  background-color: #9caa92;
+  color: #3c433b; }
 
 .sidebar-todo-selector-tab {
   border-radius: 0.818rem;
   -gtk-outline-radius: 0.818rem;
   transition: 0ms;
   min-height: 2.5rem;
-  color: #e8e1e5; }
+  color: #282D29; }
 
 .sidebar-todo-selector-tab:hover {
-  background-color: rgba(103, 97, 103, 0.379); }
+  background-color: rgba(123, 135, 116, 0.37); }
 
 .sidebar-todo-selector-tab:active {
-  background-color: #524d53; }
+  background-color: #8e9b85; }
 
 .sidebar-todo-selector-tab-active > box > label {
-  color: #e6b4ff; }
+  color: #e1d796; }
 
 .sidebar-todo-selector-highlight-offset {
   margin-top: -0.205rem;
@@ -1564,12 +1496,15 @@ tooltip {
 
 .sidebar-todo-selector-highlight {
   transition: 180ms ease-in-out;
-  color: #e6b4ff;
+  color: #e1d796;
   padding: 0rem 2.045rem;
   min-height: 0.205rem; }
 
 .sidebar-todo-item {
   padding-right: 0.545rem; }
+
+.sidebar-todo-item-even {
+  background-color: rgba(176, 192, 164, 0.2); }
 
 .sidebar-todo-item-action {
   border-radius: 9999px;
@@ -1577,37 +1512,47 @@ tooltip {
   min-height: 1.705rem; }
 
 .sidebar-todo-item-action:hover {
-  background-color: rgba(70, 67, 71, 0.31); }
+  background-color: rgba(206, 206, 199, 0.3); }
 
 .sidebar-todo-item-action:active {
-  background-color: rgba(101, 96, 101, 0.31); }
+  background-color: rgba(175, 176, 169, 0.3); }
+
+.sidebar-todo-crosser {
+  transition: margin 200ms cubic-bezier(0.1, 1, 0, 1), background-color 0ms;
+  min-width: 0rem; }
+
+.sidebar-todo-crosser-crossed {
+  background-color: #282D29; }
+
+.sidebar-todo-crosser-removed {
+  background-color: #ffb4a9; }
 
 .sidebar-clipboard-item {
   border-radius: 0.818rem;
   min-height: 2.045rem;
   padding: 0.341rem;
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .sidebar-clipboard-item:hover {
-  background-color: #5f5165; }
+  background-color: #5b5a55; }
 
 .sidebar-clipboard-item:active {
-  background-color: #6f6175; }
+  background-color: #646460; }
 
 .sidebar-todo-new {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  color: #efdcf5;
+  color: #b2b2b2;
   margin: 0.341rem;
   padding: 0.205rem 0.545rem;
-  border: 0.068rem solid #e8e1e5; }
+  border: 0.068rem solid #282D29; }
 
 .sidebar-todo-new:hover {
-  background-color: #54475a; }
+  background-color: #54534e; }
 
 .sidebar-todo-new:active {
-  background-color: #6f6175; }
+  background-color: #646460; }
 
 .sidebar-todo-add {
   border-radius: 9999px;
@@ -1615,14 +1560,14 @@ tooltip {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   min-width: 1.705rem;
   min-height: 1.705rem;
-  color: #efdcf5;
-  border: 0.068rem solid #e8e1e5; }
+  color: #b2b2b2;
+  border: 0.068rem solid #282D29; }
 
 .sidebar-todo-add:hover {
-  background-color: #54475a; }
+  background-color: #54534e; }
 
 .sidebar-todo-add:active {
-  background-color: #6f6175; }
+  background-color: #646460; }
 
 .sidebar-todo-add-available {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -1630,52 +1575,66 @@ tooltip {
   -gtk-outline-radius: 9999px;
   min-width: 1.705rem;
   min-height: 1.705rem;
-  background-color: #e6b4ff;
-  color: #481866;
-  border: 0.068rem solid #e6b4ff; }
+  background-color: #e1d796;
+  color: #564f1b;
+  border: 0.068rem solid #e1d796; }
 
 .sidebar-todo-add-available:hover {
-  background-color: #e1affa; }
+  background-color: #ddd392; }
 
 .sidebar-todo-add-available:active {
-  background-color: #c695e0; }
+  background-color: #c5bc7d; }
 
 .sidebar-todo-entry {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   border-radius: 0.818rem;
   -gtk-outline-radius: 0.818rem;
-  background-color: #29252a;
-  color: #cdc3cd;
-  caret-color: #cdc3cd;
+  background-color: #b0c0a4;
+  color: #282D29;
+  caret-color: #282D29;
   margin: 0rem 0.341rem;
   min-height: 1.773rem;
   min-width: 0rem;
   padding: 0.205rem 0.682rem;
-  border: 0.068rem solid #7b747c; }
+  border: 0.068rem solid #6c7767; }
 
 .sidebar-todo-entry:focus {
-  border: 0.068rem solid #bdb3bd; }
+  border: 0.068rem solid #363c35; }
+
+.sidebar-module {
+  border-radius: 1.159rem;
+  -gtk-outline-radius: 1.159rem;
+  padding: 0.341rem;
+  background-color: rgba(247, 246, 238, 0.3); }
+
+.sidebar-module-btn-arrow {
+  border-radius: 9999px;
+  -gtk-outline-radius: 9999px;
+  font-family: 'Material Symbols Rounded', 'Material Symbols Outlined', 'Material Symbols Sharp';
+  background-color: rgba(176, 192, 164, 0.3);
+  min-width: 1.705rem;
+  min-height: 1.705rem; }
 
 .session-bg {
   margin-top: -2.727rem;
-  background-color: rgba(20, 18, 21, 0.64); }
+  background-color: rgba(246, 244, 233, 0.68); }
 
 .session-button {
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
   min-width: 8.182rem;
   min-height: 8.182rem;
-  background-color: #29252a;
-  color: #cdc3cd;
+  background-color: #b0c0a4;
+  color: #282D29;
   font-size: 3rem; }
 
 .session-button-focused {
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .session-button-desc {
-  background-color: #242025;
-  color: #dbd2d9;
+  background-color: #d4dbc9;
+  color: #282d29;
   border-bottom-left-radius: 1.705rem;
   border-bottom-right-radius: 1.705rem;
   padding: 0.205rem 0.341rem;
@@ -1686,23 +1645,23 @@ tooltip {
   -gtk-outline-radius: 1.705rem;
   min-width: 8.182rem;
   min-height: 5.455rem;
-  background-color: #29252a;
-  color: #cdc3cd;
+  background-color: #b0c0a4;
+  color: #282D29;
   font-size: 3rem; }
 
 .notif-low {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
-  background-color: rgba(41, 37, 42, 0.45);
-  color: #cdc3cd;
+  background-color: rgba(176, 192, 164, 0.45);
+  color: #282D29;
   padding: 0.818rem;
   padding-right: 1.363rem; }
 
 .notif-normal {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
-  background-color: rgba(41, 37, 42, 0.45);
-  color: #cdc3cd;
+  background-color: rgba(176, 192, 164, 0.45);
+  color: #282D29;
   padding: 0.818rem;
   padding-right: 1.363rem; }
 
@@ -1718,8 +1677,8 @@ tooltip {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   min-width: 30.682rem;
-  background-color: #141215;
-  color: #cdc3cd;
+  background-color: #f6f4e9;
+  color: #282D29;
   padding: 0.818rem;
   padding-right: 1.363rem; }
 
@@ -1727,8 +1686,8 @@ tooltip {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   min-width: 30.682rem;
-  background-color: #141215;
-  color: #cdc3cd;
+  background-color: #f6f4e9;
+  color: #282D29;
   padding: 0.818rem;
   padding-right: 1.363rem; }
 
@@ -1742,10 +1701,10 @@ tooltip {
   padding-right: 1.363rem; }
 
 .notif-body-low {
-  color: #978f97; }
+  color: #555e52; }
 
 .notif-body-normal {
-  color: #978f97; }
+  color: #555e52; }
 
 .notif-body-critical {
   color: #9a3b3a; }
@@ -1757,16 +1716,16 @@ tooltip {
   min-height: 3.409rem; }
 
 .notif-icon-material {
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .notif-icon-material-low {
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .notif-icon-material-normal {
-  background-color: #4f4255;
-  color: #efdcf5; }
+  background-color: #51504b;
+  color: #b2b2b2; }
 
 .notif-icon-material-critical {
   background-color: #930006;
@@ -1797,7 +1756,7 @@ tooltip {
 .osd-notif {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
-  background-color: rgba(20, 18, 21, 0.38);
+  background-color: rgba(246, 244, 233, 0.6);
   min-width: 30.682rem; }
 
 .notif-circprog-low {
@@ -1805,14 +1764,14 @@ tooltip {
   min-width: 0.136rem;
   min-height: 1.770rem;
   padding: 0rem;
-  color: #efdcf5; }
+  color: #b2b2b2; }
 
 .notif-circprog-normal {
   transition: 0ms linear;
   min-width: 0.136rem;
   min-height: 1.770rem;
   padding: 0rem;
-  color: #efdcf5; }
+  color: #b2b2b2; }
 
 .notif-circprog-critical {
   transition: 0ms linear;
@@ -1829,9 +1788,9 @@ tooltip {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   min-width: 29.659rem;
-  background-color: #141215;
+  background-color: #f6f4e9;
   padding: 0rem 1.023rem;
-  background: linear-gradient(127deg, rgba(32, 28, 34, 0.6), rgba(32, 28, 34, 0.45) 70.71%), linear-gradient(217deg, rgba(75, 68, 77, 0.6), rgba(75, 68, 77, 0.45) 70.71%), radial-gradient(circle at 0% 100%, #4f4255 13%, rgba(0, 0, 0, 0) 100%), linear-gradient(336deg, rgba(79, 66, 85, 0.6), rgba(79, 66, 85, 0.45) 70.71%), linear-gradient(#141215, #141215); }
+  background: linear-gradient(127deg, rgba(213, 211, 201, 0.6), rgba(213, 211, 201, 0.45) 70.71%), linear-gradient(217deg, rgba(111, 140, 89, 0.6), rgba(111, 140, 89, 0.45) 70.71%), radial-gradient(circle at 0% 100%, #51504b 13%, rgba(0, 0, 0, 0) 100%), linear-gradient(336deg, rgba(81, 80, 75, 0.6), rgba(81, 80, 75, 0.45) 70.71%), linear-gradient(#f6f4e9, #f6f4e9); }
 
 .osd-music-cover-fallback {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -1839,8 +1798,8 @@ tooltip {
   -gtk-outline-radius: 0.818rem;
   min-width: 7.5rem;
   min-height: 7.5rem;
-  background-color: rgba(30, 27, 32, 0.31);
-  color: #d8d1d6; }
+  background-color: rgba(247, 246, 238, 0.3);
+  color: #2f372e; }
 
 .osd-music-cover {
   border-radius: 0.818rem;
@@ -1866,13 +1825,13 @@ tooltip {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   font-family: 'Gabarito', 'Lexend', sans-serif;
   font-size: 1.364rem;
-  color: #d8d1d6; }
+  color: #2f372e; }
 
 .osd-music-artists {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  font-family: 'AR One Sans', 'Geist', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
+  font-family: 'Geist', 'AR One Sans', 'Reddit Sans', 'Inter', 'Roboto', 'Noto Sans', 'Ubuntu', sans-serif;
   font-size: 0.955rem;
-  color: rgba(204, 197, 202, 0.9); }
+  color: rgba(56, 64, 54, 0.9); }
 
 .osd-music-pill {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -1881,8 +1840,8 @@ tooltip {
   font-family: 'Gabarito', 'Lexend', sans-serif;
   min-width: 1.833rem;
   padding: 0.273rem 0.682rem;
-  background-color: rgba(54, 48, 56, 0.5);
-  color: #d8d1d6; }
+  background-color: rgba(159, 170, 144, 0.5);
+  color: #2f372e; }
 
 .osd-music-controls {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -1891,8 +1850,8 @@ tooltip {
   font-family: 'Gabarito', 'Lexend', sans-serif;
   min-width: 1.833rem;
   padding: 0.205rem;
-  background-color: rgba(54, 48, 56, 0.5);
-  color: #d8d1d6; }
+  background-color: rgba(159, 170, 144, 0.5);
+  color: #2f372e; }
 
 .osd-music-controlbtn {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -1902,10 +1861,10 @@ tooltip {
   -gtk-outline-radius: 9999px; }
 
 .osd-music-controlbtn:hover {
-  background-color: rgba(95, 88, 96, 0.55); }
+  background-color: rgba(131, 141, 120, 0.55); }
 
 .osd-music-controlbtn:active {
-  background-color: rgba(110, 104, 111, 0.575); }
+  background-color: rgba(120, 130, 110, 0.575); }
 
 .osd-music-controlbtn-txt {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
@@ -1919,16 +1878,16 @@ tooltip {
   min-width: 0.409rem;
   min-height: 3.068rem;
   padding: 0.273rem;
-  background-color: rgba(54, 48, 56, 0.5);
-  color: #d8d1d6; }
+  background-color: rgba(159, 170, 144, 0.5);
+  color: #2f372e; }
 
 .osd-music-playstate {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   min-height: 3.068rem;
   min-width: 3.068rem;
   border-radius: 10rem;
-  background-color: rgba(54, 48, 56, 0.5);
-  color: #d8d1d6; }
+  background-color: rgba(159, 170, 144, 0.5);
+  color: #2f372e; }
 
 .osd-music-playstate-btn > label {
   transition: 50ms cubic-bezier(0.05, 0.7, 0.1, 1);

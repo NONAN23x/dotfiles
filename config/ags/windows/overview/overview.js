@@ -1,14 +1,15 @@
 const { Gdk, Gio, Gtk } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
+import { App, Service, Utils, Variable, Widget } from '../../imports.js';
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 const { execAsync, exec } = Utils;
 import { setupCursorHover, setupCursorHoverGrab } from "../../lib/cursorhover.js";
-import { execAndClose, startsWithNumber, launchCustomCommand, ls } from './miscfunctions.js';
+import { execAndClose, hasUnterminatedBackslash, startsWithNumber, launchCustomCommand, ls } from './miscfunctions.js';
 import {
     CalculationResultButton, CustomCommandButton, DirectoryButton,
     DesktopEntryButton, ExecuteCommandButton, SearchButton
 } from './searchbuttons.js';
+import { dumpToWorkspace, swapWorkspace } from "./actions.js";
 
 // Add math funcs
 const { abs, sin, cos, tan, cot, asin, acos, atan, acot } = Math;
@@ -25,17 +26,25 @@ const acotd = x => acot(x) * 180 / pi;
 
 const MAX_RESULTS = 10;
 const OVERVIEW_SCALE = 0.09; // = overview workspace box / screen size
-const OVERVIEW_WS_NUM_SCALE = 0.08;
-const OVERVIEW_WS_NUM_MARGIN_SCALE = 0.06;
+const OVERVIEW_WS_NUM_SCALE = 0.09;
+const OVERVIEW_WS_NUM_MARGIN_SCALE = 0.07;
 const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)];
 const searchPromptTexts = [
-    'Try "Minecraft"',
+    'Try "~/.config"',
+    'Try "Files"',
     'Try "6*cos(pi)"',
     'Try "sudo pacman -Syu"',
     'Try "How to basic"',
     'Drag n\' drop to move windows',
     'Type to search',
 ]
+
+const overviewTick = Variable(false);
+
+function iconExists(iconName) {
+    let iconTheme = Gtk.IconTheme.get_default();
+    return iconTheme.has_icon(iconName);
+}
 
 function substitute(str) {
     const subs = [
@@ -44,7 +53,7 @@ function substitute(str) {
         { from: 'GitHub Desktop', to: 'github-desktop' },
         { from: 'wpsoffice', to: 'wps-office2019-kprometheus' },
         { from: 'gnome-tweaks', to: 'org.gnome.tweaks' },
-        { from: 'Minecraft* 1.20.2', to: 'minecraft' },
+        { from: 'Minecraft* 1.20.1', to: 'minecraft' },
         { from: '', to: 'image-missing' },
     ];
 
@@ -53,12 +62,13 @@ function substitute(str) {
             return to;
     }
 
+    if(!iconExists(str)) str = str.toLowerCase().replace(/\s+/g, '-'); // Turn into kebab-case
     return str;
 }
 
-const ContextWorkspaceArray = ({ label, onClickBinary, thisWorkspace }) => Widget.MenuItem({
+const ContextWorkspaceArray = ({ label, actionFunc, thisWorkspace }) => Widget.MenuItem({
     label: `${label}`,
-    setup: menuItem => {
+    setup: (menuItem) => {
         let submenu = new Gtk.Menu();
         submenu.className = 'menu';
         for (let i = 1; i <= 10; i++) {
@@ -66,7 +76,9 @@ const ContextWorkspaceArray = ({ label, onClickBinary, thisWorkspace }) => Widge
                 label: `Workspace ${i}`
             });
             button.connect("activate", () => {
-                execAsync([`${onClickBinary}`, `${thisWorkspace}`, `${i}`]).catch(print);
+                // execAsync([`${onClickBinary}`, `${thisWorkspace}`, `${i}`]).catch(print);
+                actionFunc(thisWorkspace, i);
+                overviewTick.value = !overviewTick.value;
             });
             submenu.append(button);
         }
@@ -103,12 +115,12 @@ const client = ({ address, size: [w, h], workspace: { id, name }, class: c, titl
                     }),
                     ContextWorkspaceArray({
                         label: "Dump windows to workspace",
-                        onClickBinary: `${App.configDir}/scripts/dumptows`,
+                        actionFunc: dumpToWorkspace,
                         thisWorkspace: Number(id)
                     }),
                     ContextWorkspaceArray({
                         label: "Swap windows with workspace",
-                        onClickBinary: `${App.configDir}/scripts/dumptows`,
+                        actionFunc: swapWorkspace,
                         thisWorkspace: Number(id)
                     }),
                 ],
@@ -190,6 +202,7 @@ const workspace = index => {
             setup: eventbox => {
                 eventbox.drag_dest_set(Gtk.DestDefaults.ALL, TARGET, Gdk.DragAction.COPY);
                 eventbox.connect('drag-data-received', (_w, _c, _x, _y, data) => {
+                    overviewTick.value = !overviewTick.value;
                     execAsync([`bash`, `-c`, `hyprctl dispatch movetoworkspacesilent ${index},address:${data.get_text()}`, `&`]).catch(print);
                 });
             },
@@ -234,8 +247,11 @@ const OverviewRow = ({ startWorkspace, workspaces, windowName = 'overview' }) =>
     }]],
     setup: (box) => box._update(box),
     connections: [
+        // Update on change
+        [overviewTick, box => { if (!App.getWindow(windowName).visible) return; Utils.timeout(2, () => box._update(box)); }],
         [Hyprland, box => { if (!App.getWindow(windowName).visible) return; box._update(box); }, 'client-added'],
         [Hyprland, box => { if (!App.getWindow(windowName).visible) return; box._update(box); }, 'client-removed'],
+        // Update on show
         [App, (box, name, visible) => { // Update on open
             if (name == 'overview' && visible) {
                 box._update(box);
@@ -254,7 +270,7 @@ export const SearchAndWindows = () => {
         onMiddleClick: () => App.closeWindow('overview'),
     });
     const resultsBox = Widget.Box({
-        className: 'spacing-v-15 overview-search-results',
+        className: 'overview-search-results',
         vertical: true,
         vexpand: true,
     });
@@ -346,7 +362,7 @@ export const SearchAndWindows = () => {
 
             else {
                 App.closeWindow('overview');
-                execAsync(['xdg-open', `https://www.google.com/search?q=${text}`]).catch(print);
+                execAsync(['bash', '-c', `xdg-open 'https://www.google.com/search?q=${text} -site:quora.com' &`]).catch(print); // fuck quora
             }
         },
         // Actually onChange but this is ta workaround for a bug
@@ -401,7 +417,7 @@ export const SearchAndWindows = () => {
 
                     // Fallbacks
                     // if the first word is an actual command
-                    if (!isAction && exec(`bash -c "command -v ${text.split(' ')[0]}"`) != '') {
+                    if (!isAction && !hasUnterminatedBackslash(text) && exec(`bash -c "command -v ${text.split(' ')[0]}"`) != '') {
                         resultsBox.add(ExecuteCommandButton({ command: entry.text, terminal: entry.text.startsWith('sudo') }));
                     }
 
