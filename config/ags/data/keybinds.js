@@ -109,7 +109,7 @@ export const keybindList = [[
         "icon": "keyboard",
         "name": "Typing",
         "binds": [
-            { "keys": ["", "+", "V"], "action": "Clipboard history  >>  clipboard" },
+            { "keys": ["", "+", "N"], "action": "Clipboard history  >>  clipboard" },
             { "keys": ["", "+", "."], "action": "Emoji picker  >>  clipboard" },
         ],
         "appeartick": 3
