@@ -1,47 +1,53 @@
+$sidebar_chat_textareaColor: mix($onSurfaceVariant, $surfaceVariant, 20%);
+$system: #75A79A;
+$onSystem: #CBDED9;
+$chatgpt: #19C37D;
+$onChatgpt: #D5F4E7;
+
 @mixin group-padding {
     padding: 0.341rem;
 }
 
 .sidebar-right {
-    @include md3_decel;
+    @include menu_decel;
     @include large-rounding;
     @include elevation-border;
     @include elevation2;
-    // min-width: 29.591rem;
+    min-width: 27.818rem; // COMMENT THIS LATER IF TEXT WRAP IS USED
     // min-height: 29.591rem;
     background-color: $t_background;
     padding: 1.023rem;
 }
 
 .sideright-show {
-    @include md3_decel;
+    @include menu_decel;
 }
 
 .sideright-hide {
-    @include md3_accel;
+    @include menu_accel;
     margin-right: -30.682rem;
     // opacity: 0;
 }
 
 .sidebar-left {
-    @include md3_decel;
+    @include menu_decel;
     @include large-rounding;
     @include elevation-border;
     @include elevation2;
-    // min-width: 29.591rem; // COMMENT THIS LATER IF TEXT WRAP IS USED
+    min-width: 27.818rem; // COMMENT THIS LATER IF TEXT WRAP IS USED
     // min-height: 29.591rem;
     background-color: $t_background;
     padding: 1.023rem;
 }
 
 .sideleft-show {
-    @include md3_decel;
+    @include menu_decel;
 }
 
 .sideleft-hide {
     margin-left: -30.682rem;
     // opacity: 0;
-    @include md3_accel;
+    @include menu_accel;
 }
 
 .sidebar-group {
@@ -67,7 +73,7 @@
 
 .sidebar-iconbutton {
     @include full-rounding;
-    @include md3_decel;
+    @include menu_decel;
     color: $onSurface;
     min-width: 2.727rem;
     min-height: 2.727rem;
@@ -82,14 +88,14 @@
 }
 
 .sidebar-button {
-    @include md3_decel;
+    @include menu_decel;
     padding: 0rem $rounding_small;
     background-color: $t_secondaryContainer;
     color: $onSecondaryContainer;
 }
 
 .sidebar-button-nopad {
-    @include md3_decel;
+    @include menu_decel;
     background-color: $t_secondaryContainer;
     color: $onSecondaryContainer;
 }
@@ -154,7 +160,7 @@
 
 .sidebar-navrail-btn>box>label {
     @include full-rounding;
-    @include md3_decel;
+    @include menu_decel;
 }
 
 .sidebar-navrail-btn:hover>box>label:first-child {
@@ -210,15 +216,6 @@
     font-size: 0px;
 }
 
-// .sidebar-sysinfo-txt {
-//     font-size: 1.0909rem;
-//     @include techfont;
-// }
-
-.sidebar-viewport {
-    @include small-rounding;
-}
-
 .sidebar-scrollbar {
     trough {
         @include full-rounding;
@@ -244,7 +241,7 @@
 
 .sidebar-calendar-btn {
     @include full-rounding;
-    @include md3_decel;
+    @include menu_decel;
     min-height: 2.523rem;
     min-width: 2.523rem;
     color: $onSurface;
@@ -419,7 +416,7 @@
 
 .sidebar-todo-add {
     @include full-rounding;
-    @include md3_decel;
+    @include menu_decel;
     min-width: 1.705rem;
     min-height: 1.705rem;
     color: $onSecondaryContainer;
@@ -435,7 +432,7 @@
 }
 
 .sidebar-todo-add-available {
-    @include md3_decel;
+    @include menu_decel;
     @include full-rounding;
     min-width: 1.705rem;
     min-height: 1.705rem;
@@ -453,7 +450,7 @@
 }
 
 .sidebar-todo-entry {
-    @include md3_decel;
+    @include menu_decel;
     @include small-rounding;
     background-color: $surfaceVariant;
     color: $onSurfaceVariant;
@@ -481,4 +478,131 @@
     background-color: $t_surfaceVariant;
     min-width: 1.705rem;
     min-height: 1.705rem;
+}
+
+.sidebar-chat-viewport {
+    @include menu_decel;
+    margin: 0.682rem 0rem;
+    padding: 0.682rem 0rem;
+}
+
+.sidebar-chat-textarea {
+    @include normal-rounding;
+    border: 0.068rem solid $sidebar_chat_textareaColor;
+    padding: 0.682rem;
+}
+
+.sidebar-chat-entry {
+    color: $onSurfaceVariant;
+    caret-color: $onSurfaceVariant;
+    min-height: 1.773rem;
+    min-width: 0rem;
+}
+
+.sidebar-chat-send {
+    @include menu_decel;
+    min-width: 1.705rem;
+    min-height: 1.705rem;
+    border-radius: $rounding_medium - 0.681rem;
+    background-color: $sidebar_chat_textareaColor;
+}
+
+.sidebar-chat-send:hover {
+    background-color: mix($sidebar_chat_textareaColor, $t_onSecondaryContainer, 97%);
+}
+
+.sidebar-chat-send:active {
+    background-color: mix($sidebar_chat_textareaColor, $t_onSecondaryContainer, 80%);
+}
+
+.sidebar-chat-send-available {
+    background-color: $primary;
+    color: $onPrimary;
+}
+
+.sidebar-chat-send-available:hover {
+    background-color: mix($primary, $onPrimary, 97%);
+}
+
+.sidebar-chat-send-available:active {
+    background-color: mix($primary, $onPrimary, 80%);
+}
+
+.sidebar-chat-message {
+    margin: 0.682rem;
+}
+
+.sidebar-chat-indicator {
+    @include full-rounding;
+    min-width: 0.136rem;
+}
+
+.sidebar-chat-indicator-user {
+    background-color: $primary;
+}
+
+.sidebar-chat-indicator-bot {
+    background-color: $chatgpt;
+}
+
+.sidebar-chat-indicator-System {
+    background-color: $system;
+}
+
+.sidebar-chat-name {
+    @include titlefont;
+    padding: 0.341rem;
+    margin-left: -0.136rem;
+    padding: 0.341rem;
+    padding-left: 0.818rem;
+}
+
+.sidebar-chat-txt {
+    @include readingfont;
+    margin-left: -0.136rem;
+    padding: 0.341rem;
+    padding-left: 0.818rem;
+}
+
+.sidebar-chat-welcome-txt {
+    margin: 0rem 3.409rem;
+}
+
+.sidebar-chat-welcome-icon {
+    @include full-rounding;
+    font-size: 4rem;
+}
+
+.sidebar-chat-welcome-logo {
+    @include full-rounding;
+    @include menu_decel;
+    min-height: 4.773rem;
+    min-width: 4.773rem;
+    font-size: 4rem;
+    background-color: white;
+    color: black;
+}
+
+.sidebar-chat-chip {
+    @include menu_decel;
+    @include small-rounding;
+    padding: 0.341rem 0.477rem;
+}
+
+.sidebar-chat-chip-action {
+    border: 0.068rem solid $sidebar_chat_textareaColor;
+}
+
+.sidebar-chat-chip-action:hover {
+    background-color: $sidebar_chat_textareaColor;
+}
+
+.sidebar-chat-chip-action:active {
+    background-color: mix($sidebar_chat_textareaColor, $onSurfaceVariant, 70%);
+    color: mix($sidebar_chat_textareaColor, $surfaceVariant, 70%);
+}
+
+.sidebar-chat-chip-action-active {
+    color: $sidebar_chat_textareaColor;
+    border: 0.068rem solid $sidebar_chat_textareaColor;
 }

@@ -49,7 +49,7 @@ export const keybindList = [[
             { "keys": ["", "OR", "", "+", "Tab"], "action": "Toggle overview/launcher" },
             { "keys": ["Ctrl", "", "+", "R"], "action": "Restart AGS" },
             { "keys": ["", "+", "/"], "action": "Toggle this cheatsheet" },
-            { "keys": ["", "+", "O"], "action": "Toggle sidebar" },
+            { "keys": ["", "+", "N"], "action": "Toggle sidebar" },
             { "keys": ["", "+", "K"], "action": "Toggle virtual keyboard" },
             { "keys": ["Ctrl", "Alt", "+", "Del"], "action": "Power/Session menu" },
 
@@ -100,8 +100,11 @@ export const keybindList = [[
         "icon": "apps",
         "name": "Apps",
         "binds": [
-            { "keys": ["", "+", "Q"], "action": "Launch terminal: kitty" },
-            { "keys": ["", "+", "B"], "action": "Launch browser: Google Chrome" },
+            { "keys": ["", "+", "T"], "action": "Launch terminal: foot" },
+            { "keys": ["", "+", "W"], "action": "Launch browser: Firefox" },
+            { "keys": ["", "+", "C"], "action": "Launch editor: vscode" },
+            { "keys": ["", "+", "X"], "action": "Launch editor: GNOME Text Editor" },
+            { "keys": ["", "+", "I"], "action": "Launch settings: GNOME Control center" }
         ],
         "appeartick": 3
     },
@@ -109,14 +112,14 @@ export const keybindList = [[
         "icon": "keyboard",
         "name": "Typing",
         "binds": [
-            { "keys": ["", "+", "N"], "action": "Clipboard history  >>  clipboard" },
+            { "keys": ["", "+", "V"], "action": "Clipboard history  >>  clipboard" },
             { "keys": ["", "+", "."], "action": "Emoji picker  >>  clipboard" },
         ],
         "appeartick": 3
     },
     {
         "icon": "terminal",
-        "name": "Launcher commands",
+        "name": "Launcher actions",
         "binds": [
             { "keys": [">raw"], "action": "Toggle mouse acceleration" },
             { "keys": [">img"], "action": "Select wallpaper and generate colorscheme" },

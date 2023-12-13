@@ -1,21 +1,22 @@
+"strict mode";
 // Import
 import { App, Utils } from './imports.js';
 import { firstRunWelcome } from './services/messages.js';
-// Windows
-import Bar from './windows/bar/main.js';
-import Cheatsheet from './windows/cheatsheet/main.js';
-import DesktopBackground from './windows/desktopbackground/main.js';
-import Dock from './windows/dock/main.js';
-import { CornerTopleft, CornerTopright, CornerBottomleft, CornerBottomright } from './windows/screencorners/main.js';
-import Indicator from './windows/indicators/main.js';
-import Osk from './windows/onscreenkeyboard/main.js';
-import Overview from './windows/overview/main.js';
-import Session from './windows/session/main.js';
-import SideLeft from './windows/sideleft/main.js';
-import SideRight from './windows/sideright/main.js';
+// Widgets
+import Bar from './widgets/bar/main.js';
+import Cheatsheet from './widgets/cheatsheet/main.js';
+import DesktopBackground from './widgets/desktopbackground/main.js';
+import Dock from './widgets/dock/main.js';
+import { CornerTopleft, CornerTopright, CornerBottomleft, CornerBottomright } from './widgets/screencorners/main.js';
+import Indicator from './widgets/indicators/main.js';
+import Osk from './widgets/onscreenkeyboard/main.js';
+import Overview from './widgets/overview/main.js';
+import Session from './widgets/session/main.js';
+import SideLeft from './widgets/sideleft/main.js';
+import SideRight from './widgets/sideright/main.js';
 
-// Longer than actual anim time (150, see styles) to make sure windows animate fully
-const CLOSE_ANIM_TIME = 200;
+// Longer than actual anim time (see styles) to make sure widgets animate fully
+const CLOSE_ANIM_TIME = 210;
 
 // Init cache and check first run
 Utils.exec(`bash -c 'mkdir -p ~/.cache/ags/user/colorschemes'`);
@@ -42,7 +43,6 @@ export default {
         CornerTopright(),
         CornerBottomleft(),
         CornerBottomright(),
-        Dock(),
         Overview(),
         Indicator(),
         Cheatsheet(),
