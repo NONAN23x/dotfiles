@@ -45,27 +45,27 @@ const NotificationIcon = (notifObject) => {
     return Box({
         valign: Gtk.Align.CENTER,
         hexpand: false,
-        className: 'notif-icon',
-        setup: box => {
-            if (icon != 'NO_ICON') box.pack_start(Icon({
-                icon: icon,
-                halign: Gtk.Align.CENTER, hexpand: true,
-                valign: Gtk.Align.CENTER,
-                setup: (self) => {
-                    box.toggleClassName(`notif-icon-material-${notifObject.urgency}`, true);
-                    Utils.timeout(1, () => {
+        className: `notif-icon notif-icon-material-${notifObject.urgency}`,
+        homogeneous: true,
+        children: [
+            (icon != 'NO_ICON' ?
+                Icon({
+                    icon: icon,
+                    halign: Gtk.Align.CENTER, hexpand: true,
+                    valign: Gtk.Align.CENTER,
+                    setup: (self) => Utils.timeout(1, () => {
                         const styleContext = self.get_parent().get_style_context();
                         const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL);
                         const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
                         self.size = Math.max(width * 0.9, height * 0.9, 1); // im too lazy to add another box lol
-                    })
-                },
-            }), false, true, 0);
-            else box.pack_start(MaterialIcon(`${notifObject.urgency == 'critical' ? 'release_alert' : guessMessageType(notifObject.summary.toLowerCase())}`, 'hugerass', {
-                hexpand: true,
-                setup: () => box.toggleClassName(`notif-icon-material-${notifObject.urgency}`, true),
-            }), false, true, 0)
-        }
+                    }),
+                })
+                :
+                MaterialIcon(`${notifObject.urgency == 'critical' ? 'release_alert' : guessMessageType(notifObject.summary.toLowerCase())}`, 'hugerass', {
+                    hexpand: true,
+                })
+            )
+        ],
     });
 };
 
@@ -197,7 +197,7 @@ export default ({
                         child: MaterialIcon('close', 'large', {
                             valign: Gtk.Align.CENTER,
                         }),
-                        setup: (button) => setupCursorHover(button),
+                        setup: setupCursorHover,
                     }),
                 ]
             }),

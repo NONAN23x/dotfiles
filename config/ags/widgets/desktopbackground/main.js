@@ -22,10 +22,6 @@ export default () => Widget.Window({
             TimeAndLaunchesWidget(),
             SystemWidget(),
         ],
-        setup: (self) => {
-            Utils.timeout(1, () => {
-                self.set_overlay_pass_through(self.get_children()[1], true);
-            })
-        },
+        setup: (self) => self.set_overlay_pass_through(self.get_children()[1], true),
     }),
 });

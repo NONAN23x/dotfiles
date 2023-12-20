@@ -55,11 +55,7 @@ export const ModuleWorkspaces = () => Widget.EventBox({
                 }),
                 overlays: [
                     Widget.Overlay({
-                        setup: (self) => {
-                            Utils.timeout(1, () => {
-                                self.set_overlay_pass_through(self.get_children()[1], true);
-                            })
-                        },
+                        setup: (self) => self.set_overlay_pass_through(self.get_children()[1], true),
                         child: Widget.Box({
                             hpack: 'center',
                             css: `

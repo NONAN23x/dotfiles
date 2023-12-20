@@ -1,5 +1,5 @@
 const { Gdk, Gio, Gtk } = imports.gi;
-import { App, Service, Utils, Variable, Widget } from '../../imports.js';
+import { App, Service, Utils, Variable, Widget, SCREEN_HEIGHT, SCREEN_WIDTH } from '../../imports.js';
 import Applications from 'resource:///com/github/Aylur/ags/service/applications.js';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 const { execAsync, exec } = Utils;
@@ -27,8 +27,8 @@ const acotd = x => acot(x) * 180 / pi;
 
 const MAX_RESULTS = 10;
 const OVERVIEW_SCALE = 0.09; // = overview workspace box / screen size
-const OVERVIEW_WS_NUM_SCALE = 0.1;
-const OVERVIEW_WS_NUM_MARGIN_SCALE = 0.09;
+const OVERVIEW_WS_NUM_SCALE = 0.09;
+const OVERVIEW_WS_NUM_MARGIN_SCALE = 0.07;
 const TARGET = [Gtk.TargetEntry.new('text/plain', Gtk.TargetFlags.SAME_APP, 0)];
 const searchPromptTexts = [
     'Try "~/.config"',
@@ -383,7 +383,7 @@ export const SearchAndWindows = () => {
                 try {
                     const fullResult = eval(text);
                     // copy
-                    execAsync(['bash', '-c', `wl-copy '${fullResult}'`, `&`]).catch(print);
+                    execAsync(['wl-copy', `${fullResult}`]).catch(print);
                     App.closeWindow('overview');
                     return;
                 } catch (e) {
@@ -510,11 +510,11 @@ export const SearchAndWindows = () => {
             }],
             ['key-press-event', (widget, event) => { // Typing
                 if (event.get_keyval()[1] >= 32 && event.get_keyval()[1] <= 126 && widget != entry) {
-                    entry.grab_focus();
+                    Utils.timeout(1, () => entry.grab_focus());
                     entry.set_text(entry.text + String.fromCharCode(event.get_keyval()[1]));
                     entry.set_position(-1);
                 }
             }],
         ],
     });
-};
+}; 

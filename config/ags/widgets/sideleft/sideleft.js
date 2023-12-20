@@ -6,19 +6,19 @@ import { MaterialIcon } from "../../lib/materialicon.js";
 import { setupCursorHover } from "../../lib/cursorhover.js";
 import { NavigationIndicator } from "../../lib/navigationindicator.js";
 import toolBox from './toolbox.js';
-import chatGPT from './chatgpt.js';
-import { chatEntry } from './chatgpt.js';
+import apiWidgets from './apiwidgets.js';
+import { chatEntry } from './apiwidgets.js';
 
 const TabButton = (stack, stackItem, navIndicator, navIndex, icon, label) => Widget.Button({
     // hexpand: true,
-    className: 'sidebar-todo-selector-tab',
+    className: 'sidebar-selector-tab',
     onClicked: (self) => {
         stack.shown = stackItem;
         // Add active class to self and remove for others
         const allTabs = self.get_parent().get_children();
         for (let i = 0; i < allTabs.length; i++) {
-            if (allTabs[i] != self) allTabs[i].toggleClassName('sidebar-todo-selector-tab-active', false);
-            else self.toggleClassName('sidebar-todo-selector-tab-active', true);
+            if (allTabs[i] != self) allTabs[i].toggleClassName('sidebar-selector-tab-active', false);
+            else self.toggleClassName('sidebar-selector-tab-active', true);
         }
         // Fancy highlighter line width
         const buttonWidth = self.get_allocated_width();
@@ -40,25 +40,9 @@ const TabButton = (stack, stackItem, navIndicator, navIndex, icon, label) => Wid
         ]
     }),
     setup: (button) => Utils.timeout(1, () => {
-        button.toggleClassName('sidebar-todo-selector-tab-active', defaultTab === stackItem);
         setupCursorHover(button);
+        button.toggleClassName('sidebar-selector-tab-active', defaultTab === stackItem);
     }),
-});
-
-const apiStack = Stack({
-    vexpand: true,
-    transition: 'slide_left_right',
-    items: [
-        ['chatgpt', chatGPT],
-    ],
-})
-
-const apiView = Box({
-    vertical: true,
-    children: [
-        // TODO: add a workspace-like indicator for APIs here
-        apiStack,
-    ]
 });
 
 const defaultTab = 'apis';
@@ -66,14 +50,14 @@ const contentStack = Stack({
     vexpand: true,
     transition: 'slide_left_right',
     items: [
-        ['apis', apiView],
+        ['apis', apiWidgets],
         ['tools', toolBox],
     ],
 })
 
 const navIndicator = NavigationIndicator(2, false, { // The line thing
-    className: 'sidebar-todo-selector-highlight',
-    css: 'font-size: 0px;',
+    className: 'sidebar-selector-highlight',
+    css: 'font-size: 0px; padding: 0rem 4.773rem;', // Shushhhh
 })
 
 const navBar = Box({
@@ -114,7 +98,7 @@ export default () => Box({
         ['key-press-event', (widget, event) => { // Typing
             if (event.get_keyval()[1] >= 32 && event.get_keyval()[1] <= 126 &&
                 widget != chatEntry && event.get_keyval()[1] != Gdk.KEY_space) {
-                if (contentStack.shown == 'apis' && apiStack.shown == 'chatgpt') {
+                if (contentStack.shown == 'apis') {
                     chatEntry.grab_focus();
                     chatEntry.set_text(chatEntry.text + String.fromCharCode(event.get_keyval()[1]));
                     chatEntry.set_position(-1);

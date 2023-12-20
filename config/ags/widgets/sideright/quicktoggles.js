@@ -22,7 +22,7 @@ export const ToggleIconWifi = (props = {}) => Widget.Button({
             button.tooltipText = (`${Network.wifi?.ssid} | Right-click to configure` || 'Unknown');
         }],
     ],
-    setup: (button) => setupCursorHover(button),
+    setup: setupCursorHover,
     ...props,
 });
 
@@ -47,7 +47,7 @@ export const ToggleIconBluetooth = (props = {}) => Widget.Button({
             button.toggleClassName('sidebar-button-active', Bluetooth?.enabled)
         }],
     ],
-    setup: (button) => setupCursorHover(button),
+    setup: setupCursorHover,
     ...props,
 });
 
@@ -74,7 +74,6 @@ export const ModuleNightLight = (props = {}) => Widget.Button({
     className: 'txt-small sidebar-iconbutton',
     tooltipText: 'Night Light',
     onClicked: (button) => {
-        // Set the value to 1 - value
         const shaderPath = JSON.parse(exec('hyprctl -j getoption decoration:screen_shader')).str;
         if (shaderPath != "[[EMPTY]]" && shaderPath != "") {
             execAsync(['bash', '-c', `hyprctl keyword decoration:screen_shader ''`]).catch(print);
@@ -86,7 +85,26 @@ export const ModuleNightLight = (props = {}) => Widget.Button({
         }
     },
     child: MaterialIcon('nightlight', 'norm'),
-    setup: (button) => setupCursorHover(button),
+    setup: setupCursorHover,
+    ...props,
+})
+
+export const ModuleInvertColors = (props = {}) => Widget.Button({
+    className: 'txt-small sidebar-iconbutton',
+    tooltipText: 'Color inversion',
+    onClicked: (button) => {
+        const shaderPath = JSON.parse(exec('hyprctl -j getoption decoration:screen_shader')).str;
+        if (shaderPath != "[[EMPTY]]" && shaderPath != "") {
+            execAsync(['bash', '-c', `hyprctl keyword decoration:screen_shader ''`]).catch(print);
+            button.toggleClassName('sidebar-button-active', false);
+        }
+        else {
+            execAsync(['bash', '-c', `hyprctl keyword decoration:screen_shader ~/.config/hypr/shaders/invert.frag`]).catch(print);
+            button.toggleClassName('sidebar-button-active', true);
+        }
+    },
+    child: MaterialIcon('invert_colors', 'norm'),
+    setup: setupCursorHover,
     ...props,
 })
 

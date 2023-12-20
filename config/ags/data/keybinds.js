@@ -49,7 +49,8 @@ export const keybindList = [[
             { "keys": ["", "OR", "", "+", "Tab"], "action": "Toggle overview/launcher" },
             { "keys": ["Ctrl", "", "+", "R"], "action": "Restart AGS" },
             { "keys": ["", "+", "/"], "action": "Toggle this cheatsheet" },
-            { "keys": ["", "+", "N"], "action": "Toggle sidebar" },
+            { "keys": ["", "+", "N"], "action": "Toggle system sidebar" },
+            { "keys": ["", "+", "B", "OR", "", "+", "O"], "action": "Toggle utilities sidebar" },
             { "keys": ["", "+", "K"], "action": "Toggle virtual keyboard" },
             { "keys": ["Ctrl", "Alt", "+", "Del"], "action": "Power/Session menu" },
 
@@ -125,6 +126,7 @@ export const keybindList = [[
             { "keys": [">img"], "action": "Select wallpaper and generate colorscheme" },
             { "keys": [">light"], "action": "Switch to light theme" },
             { "keys": [">dark"], "action": "Switch to dark theme" },
+            { "keys": [">badapple"], "action": "Apply black n' white colorscheme" },
             { "keys": [">color"], "action": "Pick acccent color" },
             { "keys": [">todo"], "action": "Type something after that to add a To-do item" },
         ],

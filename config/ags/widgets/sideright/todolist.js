@@ -41,7 +41,7 @@ const todoListItem = (task, id, isDone, isEven = false) => {
                             Todo.check(id);
                     })
                 },
-                setup: (button) => setupCursorHover(button),
+                setup: setupCursorHover,
             }),
             Widget.Button({ // Remove
                 vpack: 'center',
@@ -58,7 +58,7 @@ const todoListItem = (task, id, isDone, isEven = false) => {
                         Todo.remove(id);
                     })
                 },
-                setup: (button) => setupCursorHover(button),
+                setup: setupCursorHover,
             }),
             crosser,
         ]
@@ -115,7 +115,7 @@ const UndoneTodoList = () => {
             halign: 'end',
             vpack: 'center',
             label: '+ New task',
-            setup: (button) => setupCursorHover(button),
+            setup: setupCursorHover,
             onClicked: (self) => {
                 newTaskButton.revealChild = false;
                 newTaskEntryRevealer.revealChild = true;
@@ -134,7 +134,7 @@ const UndoneTodoList = () => {
             halign: 'end',
             vpack: 'center',
             label: 'close',
-            setup: (button) => setupCursorHover(button),
+            setup: setupCursorHover,
             onClicked: (self) => {
                 newTaskEntryRevealer.revealChild = false;
                 confirmAddTask.revealChild = false;
@@ -171,7 +171,7 @@ const UndoneTodoList = () => {
             halign: 'end',
             vpack: 'center',
             label: 'arrow_upward',
-            setup: (button) => setupCursorHover(button),
+            setup: setupCursorHover,
             onClicked: (self) => {
                 if (newTaskEntry.text == '') return;
                 Todo.add(newTaskEntry.text);
@@ -208,13 +208,13 @@ const todoItemsBox = Widget.Stack({
 export const TodoWidget = () => {
     const TodoTabButton = (isDone, navIndex) => Widget.Button({
         hexpand: true,
-        className: 'sidebar-todo-selector-tab',
+        className: 'sidebar-selector-tab',
         onClicked: (button) => {
             todoItemsBox.shown = `${isDone ? 'done' : 'undone'}`;
             const kids = button.get_parent().get_children();
             for (let i = 0; i < kids.length; i++) {
-                if (kids[i] != button) kids[i].toggleClassName('sidebar-todo-selector-tab-active', false);
-                else button.toggleClassName('sidebar-todo-selector-tab-active', true);
+                if (kids[i] != button) kids[i].toggleClassName('sidebar-selector-tab-active', false);
+                else button.toggleClassName('sidebar-selector-tab-active', true);
             }
             // Fancy highlighter line width
             const buttonWidth = button.get_allocated_width();
@@ -236,27 +236,26 @@ export const TodoWidget = () => {
             ]
         }),
         setup: (button) => Utils.timeout(1, () => {
-            button.toggleClassName('sidebar-todo-selector-tab-active', defaultTodoSelected === `${isDone ? 'done' : 'undone'}`);
             setupCursorHover(button);
+            button.toggleClassName('sidebar-selector-tab-active', defaultTodoSelected === `${isDone ? 'done' : 'undone'}`);
         }),
     });
     const undoneButton = TodoTabButton(false, 0);
     const doneButton = TodoTabButton(true, 1);
     const navIndicator = NavigationIndicator(2, false, { // The line thing
-        className: 'sidebar-todo-selector-highlight',
-        css: 'font-size: 0px;',
+        className: 'sidebar-selector-highlight',
+        css: 'font-size: 0px; padding: 0rem 1.636rem;', // Shush
     })
     return Widget.Box({
         hexpand: true,
         vertical: true,
         className: 'spacing-v-10',
-        setup: (box) => Utils.timeout(1, () => {
-            // undone/done selector rail
+        setup: (box) => {     // undone/done selector rail
             box.pack_start(Widget.Box({
                 vertical: true,
                 children: [
                     Widget.Box({
-                        className: 'sidebar-todo-selectors spacing-h-5',
+                        className: 'sidebar-selectors spacing-h-5',
                         homogeneous: true,
                         setup: (box) => {
                             box.pack_start(undoneButton, false, true, 0);
@@ -264,14 +263,14 @@ export const TodoWidget = () => {
                         }
                     }),
                     Widget.Box({
-                        className: 'sidebar-todo-selector-highlight-offset',
+                        className: 'sidebar-selector-highlight-offset',
                         homogeneous: true,
                         children: [navIndicator]
                     })
                 ]
             }), false, false, 0);
             box.pack_end(todoItemsBox, true, true, 0);
-        })
+        },
     });
 };
 

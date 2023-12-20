@@ -95,13 +95,13 @@ const CalendarWidget = () => {
                         className: 'sidebar-calendar-monthshift-btn',
                         onClicked: () => shiftCalendarXMonths(-1),
                         child: MaterialIcon('chevron_left', 'norm'),
-                        setup: (button) => setupCursorHover(button),
+                        setup: setupCursorHover,
                     }),
                     Button({
                         className: 'sidebar-calendar-monthshift-btn',
                         onClicked: () => shiftCalendarXMonths(1),
                         child: MaterialIcon('chevron_right', 'norm'),
-                        setup: (button) => setupCursorHover(button),
+                        setup: setupCursorHover,
                     })
                 ]
             }), false, false, 0);
@@ -180,8 +180,8 @@ const StackButton = (stackItemName, icon, name) => Widget.Button({
         ]
     }),
     setup: (button) => Utils.timeout(1, () => {
-        button.toggleClassName('sidebar-navrail-btn-active', defaultShown === stackItemName);
         setupCursorHover(button);
+        button.toggleClassName('sidebar-navrail-btn-active', defaultShown === stackItemName);
     })
 });
 

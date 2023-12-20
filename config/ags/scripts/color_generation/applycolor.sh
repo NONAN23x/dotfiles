@@ -3,15 +3,27 @@
 sleep 0 # idk i want some delay or colors dont get applied properly
 cd "$HOME/.config/ags" || exit
 
-# filelist=$(ls 'images/svg/template/' | grep -v /)
+colornames=''
+colorstrings=''
+colorlist=()
+colorvalues=()
 
-# cat scss/_material.scss
-colornames=$(cat scss/_material.scss | cut -d: -f1)
-colorstrings=$(cat scss/_material.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
-IFS=$'\n'
-# filearr=( $filelist ) # Get colors
-colorlist=( $colornames ) # Array of color names
-colorvalues=( $colorstrings ) # Array of color values
+if [[ "$1" = "--bad-apple" ]]; then
+    cp scripts/color_generation/specials/_material_badapple.scss scss/_material.scss
+    colornames=$(cat scripts/color_generation/specials/_material_badapple.scss | cut -d: -f1)
+    colorstrings=$(cat scripts/color_generation/specials/_material_badapple.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
+    IFS=$'\n'
+    # filearr=( $filelist ) # Get colors
+    colorlist=( $colornames ) # Array of color names
+    colorvalues=( $colorstrings ) # Array of color values
+else
+    colornames=$(cat scss/_material.scss | cut -d: -f1)
+    colorstrings=$(cat scss/_material.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
+    IFS=$'\n'
+    # filearr=( $filelist ) # Get colors
+    colorlist=( $colornames ) # Array of color names
+    colorvalues=( $colorstrings ) # Array of color values
+fi
 
 transparentize() {
   local hex="$1"
@@ -132,7 +144,14 @@ apply_gtk() { # Using gradience-cli
     fi
 }
 
+apply_ags() {
+    sassc "$HOME"/.config/ags/scss/main.scss "$HOME"/.config/ags/style.css
+    ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'
+    ags run-js "App.resetCss(); App.applyCss('${HOME}/.config/ags/style.css');"
+}
+
 # apply_svgs
+apply_ags &
 apply_hyprland &
 apply_gtk &
 apply_gtklock &

@@ -27,29 +27,27 @@ const right = Widget.Box({
     children: [ModuleSystem()],
 });
 
-export default () => Utils.timeout(1, () => {
-    return Widget.Window({
-        name: 'bar',
-        anchor: ['top', 'left', 'right'],
-        exclusivity: 'exclusive',
-        visible: true,
-        child: Widget.CenterBox({
-            className: 'bar-bg',
-            startWidget: ModuleLeftSpace(),
-            centerWidget: Widget.Box({
-                className: 'spacing-h--20',
-                children: [
-                    left,
-                    center,
-                    right,
-                ]
-            }),
-            endWidget: ModuleRightSpace(),
-            setup: (self) => {
-                const styleContext = self.get_style_context();
-                const minHeight = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
-                // execAsync(['bash', '-c', `hyprctl keyword monitor ,addreserved,${minHeight},0,0,0`]).catch(print);
-            }
+export default () => Widget.Window({
+    name: 'bar',
+    anchor: ['top', 'left', 'right'],
+    exclusivity: 'exclusive',
+    visible: true,
+    child: Widget.CenterBox({
+        className: 'bar-bg',
+        startWidget: ModuleLeftSpace(),
+        centerWidget: Widget.Box({
+            className: 'spacing-h--20',
+            children: [
+                left,
+                center,
+                right,
+            ]
         }),
-    });
-})
+        endWidget: ModuleRightSpace(),
+        setup: (self) => {
+            const styleContext = self.get_style_context();
+            const minHeight = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
+            // execAsync(['bash', '-c', `hyprctl keyword monitor ,addreserved,${minHeight},0,0,0`]).catch(print);
+        }
+    }),
+});
