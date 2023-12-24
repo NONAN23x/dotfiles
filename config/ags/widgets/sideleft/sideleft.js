@@ -9,7 +9,7 @@ import toolBox from './toolbox.js';
 import apiWidgets from './apiwidgets.js';
 import { chatEntry } from './apiwidgets.js';
 
-const TabButton = (stack, stackItem, navIndicator, navIndex, icon, label) => Widget.Button({
+const SidebarTabButton = (stack, stackItem, navIndicator, navIndex, icon, label) => Widget.Button({
     // hexpand: true,
     className: 'sidebar-selector-tab',
     onClicked: (self) => {
@@ -66,8 +66,8 @@ const navBar = Box({
         Box({
             homogeneous: true,
             children: [
-                TabButton(contentStack, 'apis', navIndicator, 0, 'api', 'APIs'),
-                TabButton(contentStack, 'tools', navIndicator, 1, 'home_repair_service', 'Tools'),
+                SidebarTabButton(contentStack, 'apis', navIndicator, 0, 'api', 'APIs'),
+                SidebarTabButton(contentStack, 'tools', navIndicator, 1, 'home_repair_service', 'Tools'),
             ]
         }),
         navIndicator,

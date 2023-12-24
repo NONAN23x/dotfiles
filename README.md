@@ -10,11 +10,15 @@ hyprland kitty lsd doas swww swaylock-effects wlogout xdg-desktop-portal-hyprlan
 
 ```
 
-> :memo: **Installation:**
+-- -
+
+> :bulb: **Installation:**
 
 > :lightbulb: **Zen Programmer Setup**
 - Setup [zsh](https://dev.to/andrenbrandao/terminal-setup-with-zsh-tmux-dracula-theme-48lm)
 - Setup [tmux](https://www.josean.com/posts/tmux-setup)
+
+-- -
 
 > :bulb: **Attributions**
 

@@ -117,9 +117,6 @@ apply_hyprland() {
 
 apply_gtk() { # Using gradience-cli
     lightdark=$(get_light_dark)
-
-    background=$(cat scss/_material.scss | grep "background" | awk '{print $2}' | cut -d ";" -f1)
-    secondaryContainer=$(cat scss/_material.scss | grep "secondaryContainer" | awk '{print $2}' | cut -d ";" -f1)
     
     # Copy template 
     cp "scripts/templates/gradience/preset_template.json" "scripts/templates/gradience/preset.json"

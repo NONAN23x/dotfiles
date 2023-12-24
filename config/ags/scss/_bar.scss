@@ -393,6 +393,15 @@ $notchOnPrimary: $onPrimary;
     min-width: 0.681rem;
     min-height: 0.681rem;
     background-color: $t_onSecondaryContainer;
+    color: $secondaryContainer;
+}
+
+.bar-batt-chargestate-charging-smaller {
+    border-radius: 10rem;
+    min-width: 0.409rem;
+    min-height: 0.409rem;
+    background-color: $t_onSecondaryContainer;
+    color: $secondaryContainer;
 }
 
 .bar-batt-chargestate-low {

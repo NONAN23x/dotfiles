@@ -3,14 +3,15 @@ import { Utils, Widget } from '../../imports.js';
 const { execAsync, exec } = Utils;
 const { Box, EventBox } = Widget;
 import {
-    ToggleIconBluetooth, 
-    ToggleIconWifi, 
-    HyprToggleIcon, 
+    ToggleIconBluetooth,
+    ToggleIconWifi,
+    HyprToggleIcon,
     ModuleNightLight,
     ModuleInvertColors,
-    ModuleEditIcon, 
-    ModuleReloadIcon, 
-    ModuleSettingsIcon, 
+    ModuleIdleInhibitor,
+    ModuleEditIcon,
+    ModuleReloadIcon,
+    ModuleSettingsIcon,
     ModulePowerIcon
 } from "./quicktoggles.js";
 import ModuleNotificationList from "./notificationlist.js";
@@ -21,11 +22,11 @@ import { ModuleCalendar } from "./calendar.js";
 //     className: 'sidebar-group spacing-h-10',
 //     setup: (self) => {
 //         self.set_max_children_per_line(NUM_OF_TOGGLES_PER_LINE);
-//         self.add(ToggleIconWifi({ hexpand: 'true' }));
-//         self.add(ToggleIconBluetooth({ hexpand: 'true' }));
-//         self.add(HyprToggleIcon('mouse', 'Raw input', 'input:force_no_accel', { hexpand: 'true' }));
-//         self.add(HyprToggleIcon('front_hand', 'No touchpad while typing', 'input:touchpad:disable_while_typing', { hexpand: 'true' }));
-//         self.add(ModuleNightLight({ hexpand: 'true' }));
+//         self.add(ToggleIconWifi({ hexpand: true }));
+//         self.add(ToggleIconBluetooth({ hexpand: true }));
+//         self.add(HyprToggleIcon('mouse', 'Raw input', 'input:force_no_accel', { hexpand: true }));
+//         self.add(HyprToggleIcon('front_hand', 'No touchpad while typing', 'input:touchpad:disable_while_typing', { hexpand: true }));
+//         self.add(ModuleNightLight({ hexpand: true }));
 //         // Setup flowbox rearrange
 //         self.connect('child-activated', (self, child) => {
 //             if (child.get_index() === 0) {
@@ -37,20 +38,47 @@ import { ModuleCalendar } from "./calendar.js";
 //     }
 // })
 
-const togglesBox = Widget.Box({ // TODO: Fix js error spam here
-    className: 'sidebar-group spacing-h-10',
+const timeRow = Box({
+    className: 'spacing-h-5 sidebar-group-invisible-morehorizpad',
     children: [
-        ToggleIconWifi({ hexpand: 'true' }),
-        ToggleIconBluetooth({ hexpand: 'true' }),
-        HyprToggleIcon('mouse', 'Raw input', 'input:force_no_accel', { hexpand: 'true' }),
-        HyprToggleIcon('front_hand', 'No touchpad while typing', 'input:touchpad:disable_while_typing', { hexpand: 'true' }),
-        ModuleNightLight({ hexpand: 'true' }),
-        ModuleInvertColors({ hexpand: 'true' }),
+        Widget.Label({
+            className: 'txt-title txt',
+            connections: [[5000, label => {
+                label.label = GLib.DateTime.new_now_local().format("%H:%M");
+            }]],
+        }),
+        Widget.Label({
+            hpack: 'center',
+            className: 'txt-small txt',
+            connections: [[5000, label => {
+                execAsync(['bash', '-c', `uptime -p | sed -e 's/up //;s/ hours,/h/;s/ minutes/m/'`]).then(upTimeString => {
+                    label.label = `• up: ${upTimeString}`;
+                }).catch(print);
+            }]],
+        }),
+        Widget.Box({ hexpand: true }),
+        // ModuleEditIcon({ hpack: 'end' }), // TODO: Make this work
+        ModuleReloadIcon({ hpack: 'end' }),
+        ModuleSettingsIcon({ hpack: 'end' }),
+        ModulePowerIcon({ hpack: 'end' }),
+    ]
+});
+
+const togglesBox = Widget.Box({
+    hpack: 'center',
+    className: 'sidebar-togglesbox spacing-h-10',
+    children: [
+        ToggleIconWifi(),
+        ToggleIconBluetooth(),
+        HyprToggleIcon('mouse', 'Raw input', 'input:force_no_accel', {}),
+        HyprToggleIcon('front_hand', 'No touchpad while typing', 'input:touchpad:disable_while_typing', {}),
+        ModuleNightLight(),
+        ModuleInvertColors(),
+        ModuleIdleInhibitor(),
     ]
 })
 
 export default () => Box({
-    // vertical: true,
     vexpand: true,
     hexpand: true,
     children: [
@@ -62,51 +90,20 @@ export default () => Box({
         Box({
             vertical: true,
             vexpand: true,
-            className: 'sidebar-right',
+            className: 'sidebar-right spacing-v-15',
             children: [
                 Box({
                     vertical: true,
-                    vexpand: true,
-                    className: 'spacing-v-15',
+                    className: 'spacing-v-5',
                     children: [
-                        Box({
-                            vertical: true,
-                            className: 'spacing-v-5',
-                            children: [
-                                Box({ // Header
-                                    className: 'spacing-h-5 sidebar-group-invisible-morehorizpad',
-                                    children: [
-                                        Widget.Label({
-                                            className: 'txt-title txt',
-                                            connections: [[5000, label => {
-                                                label.label = GLib.DateTime.new_now_local().format("%H:%M");
-                                            }]],
-                                        }),
-                                        Widget.Label({
-                                            hpack: 'center',
-                                            className: 'txt-small txt',
-                                            connections: [[5000, label => {
-                                                execAsync(['bash', '-c', `uptime -p | sed -e 's/up //;s/ hours,/h/;s/ minutes/m/'`]).then(upTimeString => {
-                                                    label.label = `• uptime ${upTimeString}`;
-                                                }).catch(print);
-                                            }]],
-                                        }),
-                                        Widget.Box({ hexpand: true }),
-                                        // ModuleEditIcon({ hpack: 'end' }), // TODO: Make this work
-                                        ModuleReloadIcon({ hpack: 'end' }),
-                                        ModuleSettingsIcon({ hpack: 'end' }),
-                                        ModulePowerIcon({ hpack: 'end' }),
-                                    ]
-                                }),
-                                // togglesFlowBox,
-                                togglesBox,
-                            ]
-                        }),
-                        ModuleNotificationList({ vexpand: true, }),
-                        ModuleCalendar(),
+                        timeRow,
+                        // togglesFlowBox,
+                        togglesBox,
                     ]
                 }),
-            ],
+                ModuleNotificationList({ vexpand: true, }),
+                ModuleCalendar(),
+            ]
         }),
     ]
 });

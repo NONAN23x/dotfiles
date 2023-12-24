@@ -82,12 +82,25 @@ const BarBattery = () => {
                 revealChild: false,
                 transition: 'slide_left',
                 child: Widget.Box({
-                    vpack: 'center',
-                    className: 'bar-batt-chargestate-charging',
-                    connections: [[Battery, box => {
-                        box.toggleClassName('bar-batt-chargestate-low', Battery.percent <= BATTERY_LOW);
-                        box.toggleClassName('bar-batt-chargestate-full', Battery.charged);
-                    }]],
+                    className: 'spacing-h-3',
+                    children: [
+                        Widget.Box({
+                            vpack: 'center',
+                            className: 'bar-batt-chargestate-charging-smaller',
+                            connections: [[Battery, box => {
+                                box.toggleClassName('bar-batt-chargestate-low', Battery.percent <= BATTERY_LOW);
+                                box.toggleClassName('bar-batt-chargestate-full', Battery.charged);
+                            }]],
+                        }),
+                        Widget.Box({
+                            vpack: 'center',
+                            className: 'bar-batt-chargestate-charging',
+                            connections: [[Battery, box => {
+                                box.toggleClassName('bar-batt-chargestate-low', Battery.percent <= BATTERY_LOW);
+                                box.toggleClassName('bar-batt-chargestate-full', Battery.charged);
+                            }]],
+                        }),
+                    ]
                 }),
                 connections: [[Battery, revealer => {
                     revealer.revealChild = Battery.charging;

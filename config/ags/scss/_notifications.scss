@@ -22,8 +22,8 @@ $notif_surface: $t_background;
 
 .notif-critical {
     @include notif-rounding;
-    background-color: $error;
-    color: $onError;
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
     padding: $rounding_small;
     padding-right: $rounding_small + 0.545rem;
 }
@@ -49,8 +49,8 @@ $notif_surface: $t_background;
 .popup-notif-critical {
     @include notif-rounding;
     min-width: 30.682rem;
-    background-color: $error;
-    color: $onError;
+    background-color: $secondaryContainer;
+    color: $onSecondaryContainer;
     padding: $rounding_small;
     padding-right: $rounding_small + 0.545rem;
 }
@@ -64,7 +64,7 @@ $notif_surface: $t_background;
 }
 
 .notif-body-critical {
-    color: mix($onError, $error, 67%);
+    color: mix($onSecondaryContainer, $secondaryContainer, 67%);
 }
 
 .notif-icon {
@@ -89,8 +89,8 @@ $notif_surface: $t_background;
 }
 
 .notif-icon-material-critical {
-    background-color: $t_errorContainer;
-    color: $onErrorContainer;
+    background-color: $t_onSecondaryContainer;
+    color: $secondaryContainer;
 }
 
 .notif-close-btn {
@@ -148,5 +148,5 @@ $notif_surface: $t_background;
     min-width: 0.136rem; // line width
     min-height: 1.770rem;
     padding: 0rem;
-    color: $onError;
+    color: $onSecondaryContainer;
 }

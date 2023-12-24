@@ -7,24 +7,28 @@ import { fileExists } from './messages.js';
 
 // This is for custom prompt
 // It's hard to make gpt-3.5 listen to all these, I know
+// Disabled by default
 const initMessages =
     [
         {
             role: "user",
             content: `
-- When asked to perform system tasks, remember that this is a Linux system. If there's an appropriate command, you only need to include a bash code block.
+## Style
+- You should a natural tone like a real conversation! 
+## Formatting
 - Try to use **bold**, _italics_ and __underline__ extensively. Using bullet points is also encouraged.
 - When providing code blocks or facts, precede with h2 heading (\`##\`) and use 2 spaces for indentation, not 4.
 - Use dividers (\`---\`) to separate different information.
+## Content
+- When asked to perform system tasks, include a bash code block to handle it on a Linux desktop with Wayland.
 - Unless requested otherwise or asked writing questions, be as short and concise as possible.
-- You should a natural tone like a real conversation!
 `,
             thinking: false,
             done: true
         },
         {
             role: "assistant",
-            content: "Got it! I'll try to give commands to perform Linux tasks. I'll try to use markdown features extensively, use divider when appropriate, and use a heading for code blocks. All code blocks should use 2 spaces for indent. I'll be concise and speak naturally.",
+            content: "Got it! I'll try to give commands to perform Linux tasks. I'll try to use markdown features extensively, use divider when appropriate, and use a heading for code blocks. All code blocks should use 2 spaces for indent. And most importantly, I'll speak naturally.",
             thinking: false,
             done: true,
         }
@@ -114,8 +118,10 @@ class ChatGPTService extends Service {
         });
     }
 
-    _messages = [...initMessages];
-    _cycleModels = false;
+    _assistantPrompt = false;
+    _messages = [];
+    _cycleModels = true;
+    _temperature = 0.5;
     _requestCount = 0;
     _modelIndex = 0;
     _key = '';
@@ -124,12 +130,13 @@ class ChatGPTService extends Service {
 
     constructor() {
         super();
-        if (fileExists(expandTilde(KEY_FILE_LOCATION))) {
-            this._key = Utils.readFile(expandTilde(KEY_FILE_LOCATION)).trim();
-        }
-        else {
-            this.emit('hasKey', false);
-        }
+
+        if (fileExists(expandTilde(KEY_FILE_LOCATION))) this._key = Utils.readFile(expandTilde(KEY_FILE_LOCATION)).trim();
+        else this.emit('hasKey', false);
+
+        if (this._assistantPrompt) this._messages = [...initMessages];
+        else this._messages = [];
+
         this.emit('initialized');
     }
 
@@ -153,18 +160,23 @@ class ChatGPTService extends Service {
         }
     }
 
+    get temperature() { return this._temperature }
+    set temperature(value) { this._temperature = value; }
+
     get messages() { return this._messages }
     get lastMessage() { return this._messages[this._messages.length - 1] }
 
     clear() {
-        this._messages = [...initMessages];
+        if (this._assistantPrompt)
+            this._messages = [...initMessages];
+        else
+            this._messages = [];
         this.emit('clear');
     }
 
-    get assistantPrompt() {
-        return (this._messages.length > 0);
-    }
+    get assistantPrompt() { return this._assistantPrompt; }
     set assistantPrompt(value) {
+        this._assistantPrompt = value;
         if (value) this._messages = [...initMessages];
         else this._messages = [];
     }
@@ -210,6 +222,8 @@ class ChatGPTService extends Service {
         const body = {
             model: CHAT_MODELS[this._modelIndex],
             messages: this._messages.map(msg => { let m = { role: msg.role, content: msg.content }; return m; }),
+            temperature: this._temperature,
+            // temperature: 2, // <- Nuts
             stream: true,
         };
 
