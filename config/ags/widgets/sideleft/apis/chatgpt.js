@@ -8,20 +8,18 @@ import { setupCursorHover, setupCursorHoverInfo } from "../../../lib/cursorhover
 import { SystemMessage, ChatMessage } from "./chatgpt_chatmessage.js";
 import { ConfigToggle, ConfigSegmentedSelection, ConfigGap } from '../../../lib/configwidgets.js';
 import { markdownTest } from '../../../lib/md2pango.js';
+import { MarginRevealer } from '../../../lib/advancedwidgets.js';
 
-const chatGPTTabIcon = Icon({
+export const chatGPTTabIcon = Box({
     hpack: 'center',
-    className: 'sidebar-chat-welcome-logo',
-    icon: `${App.configDir}/assets/openai-logomark.svg`,
-    setup: (self) => Utils.timeout(1, () => {
-        const styleContext = self.get_style_context();
-        const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL);
-        const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
-        self.size = Math.max(width, height, 1) * 116 / 180; // Why such a specific proportion? See https://openai.com/brand#logos
-    })
+    className: 'sidebar-chat-apiswitcher-icon',
+    homogeneous: true,
+    children: [
+        MaterialIcon('forum', 'norm'),
+    ],
 });
 
-export const chatGPTInfo = Box({
+const chatGPTInfo = Box({
     vertical: true,
     className: 'spacing-v-15',
     children: [
@@ -63,16 +61,15 @@ export const chatGPTInfo = Box({
     ]
 })
 
-export const chatGPTSettings = Revealer({
+export const chatGPTSettings = MarginRevealer({
     transition: 'slide_down',
-    transitionDuration: 150,
     revealChild: true,
     connections: [
         [ChatGPT, (self) => Utils.timeout(200, () => {
-            self.revealChild = false;
+            self._hide();
         }), 'newMsg'],
         [ChatGPT, (self) => Utils.timeout(200, () => {
-            self.revealChild = true;
+            self._show();
         }), 'clear'],
     ],
     child: Box({
@@ -177,7 +174,11 @@ export const chatContent = Box({
 
 const clearChat = () => {
     ChatGPT.clear();
-    chatContent.get_children().forEach(ch => ch.destroy());
+    const children = chatContent.get_children();
+    for (let i = 0; i < children.length; i++) {
+        const child = children[i];
+        child.destroy();
+    }
 }
 
 export const chatGPTView = Scrollable({
@@ -191,50 +192,41 @@ export const chatGPTView = Scrollable({
         ]
     }),
     setup: (scrolledWindow) => {
+        // Show scrollbar
         scrolledWindow.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         const vScrollbar = scrolledWindow.get_vscrollbar();
         vScrollbar.get_style_context().add_class('sidebar-scrollbar');
-
-        Utils.timeout(1, () => { // Fix click-to-scroll-widget-to-view behavior
+        // Avoid click-to-scroll-widget-to-view behavior
+        Utils.timeout(1, () => { 
             const viewport = scrolledWindow.child;
             viewport.set_focus_vadjustment(new Gtk.Adjustment(undefined));
         })
+        // Always scroll to bottom with new content
+        const adjustment = scrolledWindow.get_vadjustment();
+        adjustment.connect("changed", () => {
+            adjustment.set_value(adjustment.get_upper() - adjustment.get_page_size());
+        })
     }
+});
+
+const CommandButton = (command) => Button({
+    className: 'sidebar-chat-chip sidebar-chat-chip-action txt txt-small',
+    onClicked: () => sendMessage(command),
+    setup: setupCursorHover,
+    label: command,
 });
 
 export const chatGPTCommands = Box({
     className: 'spacing-h-5',
     children: [
         Box({ hexpand: true }),
-        Button({
-            className: 'sidebar-chat-chip sidebar-chat-chip-action txt txt-small',
-            onClicked: () => chatContent.add(SystemMessage(
-                `Key stored in:\n\`${ChatGPT.keyPath}\`\nTo update this key, type \`/key YOUR_API_KEY\``,
-                '/key',
-                chatGPTView)),
-            setup: setupCursorHover,
-            label: '/key',
-        }),
-        Button({
-            className: 'sidebar-chat-chip sidebar-chat-chip-action txt txt-small',
-            onClicked: () => chatContent.add(SystemMessage(
-                `Currently using \`${ChatGPT.modelName}\``,
-                '/model',
-                chatGPTView
-            )),
-            setup: setupCursorHover,
-            label: '/model',
-        }),
-        Button({
-            className: 'sidebar-chat-chip sidebar-chat-chip-action txt txt-small',
-            onClicked: () => clearChat(),
-            setup: setupCursorHover,
-            label: '/clear',
-        }),
+        CommandButton('/key'),
+        CommandButton('/model'),
+        CommandButton('/clear'),
     ]
 });
 
-export const chatGPTSendMessage = (text) => {
+export const sendMessage = (text) => {
     // Check if text or API key is empty
     if (text.length == 0) return;
     if (ChatGPT.key.length == 0) {
@@ -247,6 +239,16 @@ export const chatGPTSendMessage = (text) => {
     if (text.startsWith('/')) {
         if (text.startsWith('/clear')) clearChat();
         else if (text.startsWith('/model')) chatContent.add(SystemMessage(`Currently using \`${ChatGPT.modelName}\``, '/model', chatGPTView))
+        else if (text.startsWith('/prompt')) {
+            const firstSpaceIndex = text.indexOf(' ');
+            const prompt = text.slice(firstSpaceIndex + 1);
+            if (firstSpaceIndex == -1 || prompt.length < 1) {
+                chatContent.add(SystemMessage(`Usage: \`/prompt MESSAGE\``, '/prompt', chatGPTView))
+            }
+            else {
+                ChatGPT.addMessage('user', prompt)
+            }
+        }
         else if (text.startsWith('/key')) {
             const parts = text.split(' ');
             if (parts.length == 1) chatContent.add(SystemMessage(

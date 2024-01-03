@@ -5,16 +5,23 @@ const { execAsync, exec } = Utils;
 import { AnimatedCircProg } from "../../lib/animatedcircularprogress.js";
 import { showMusicControls } from '../../variables.js';
 
+function trimTrackTitle(title) {
+    // Removes stuff like【C93】 at beginning
+    var pattern = /【[^】]*】/;
+    var cleanedTitle = title.replace(pattern, '');
+    return cleanedTitle.trim();
+}
+
 const TrackProgress = () => {
     const _updateProgress = (circprog) => {
         const mpris = Mpris.getPlayer('');
         if (!mpris) return;
-        // Set circular progress (font size cuz that's how this hacky circprog works)
+        // Set circular progress value
         circprog.css = `font-size: ${Math.max(mpris.position / mpris.length * 100, 0)}px;`
     }
     return AnimatedCircProg({
         className: 'bar-music-circprog',
-        vpack: 'center',
+        vpack: 'center', hpack: 'center',
         connections: [ // Update on change/once every 3 seconds
             [Mpris, _updateProgress],
             [3000, _updateProgress]
@@ -65,11 +72,11 @@ export const ModuleMusic = () => Widget.EventBox({
                     Widget.Scrollable({
                         hexpand: true,
                         child: Widget.Label({
-                            className: 'txt txt-smallie',
+                            className: 'txt-smallie txt-onSurfaceVariant',
                             connections: [[Mpris, label => {
                                 const mpris = Mpris.getPlayer('');
                                 if (mpris)
-                                    label.label = `${mpris.trackTitle} • ${mpris.trackArtists.join(', ')}`;
+                                    label.label = `${trimTrackTitle(mpris.trackTitle)} • ${mpris.trackArtists.join(', ')}`;
                                 else
                                     label.label = 'No media';
                             }]],
