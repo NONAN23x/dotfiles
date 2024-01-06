@@ -75,9 +75,9 @@ function getTrackfont(player) {
     return DEFAULT_MUSIC_FONT;
 }
 function trimTrackTitle(title) {
-    // Removes stuff like【C93】 at beginning
-    var pattern = /【[^】]*】/;
-    var cleanedTitle = title.replace(pattern, '');
+    var cleanedTitle = title;
+    cleanedTitle = cleanedTitle.replace(/【[^】]*】/, '');          // Remove stuff like【C93】 at beginning
+    cleanedTitle = cleanedTitle.replace(/\[FREE DOWNLOAD\]/g, ''); // Remove F-777's [FREE DOWNLOAD]
     return cleanedTitle.trim();
 }
 
@@ -200,6 +200,7 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
         children: [
             Button({
                 className: 'osd-music-controlbtn',
+                onClicked: () => execAsync('playerctl previous').catch(print),
                 child: Label({
                     className: 'icon-material osd-music-controlbtn-txt',
                     label: 'skip_previous',
@@ -207,6 +208,9 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
             }),
             Button({
                 className: 'osd-music-controlbtn',
+                onClicked: () => execAsync(['bash', '-c', 'playerctl next || playerctl position `bc <<< "100 * $(playerctl metadata mpris:length) / 1000000 / 100"`'])
+                    .catch(print)
+                ,
                 child: Label({
                     className: 'icon-material osd-music-controlbtn-txt',
                     label: 'skip_next',
@@ -297,9 +301,7 @@ const PlayState = ({ player }) => {
             overlays: [
                 Widget.Button({
                     className: 'osd-music-playstate-btn',
-                    onClicked: () => {
-                        Mpris.getPlayer().playPause()
-                    },
+                    onClicked: () => execAsync('playerctl play-pause').catch(print),
                     child: Widget.Label({
                         justification: 'center',
                         hpack: 'fill',
@@ -380,7 +382,7 @@ export default () => MarginRevealer({
     }),
     connections: [
         [showMusicControls, (revealer) => {
-            if(showMusicControls.value) revealer._show();
+            if (showMusicControls.value) revealer._show();
             else revealer._hide();
         }],
     ],
