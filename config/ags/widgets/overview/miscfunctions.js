@@ -1,5 +1,6 @@
 const { Gio, GLib } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 const { execAsync, exec } = Utils;
 import Todo from "../../services/todo.js";
 
@@ -52,7 +53,7 @@ export function launchCustomCommand(command) {
         execAsync([`bash`, `-c`, `systemctl suspend`]).catch(print);
     }
     else if (args[0] == '>logout') { // Log out
-        execAsync([`bash`, `-c`, `loginctl terminate-user $USER`]).catch(print);
+        execAsync([`bash`, `-c`, `pkill Hyprland || pkill sway`]).catch(print);
     }
 }
 
@@ -65,9 +66,9 @@ export function execAndClose(command, terminal) {
         execAsync(command).catch(print);
 }
 
-export function startsWithNumber(str) {
-    var pattern = /^\d/;
-    return pattern.test(str);
+export function couldBeMath(str) {
+    const regex = /^[0-9.+*/-]/;
+    return regex.test(str);
 }
 
 export function expandTilde(path) {

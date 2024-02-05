@@ -1,7 +1,7 @@
-const { Gdk, Gtk } = imports.gi;
-const GObject = imports.gi.GObject;
+const { Gtk } = imports.gi;
 const Lang = imports.lang;
-import { Utils, Widget } from '../imports.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js'
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js'
 
 // -- Styling --
 // min-height for diameter
@@ -17,6 +17,7 @@ export const AnimatedCircProg = ({
     initTo = 0,
     initAnimTime = 2900,
     initAnimPoints = 1,
+    extraSetup = () => {  },
     ...rest
 }) => Widget.DrawingArea({
     ...rest,
@@ -82,23 +83,24 @@ export const AnimatedCircProg = ({
 
         // Init animation
         if (initFrom != initTo) {
-            // area.css = `font-size: ${initFrom}px; transition: ${initAnimTime}ms linear;`;
+            area.css = `font-size: ${initFrom}px; transition: ${initAnimTime}ms linear;`;
             Utils.timeout(20, () => {
                 area.css = `font-size: ${initTo}px;`;
-            })
-            // const transitionDistance = initTo - initFrom;
-            // const oneStep = initAnimTime / initAnimPoints;
-            // area.css = `
-            //     font-size: ${initFrom}px;
-            //     transition: ${oneStep}ms linear;
-            // `;
-            // for (let i = 0; i < initAnimPoints; i++) {
-            //     Utils.timeout(Math.max(10, i * oneStep), () => {
-            //         if(!area) return;
-            //         area.css = `${initFrom != initTo ? 'font-size: ' + (initFrom + (transitionDistance / initAnimPoints * (i + 1))) + 'px;' : ''}`;
-            //     });
-            // }
+            }, area)
+            const transitionDistance = initTo - initFrom;
+            const oneStep = initAnimTime / initAnimPoints;
+            area.css = `
+                font-size: ${initFrom}px;
+                transition: ${oneStep}ms linear;
+            `;
+            for (let i = 0; i < initAnimPoints; i++) {
+                Utils.timeout(Math.max(10, i * oneStep), () => {
+                    if(!area) return;
+                    area.css = `${initFrom != initTo ? 'font-size: ' + (initFrom + (transitionDistance / initAnimPoints * (i + 1))) + 'px;' : ''}`;
+                });
+            }
         }
         else area.css = 'font-size: 0px;';
+        extraSetup(area);
     },
 })

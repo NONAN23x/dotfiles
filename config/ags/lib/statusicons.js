@@ -1,9 +1,11 @@
-import { App, Service, Utils, Widget } from '../imports.js';
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+
 import { MaterialIcon } from './materialicon.js';
 import Bluetooth from 'resource:///com/github/Aylur/ags/service/bluetooth.js';
 import Network from 'resource:///com/github/Aylur/ags/service/network.js';
 import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
-import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 import { languages } from '../data/languages.js';
 
 // A guessing func to try to support langs not listed in data/languages.js
@@ -44,23 +46,21 @@ export const NotificationIndicator = (notifCenterName = 'sideright') => {
                 MaterialIcon('notifications', 'norm'),
                 Widget.Label({
                     className: 'txt-small titlefont',
-                    properties: [
-                        ['increment', (self) => self._unreadCount++],
-                        ['markread', (self) => self._unreadCount = 0],
-                        ['update', (self) => self.label = `${self._unreadCount}`],
-                        ['unreadCount', 0],
-                    ],
+                    attribute: {
+                        unreadCount: 0,
+                        update: (self) => self.label = `${self.attribute.unreadCount}`,
+                    },
                     setup: (self) => self
                         .hook(Notifications, (self, id) => {
                             if (!id || Notifications.dnd) return;
                             if (!Notifications.getNotification(id)) return;
-                            self._increment(self);
-                            self._update(self);
+                            self.attribute.unreadCount++;
+                            self.attribute.update(self);
                         }, 'notified')
                         .hook(App, (self, currentName, visible) => {
                             if (visible && currentName === notifCenterName) {
-                                self._markread(self);
-                                self._update(self);
+                                self.attribute.unreadCount = 0;
+                                self.attribute.update(self);
                             }
                         })
                     ,
@@ -74,8 +74,8 @@ export const NotificationIndicator = (notifCenterName = 'sideright') => {
 export const BluetoothIndicator = () => Widget.Stack({
     transition: 'slide_up_down',
     items: [
-        ['true', Widget.Label({ className: 'txt-norm icon-material', label: 'bluetooth' })],
         ['false', Widget.Label({ className: 'txt-norm icon-material', label: 'bluetooth_disabled' })],
+        ['true', Widget.Label({ className: 'txt-norm icon-material', label: 'bluetooth' })],
     ],
     setup: (self) => self
         .hook(Bluetooth, stack => {
@@ -161,69 +161,83 @@ export const NetworkIndicator = () => Widget.Stack({
     }),
 });
 
-const KeyboardLayout = ({ useFlag } = {}) => {
-    var initLangs = [];
-    var languageStackArray = [];
-    var currentKeyboard;
+const HyprlandXkbKeyboardLayout = async ({ useFlag } = {}) => {
+    try {
+        const Hyprland = (await import('resource:///com/github/Aylur/ags/service/hyprland.js')).default;
+        var initLangs = [];
+        var languageStackArray = [];
+        var currentKeyboard;
 
-    const updateCurrentKeyboards = () => {
-        currentKeyboard = JSON.parse(Utils.exec('hyprctl -j devices')).keyboards
-            .find(device => device.name === 'at-translated-set-2-keyboard');
-        if (currentKeyboard) {
-            initLangs = currentKeyboard.layout.split(',').map(lang => lang.trim());
-        }
-        languageStackArray = Array.from({ length: initLangs.length }, (_, i) => {
-            const lang = languages.find(lang => lang.layout == initLangs[i]);
-            if (!lang) return [
-                initLangs[i],
-                Widget.Label({ label: initLangs[i] })
-            ];
-            return [
-                lang.layout,
-                Widget.Label({ label: (useFlag ? lang.flag : lang.layout) })
-            ];
+        const updateCurrentKeyboards = () => {
+            currentKeyboard = JSON.parse(Utils.exec('hyprctl -j devices')).keyboards
+                .find(device => device.name === 'at-translated-set-2-keyboard');
+            if (currentKeyboard) {
+                initLangs = currentKeyboard.layout.split(',').map(lang => lang.trim());
+            }
+            languageStackArray = Array.from({ length: initLangs.length }, (_, i) => {
+                const lang = languages.find(lang => lang.layout == initLangs[i]);
+                if (!lang) return [
+                    initLangs[i],
+                    Widget.Label({ label: initLangs[i] })
+                ];
+                return [
+                    lang.layout,
+                    Widget.Label({ label: (useFlag ? lang.flag : lang.layout) })
+                ];
+            });
+        };
+        updateCurrentKeyboards();
+        const widgetRevealer = Widget.Revealer({
+            transition: 150,
+            transition: 'slide_left',
+            revealChild: languageStackArray.length > 1,
         });
-    };
-    updateCurrentKeyboards();
-    const widgetRevealer = Widget.Revealer({
-        transition: 150,
-        transition: 'slide_left',
-        revealChild: languageStackArray.length > 1,
-    });
-    const widgetContent = Widget.Stack({
-        transition: 'slide_up_down',
-        items: [
-            ...languageStackArray,
-            ['undef', Widget.Label({ label: '?' })]
-        ],
-        setup: (self) => self.hook(Hyprland, (stack, kbName, layoutName) => {
-            if (!kbName) {
-                return;
-            }
-            var lang = languages.find(lang => layoutName.includes(lang.name));
-            if (lang) {
-                widgetContent.shown = lang.layout;
-            }
-            else { // Attempt to support langs not listed
-                lang = languageStackArray.find(lang => isLanguageMatch(lang[0], layoutName));
-                if (!lang) stack.shown = 'undef';
-                else stack.shown = lang[0];
-            }
-        }, 'keyboard-layout'),
-    });
-    widgetRevealer.child = widgetContent;
-    return widgetRevealer;
+        const widgetContent = Widget.Stack({
+            transition: 'slide_up_down',
+            items: [
+                ...languageStackArray,
+                ['undef', Widget.Label({ label: '?' })]
+            ],
+            setup: (self) => self.hook(Hyprland, (stack, kbName, layoutName) => {
+                if (!kbName) {
+                    return;
+                }
+                var lang = languages.find(lang => layoutName.includes(lang.name));
+                if (lang) {
+                    widgetContent.shown = lang.layout;
+                }
+                else { // Attempt to support langs not listed
+                    lang = languageStackArray.find(lang => isLanguageMatch(lang[0], layoutName));
+                    if (!lang) stack.shown = 'undef';
+                    else stack.shown = lang[0];
+                }
+            }, 'keyboard-layout'),
+        });
+        widgetRevealer.child = widgetContent;
+        return widgetRevealer;
+    } catch {
+        return null;
+    }
 }
+
+const OptionalKeyboardLayout = async () => {
+    try {
+        return await HyprlandXkbKeyboardLayout({ useFlag: false });
+    } catch {
+        return null;
+    }
+};
+const optionalKeyboardLayoutInstance = await OptionalKeyboardLayout();
 
 export const StatusIcons = (props = {}) => Widget.Box({
     ...props,
     child: Widget.Box({
         className: 'spacing-h-15',
         children: [
-            KeyboardLayout({ useFlag: false }),
+            optionalKeyboardLayoutInstance,
             NotificationIndicator(),
-            BluetoothIndicator(),
             NetworkIndicator(),
+            BluetoothIndicator(),
         ]
     })
 });

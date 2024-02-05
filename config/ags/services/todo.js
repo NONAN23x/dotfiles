@@ -1,5 +1,6 @@
-const { Gio, Gdk, GLib, Gtk } = imports.gi;
-import { Service, Utils } from '../imports.js';
+const { Gio, GLib } = imports.gi;
+import Service from 'resource:///com/github/Aylur/ags/service.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 const { exec, execAsync } = Utils;
 
 const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
@@ -31,24 +32,26 @@ class TodoService extends Service {
         return this._todoJson;
     }
 
-    add(content) {
-        this._todoJson.push({ content, done: false });
+    _save() {
         Utils.writeFile(JSON.stringify(this._todoJson), this._todoPath)
             .catch(print);
+    }
+
+    add(content) {
+        this._todoJson.push({ content, done: false });
+        this._save();
         this.emit('updated');
     }
 
     check(index) {
         this._todoJson[index].done = true;
-        Utils.writeFile(JSON.stringify(this._todoJson), this._todoPath)
-            .catch(print);
+        this._save();
         this.emit('updated');
     }
 
     uncheck(index) {
         this._todoJson[index].done = false;
-        Utils.writeFile(JSON.stringify(this._todoJson), this._todoPath)
-            .catch(print);
+        this._save();
         this.emit('updated');
     }
 
@@ -62,16 +65,16 @@ class TodoService extends Service {
     constructor() {
         super();
         this._todoPath = `${GLib.get_user_cache_dir()}/ags/user/todo.json`;
-        if (!fileExists(this._todoPath)) { // No? create file with empty array
+        try {
+            const fileContents = Utils.readFile(this._todoPath);
+            this._todoJson = JSON.parse(fileContents);
+        }
+        catch {
             Utils.exec(`bash -c 'mkdir -p ${GLib.get_user_cache_dir()}/ags/user'`);
             Utils.exec(`touch ${this._todoPath}`);
             Utils.writeFile("[]", this._todoPath).then(() => {
                 this._todoJson = JSON.parse(Utils.readFile(this._todoPath))
             }).catch(print);
-        }
-        else {
-            const fileContents = Utils.readFile(this._todoPath);
-            this._todoJson = JSON.parse(fileContents);
         }
     }
 }

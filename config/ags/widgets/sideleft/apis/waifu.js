@@ -1,17 +1,28 @@
-const { Gdk, Gio, GLib, Gtk, Pango } = imports.gi;
-import { App, Utils, Widget } from '../../../imports.js';
-const { Box, Button, Entry, EventBox, Icon, Label, Revealer, Scrollable, Stack } = Widget;
+const { Gdk, GdkPixbuf, Gio, GLib, Gtk } = imports.gi;
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+const { Box, Button, Label, Overlay, Revealer, Scrollable, Stack } = Widget;
 const { execAsync, exec } = Utils;
 import { MaterialIcon } from "../../../lib/materialicon.js";
 import { MarginRevealer } from '../../../lib/advancedwidgets.js';
 import { setupCursorHover, setupCursorHoverInfo } from "../../../lib/cursorhover.js";
 import WaifuService from '../../../services/waifus.js';
 
+async function getImageViewerApp(preferredApp) {
+    Utils.execAsync(['bash', '-c', `command -v ${preferredApp}`])
+        .then((output) => {
+            if (output != '') return preferredApp;
+            else return 'xdg-open';
+        });
+}
+
 const IMAGE_REVEAL_DELAY = 13; // Some wait for inits n other weird stuff
+const IMAGE_VIEWER_APP = getImageViewerApp('loupe'); // Gnome's image viewer cuz very comfortable zooming
+const USER_CACHE_DIR = GLib.get_user_cache_dir();
 
 // Create cache folder and clear pics from previous session
-Utils.exec(`bash -c 'mkdir -p ${GLib.get_user_cache_dir()}/ags/media/waifus'`);
-Utils.exec(`bash -c 'rm ${GLib.get_user_cache_dir()}/ags/media/waifus/*'`);
+Utils.exec(`bash -c 'mkdir -p ${USER_CACHE_DIR}/ags/media/waifus'`);
+Utils.exec(`bash -c 'rm ${USER_CACHE_DIR}/ags/media/waifus/*'`);
 
 export function fileExists(filePath) {
     let file = Gio.File.new_for_path(filePath);
@@ -83,90 +94,114 @@ const WaifuImage = (taglist) => {
             downloadIndicator,
         ]
     });
-    const blockImageActions = Box({
-        className: 'sidebar-waifu-image-actions spacing-h-3',
-        children: [
-            Box({ hexpand: true }),
-            ImageAction({
-                name: 'Go to source',
-                icon: 'link',
-                action: () => execAsync(['xdg-open', `${thisBlock._imageData.source}`]).catch(print),
-            }),
-            ImageAction({
-                name: 'Hoard',
-                icon: 'save',
-                action: () => execAsync(['bash', '-c', `mkdir -p ~/Pictures/waifus && cp ${thisBlock._imagePath} ~/Pictures/waifus`]).catch(print),
-            }),
-            ImageAction({
-                name: 'Open externally',
-                icon: 'open_in_new',
-                action: () => execAsync(['xdg-open', `${thisBlock._imagePath}`]).catch(print),
-            }),
-        ]
-    })
-    const blockImage = Box({
-        className: 'test',
-        hpack: 'start',
-        vertical: true,
-        className: 'sidebar-waifu-image',
-        homogeneous: true,
-        children: [
-            Revealer({
-                transition: 'crossfade',
-                revealChild: false,
-                child: Box({
-                    vertical: true,
-                    children: [blockImageActions],
+    const blockImageActions = Revealer({
+        transition: 'crossfade',
+        revealChild: false,
+        child: Box({
+            vertical: true,
+            children: [
+                Box({
+                    className: 'sidebar-waifu-image-actions spacing-h-3',
+                    children: [
+                        Box({ hexpand: true }),
+                        ImageAction({
+                            name: 'Go to source',
+                            icon: 'link',
+                            action: () => execAsync(['xdg-open', `${thisBlock.attribute.imageData.source}`]).catch(print),
+                        }),
+                        ImageAction({
+                            name: 'Hoard',
+                            icon: 'save',
+                            action: () => execAsync(['bash', '-c', `mkdir -p ~/Pictures/homework${thisBlock.attribute.isNsfw ? '/🌶️' : ''} && cp ${thisBlock.attribute.imagePath} ~/Pictures/homework${thisBlock.attribute.isNsfw ? '/🌶️/' : ''}`]).catch(print),
+                        }),
+                        ImageAction({
+                            name: 'Open externally',
+                            icon: 'open_in_new',
+                            action: () => execAsync([IMAGE_VIEWER_APP, `${thisBlock.attribute.imagePath}`]).catch(print),
+                        }),
+                    ]
                 })
-            })
-        ]
+            ],
+        })
     })
+    const blockImage = Widget.DrawingArea({
+        className: 'sidebar-waifu-image',
+    });
     const blockImageRevealer = Revealer({
         transition: 'slide_down',
         transitionDuration: 150,
         revealChild: false,
-        child: blockImage,
+        child: Overlay({
+            child: Box({
+                homogeneous: true,
+                className: 'sidebar-waifu-image',
+                children: [blockImage],
+            }),
+            overlays: [blockImageActions],
+        }),
     });
     const thisBlock = Box({
         className: 'sidebar-chat-message',
-        properties: [
-            ['imagePath', ''],
-            ['imageData', ''],
-            ['update', (imageData, force = false) => {
-                thisBlock._imageData = imageData;
-                const { status, signature, url, extension, source, dominant_color, is_nsfw, width, height, tags } = thisBlock._imageData;
+        attribute: {
+            'imagePath': '',
+            'isNsfw': false,
+            'imageData': '',
+            'update': (imageData, force = false) => {
+                thisBlock.attribute.imageData = imageData;
+                const { status, signature, url, extension, source, dominant_color, is_nsfw, width, height, tags } = thisBlock.attribute.imageData;
+                thisBlock.attribute.isNsfw = is_nsfw;
                 if (status != 200) {
                     downloadState.shown = 'error';
                     return;
                 }
-                thisBlock._imagePath = `${GLib.get_user_cache_dir()}/ags/media/waifus/${signature}${extension}`;
+                thisBlock.attribute.imagePath = `${USER_CACHE_DIR}/ags/media/waifus/${signature}${extension}`;
                 downloadState.shown = 'download';
-                // Width allocation
-                const widgetWidth = Math.min(Math.floor(waifuContent.get_allocated_width() * 0.75), width);
-                blockImage.set_size_request(widgetWidth, Math.ceil(widgetWidth * height / width));
-                // Start download
+                // Width/height
+                const widgetWidth = Math.min(Math.floor(waifuContent.get_allocated_width() * 0.85), width);
+                const widgetHeight = Math.ceil(widgetWidth * height / width);
+                blockImage.set_size_request(widgetWidth, widgetHeight);
                 const showImage = () => {
                     downloadState.shown = 'done';
-                    // blockImage.css = `background-color: ${dominant_color};`;
-                    blockImage.css = `background-image:url('${thisBlock._imagePath}');`; // TODO: use proper image widget
+                    const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_size(thisBlock.attribute.imagePath, widgetWidth, widgetHeight);
+                    // const pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(thisBlock.attribute.imagePath, widgetWidth, widgetHeight, false);
+
+                    blockImage.set_size_request(widgetWidth, widgetHeight);
+                    blockImage.connect("draw", (widget, cr) => {
+                        const borderRadius = widget.get_style_context().get_property('border-radius', Gtk.StateFlags.NORMAL);
+
+                        // Draw a rounded rectangle
+                        cr.arc(borderRadius, borderRadius, borderRadius, Math.PI, 1.5 * Math.PI);
+                        cr.arc(widgetWidth - borderRadius, borderRadius, borderRadius, 1.5 * Math.PI, 2 * Math.PI);
+                        cr.arc(widgetWidth - borderRadius, widgetHeight - borderRadius, borderRadius, 0, 0.5 * Math.PI);
+                        cr.arc(borderRadius, widgetHeight - borderRadius, borderRadius, 0.5 * Math.PI, Math.PI);
+                        cr.closePath();
+                        cr.clip();
+
+                        // Paint image as bg
+                        Gdk.cairo_set_source_pixbuf(cr, pixbuf, 0, 0);
+                        cr.paint();
+                    });
+
+                    // Reveal stuff
                     Utils.timeout(IMAGE_REVEAL_DELAY, () => {
                         blockImageRevealer.revealChild = true;
                     })
                     Utils.timeout(IMAGE_REVEAL_DELAY + blockImageRevealer.transitionDuration,
-                        () => blockImage.get_children()[0].revealChild = true
+                        () => blockImageActions.revealChild = true
                     );
-                    downloadIndicator._hide();
+                    downloadIndicator.attribute.hide();
                 }
-                if (!force && fileExists(thisBlock._imagePath)) showImage();
-                else Utils.execAsync(['bash', '-c', `wget -O '${thisBlock._imagePath}' '${url}'`])
+                // Show
+                if (!force && fileExists(thisBlock.attribute.imagePath)) showImage();
+                else Utils.execAsync(['bash', '-c', `wget -O '${thisBlock.attribute.imagePath}' '${url}'`])
                     .then(showImage)
                     .catch(print);
                 blockHeading.get_children().forEach((child) => {
                     child.setCss(`border-color: ${dominant_color};`);
-                }) 
+                })
                 colorIndicator.css = `background-color: ${dominant_color};`;
-            }],
-        ],
+            },
+        },
         children: [
             colorIndicator,
             Box({
@@ -176,6 +211,7 @@ const WaifuImage = (taglist) => {
                     blockHeading,
                     Box({
                         vertical: true,
+                        hpack: 'start',
                         children: [blockImageRevealer],
                     })
                 ]
@@ -185,29 +221,81 @@ const WaifuImage = (taglist) => {
     return thisBlock;
 }
 
+const WaifuInfo = () => {
+    const waifuLogo = Label({
+        hpack: 'center',
+        className: 'sidebar-chat-welcome-logo',
+        label: 'photo_library',
+    })
+    return Box({
+        vertical: true,
+        vexpand: true,
+        className: 'spacing-v-15',
+        children: [
+            waifuLogo,
+            Label({
+                className: 'txt txt-title-small sidebar-chat-welcome-txt',
+                wrap: true,
+                justify: Gtk.Justification.CENTER,
+                label: 'Waifus',
+            }),
+            Box({
+                className: 'spacing-h-5',
+                hpack: 'center',
+                children: [
+                    Label({
+                        className: 'txt-smallie txt-subtext',
+                        wrap: true,
+                        justify: Gtk.Justification.CENTER,
+                        label: 'Powered by waifu.im',
+                    }),
+                    Button({
+                        className: 'txt-subtext txt-norm icon-material',
+                        label: 'info',
+                        tooltipText: 'A free Waifu API. An alternative to waifu.pics.',
+                        setup: setupCursorHoverInfo,
+                    }),
+                ]
+            }),
+        ]
+    });
+}
+
+const waifuWelcome = Box({
+    vexpand: true,
+    homogeneous: true,
+    child: Box({
+        className: 'spacing-v-15',
+        vpack: 'center',
+        vertical: true,
+        children: [
+            WaifuInfo(),
+        ]
+    })
+});
+
 const waifuContent = Box({
     className: 'spacing-v-15',
     vertical: true,
-    vexpand: true,
-    properties: [
-        ['map', new Map()],
-    ],
-    connections: [
-        [WaifuService, (box, id) => {
+    attribute: {
+        'map': new Map(),
+    },
+    setup: (self) => self
+        .hook(WaifuService, (box, id) => {
             if (id === undefined) return;
             const newImageBlock = WaifuImage(WaifuService.queries[id]);
             box.add(newImageBlock);
             box.show_all();
-            box._map.set(id, newImageBlock);
-        }, 'newResponse'],
-        [WaifuService, (box, id) => {
+            box.attribute.map.set(id, newImageBlock);
+        }, 'newResponse')
+        .hook(WaifuService, (box, id) => {
             if (id === undefined) return;
             const data = WaifuService.responses[id];
             if (!data) return;
-            const imageBlock = box._map.get(id);
-            imageBlock._update(data);
-        }, 'updateResponse'],
-    ]
+            const imageBlock = box.attribute.map.get(id);
+            imageBlock.attribute.update(data);
+        }, 'updateResponse')
+    ,
 });
 
 export const waifuView = Scrollable({
@@ -216,6 +304,7 @@ export const waifuView = Scrollable({
     child: Box({
         vertical: true,
         children: [
+            waifuWelcome,
             waifuContent,
         ]
     }),
@@ -284,11 +373,27 @@ export const waifuCommands = Box({
 });
 
 const clearChat = () => {
+    waifuContent.attribute.map.clear();
     const kids = waifuContent.get_children();
     for (let i = 0; i < kids.length; i++) {
         const child = kids[i];
         if (child) child.destroy();
     }
+}
+
+const DummyTag = (width, height, url, color = '#9392A6') => {
+    return { // Needs timeout or inits won't make it
+        status: 200,
+        url: url,
+        extension: '',
+        signature: 0,
+        source: url,
+        dominant_color: color,
+        is_nsfw: false,
+        width: width,
+        height: height,
+        tags: ['/test'],
+    };
 }
 
 export const sendMessage = (text) => {
@@ -299,20 +404,20 @@ export const sendMessage = (text) => {
         else if (text.startsWith('/test')) {
             const newImage = WaifuImage(['/test']);
             waifuContent.add(newImage);
-            Utils.timeout(IMAGE_REVEAL_DELAY, () => newImage._update({ // Needs timeout or inits won't make it
-                // This is an image uploaded to my github repo
-                status: 200,
-                url: 'https://picsum.photos/400/600',
-                extension: '',
-                signature: 0,
-                source: 'https://picsum.photos/400/600',
-                dominant_color: '#9392A6',
-                is_nsfw: false,
-                width: 300,
-                height: 200,
-                tags: ['/test'],
-            }, true));
+            Utils.timeout(IMAGE_REVEAL_DELAY, () => newImage.attribute.update(
+                DummyTag(300, 200, 'https://picsum.photos/600/400'),
+                true
+            ));
         }
+        else if (text.startsWith('/chino')) {
+            const newImage = WaifuImage(['/chino']);
+            waifuContent.add(newImage);
+            Utils.timeout(IMAGE_REVEAL_DELAY, () => newImage.attribute.update(
+                DummyTag(300, 400, 'https://chino.pages.dev/chino', '#B2AEF3'),
+                true
+            ));
+        }
+
     }
     else WaifuService.fetch(text);
 }

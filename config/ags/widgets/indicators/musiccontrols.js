@@ -1,5 +1,7 @@
-const { Gio, GLib, Gtk } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
+const { Gio, GLib } = imports.gi;
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 const { exec, execAsync } = Utils;
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
 
@@ -30,17 +32,13 @@ function isRealPlayer(player) {
     );
 }
 
-export const getPlayer = (name = PREFERRED_PLAYER) => {
-    return Mpris.getPlayer(name) || Mpris.players[0] || null;
-}
-
+export const getPlayer = (name = PREFERRED_PLAYER) => Mpris.getPlayer(name) || Mpris.players[0] || null;
 function lengthStr(length) {
     const min = Math.floor(length / 60);
     const sec = Math.floor(length % 60);
     const sec0 = sec < 10 ? '0' : '';
     return `${min}:${sec0}${sec}`;
 }
-
 function fileExists(filePath) {
     let file = Gio.File.new_for_path(filePath);
     return file.query_exists(null);
@@ -52,17 +50,11 @@ function detectMediaSource(link) {
             return '󰈹 Firefox'
         return "󰈣 File";
     }
-    // Remove protocol if present
     let url = link.replace(/(^\w+:|^)\/\//, '');
-    // Extract the domain name
     let domain = url.match(/(?:[a-z]+\.)?([a-z]+\.[a-z]+)/i)[1];
-
-    if (domain == 'ytimg.com')
-        return '󰗃 Youtube';
-    if (domain == 'discordapp.net')
-        return '󰙯 Discord';
-    if (domain == 'sndcdn.com')
-        return '󰓀 SoundCloud';
+    if (domain == 'ytimg.com') return '󰗃 Youtube';
+    if (domain == 'discordapp.net') return '󰙯 Discord';
+    if (domain == 'sndcdn.com') return '󰓀 SoundCloud';
     return domain;
 }
 
@@ -70,15 +62,20 @@ const DEFAULT_MUSIC_FONT = 'Gabarito, sans-serif';
 function getTrackfont(player) {
     const title = player.trackTitle;
     const artists = player.trackArtists.join(' ');
-    if (artists.includes('TANO*C') || artists.includes('USAO') || artists.includes('Kobaryo')) return 'Chakra Petch'; // Rigid square replacement
-    if (title.includes('東方')) return 'Crimson Text, serif'; // Serif for Touhou stuff
+    if (artists.includes('TANO*C') || artists.includes('USAO') || artists.includes('Kobaryo'))
+        return 'Chakra Petch'; // Rigid square replacement
+    if (title.includes('東方'))
+        return 'Crimson Text, serif'; // Serif for Touhou stuff
     return DEFAULT_MUSIC_FONT;
 }
 function trimTrackTitle(title) {
-    var cleanedTitle = title;
-    cleanedTitle = cleanedTitle.replace(/【[^】]*】/, '');          // Remove stuff like【C93】 at beginning
-    cleanedTitle = cleanedTitle.replace(/\[FREE DOWNLOAD\]/g, ''); // Remove F-777's [FREE DOWNLOAD]
-    return cleanedTitle.trim();
+    if(!title) return '';
+    const cleanRegexes = [
+        /【[^】]*】/,         // Touhou n weeb stuff
+        /\[FREE DOWNLOAD\]/, // F-777
+    ];
+    cleanRegexes.forEach((expr) => title.replace(expr, ''));
+    return title;
 }
 
 const TrackProgress = ({ player, ...rest }) => {
@@ -92,10 +89,10 @@ const TrackProgress = ({ player, ...rest }) => {
         ...rest,
         className: 'osd-music-circprog',
         vpack: 'center',
-        connections: [ // Update on change/once every 3 seconds
-            [Mpris, _updateProgress],
-            [3000, _updateProgress]
-        ],
+        extraSetup: (self) => self
+            .hook(Mpris, _updateProgress)
+            .poll(3000, _updateProgress)
+        ,
     })
 }
 
@@ -106,13 +103,13 @@ const TrackTitle = ({ player, ...rest }) => Label({
     truncate: 'end',
     // wrap: true,
     className: 'osd-music-title',
-    connections: [[player, (self) => {
+    setup: (self) => self.hook(player, (self) => {
         // Player name
         self.label = player.trackTitle.length > 0 ? trimTrackTitle(player.trackTitle) : 'No media';
         // Font based on track/artist
         const fontForThisTrack = getTrackfont(player);
         self.css = `font-family: ${fontForThisTrack}, ${DEFAULT_MUSIC_FONT};`;
-    }, 'notify::track-title']]
+    }, 'notify::track-title'),
 });
 
 const TrackArtists = ({ player, ...rest }) => Label({
@@ -120,9 +117,9 @@ const TrackArtists = ({ player, ...rest }) => Label({
     xalign: 0,
     className: 'osd-music-artists',
     truncate: 'end',
-    connections: [[player, (self) => {
+    setup: (self) => self.hook(player, (self) => {
         self.label = player.trackArtists.length > 0 ? player.trackArtists.join(', ') : '';
-    }, 'notify::track-artists']]
+    }, 'notify::track-artists'),
 })
 
 const CoverArt = ({ player, ...rest }) => Box({
@@ -140,8 +137,8 @@ const CoverArt = ({ player, ...rest }) => Box({
             }),
             overlays: [ // Real
                 Box({
-                    properties: [
-                        ['updateCover', (self) => {
+                    attribute: {
+                        'updateCover': (self) => {
                             const player = Mpris.getPlayer();
 
                             // Player closed
@@ -177,11 +174,11 @@ const CoverArt = ({ player, ...rest }) => Box({
                                     App.applyCss(`${stylePath}`);
                                 })
                                 .catch(print);
-                        }],
-                    ],
+                        },
+                    },
                     className: 'osd-music-cover-art',
-                    connections: [
-                        [player, (self) => self._updateCover(self), 'notify::cover-path']
+                    $: [
+                        [player, (self) => self.attribute.updateCover(self), 'notify::cover-path']
                     ],
                 })
             ]
@@ -218,13 +215,13 @@ const TrackControls = ({ player, ...rest }) => Widget.Revealer({
             }),
         ],
     }),
-    connections: [[Mpris, (self) => {
+    setup: (self) => szelf.hook(Mpris, (self) => {
         const player = Mpris.getPlayer();
         if (!player)
             self.revealChild = false;
         else
             self.revealChild = true;
-    }, 'notify::play-back-status']]
+    }, 'notify::play-back-status'),
 });
 
 const TrackSource = ({ player, ...rest }) => Widget.Revealer({
@@ -240,19 +237,19 @@ const TrackSource = ({ player, ...rest }) => Widget.Revealer({
                 hpack: 'fill',
                 justification: 'center',
                 className: 'icon-nerd',
-                connections: [[player, (self) => {
+                setup: (self) => self.hook(player, (self) => {
                     self.label = detectMediaSource(player.trackCoverUrl);
-                }, 'notify::cover-path']]
+                }, 'notify::cover-path'),
             }),
         ],
     }),
-    connections: [[Mpris, (self) => {
+    setup: (self) => self.hook(Mpris, (self) => {
         const mpris = Mpris.getPlayer('');
         if (!mpris)
             self.revealChild = false;
         else
             self.revealChild = true;
-    }]]
+    }),
 });
 
 const TrackTime = ({ player, ...rest }) => {
@@ -266,28 +263,26 @@ const TrackTime = ({ player, ...rest }) => {
             className: 'osd-music-pill spacing-h-5',
             children: [
                 Label({
-                    connections: [[1000, (self) => {
+                    setup: (self) => self.poll(1000, (self) => {
                         const player = Mpris.getPlayer();
                         if (!player) return;
                         self.label = lengthStr(player.position);
-                    }]]
+                    }),
                 }),
                 Label({ label: '/' }),
                 Label({
-                    connections: [[Mpris, (self) => {
+                    setup: (self) => self.hook(Mpris, (self) => {
                         const player = Mpris.getPlayer();
                         if (!player) return;
                         self.label = lengthStr(player.length);
-                    }]]
+                    }),
                 }),
             ],
         }),
-        connections: [[Mpris, (self) => {
-            if (!player)
-                self.revealChild = false;
-            else
-                self.revealChild = true;
-        }]]
+        setup: (self) => self.hook(Mpris, (self) => {
+            if (!player) self.revealChild = false;
+            else self.revealChild = true;
+        }),
     })
 }
 
@@ -306,15 +301,12 @@ const PlayState = ({ player }) => {
                         justification: 'center',
                         hpack: 'fill',
                         vpack: 'center',
-                        connections: [[player, (label) => {
+                        setup: (self) => self.hook(player, (label) => {
                             label.label = `${player.playBackStatus == 'Playing' ? 'pause' : 'play_arrow'}`;
-                        }, 'notify::play-back-status']],
+                        }, 'notify::play-back-status'),
                     }),
                 }),
             ],
-            // setup: self => Utils.timeout(1, () => {
-            //     self.set_overlay_pass_through(self.get_children()[1], true);
-            // }),
             passThrough: true,
         })
     });
@@ -358,32 +350,29 @@ export default () => MarginRevealer({
     showClass: 'osd-show',
     hideClass: 'osd-hide',
     child: Box({
-        connections: [[Mpris, box => {
+        setup: (self) => self.hook(Mpris, box => {
             let foundPlayer = false;
 
             Mpris.players.forEach((player, i) => {
                 if (isRealPlayer(player)) {
                     foundPlayer = true;
-                    box._player = player;
                     box.children = [MusicControlsWidget(player)];
                 }
             });
 
             if (!foundPlayer) {
-                box._player = null;
                 const children = box.get_children();
                 for (let i = 0; i < children.length; i++) {
                     const child = children[i];
                     child.destroy();
+                    child = null;
                 }
                 return;
             }
-        }, 'notify::players']],
+        }, 'notify::players'),
     }),
-    connections: [
-        [showMusicControls, (revealer) => {
-            if (showMusicControls.value) revealer._show();
-            else revealer._hide();
-        }],
-    ],
+    setup: (self) => self.hook(showMusicControls, (revealer) => {
+        if (showMusicControls.value) revealer.attribute.show();
+        else revealer.attribute.hide();
+    }),
 })

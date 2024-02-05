@@ -1,5 +1,6 @@
 const { Gdk, Gtk } = imports.gi;
-import { Service, Widget } from '../../imports.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import Service from 'resource:///com/github/Aylur/ags/service.js';
 import { Keybinds } from "./keybinds.js";
 import { setupCursorHover } from "../../lib/cursorhover.js";
 
@@ -70,7 +71,7 @@ const clickOutsideToClose = Widget.EventBox({
 export default () => Widget.Window({
     name: 'cheatsheet',
     exclusivity: 'ignore',
-    focusable: true,
+    keymode: 'exclusive',
     popup: true,
     visible: false,
     child: Widget.Box({

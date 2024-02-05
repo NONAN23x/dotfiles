@@ -1,10 +1,6 @@
-const { Gdk, Gtk } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
-const { execAsync, exec } = Utils;
-import { setupCursorHover, setupCursorHoverAim } from "../../lib/cursorhover.js";
-import { MaterialIcon } from '../../lib/materialicon.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
-export const searchItem = ({ materialIconName, name, actionName, content, onActivate }) => {
+export const searchItem = ({ materialIconName, name, actionName, content, onActivate, extraClassName = '', ...rest }) => {
     const actionText = Widget.Revealer({
         revealChild: false,
         transition: "crossfade",
@@ -21,7 +17,7 @@ export const searchItem = ({ materialIconName, name, actionName, content, onActi
         child: actionText,
     })
     return Widget.Button({
-        className: 'overview-search-result-btn',
+        className: `overview-search-result-btn txt ${extraClassName}`,
         onClicked: onActivate,
         child: Widget.Box({
             children: [
@@ -37,13 +33,13 @@ export const searchItem = ({ materialIconName, name, actionName, content, onActi
                             children: [
                                 Widget.Label({
                                     hpack: 'start',
-                                    className: 'overview-search-results-txt txt txt-smallie txt-subtext',
+                                    className: 'overview-search-results-txt txt-smallie txt-subtext',
                                     label: `${name}`,
                                     truncate: "end",
                                 }),
                                 Widget.Label({
                                     hpack: 'start',
-                                    className: 'overview-search-results-txt txt txt-norm',
+                                    className: 'overview-search-results-txt txt-norm',
                                     label: `${content}`,
                                     truncate: "end",
                                 }),
@@ -55,15 +51,15 @@ export const searchItem = ({ materialIconName, name, actionName, content, onActi
                 })
             ]
         }),
-        connections: [
-            ['focus-in-event', (button) => {
+        setup: (self) => self
+            .on('focus-in-event', (button) => {
                 actionText.revealChild = true;
                 actionTextRevealer.revealChild = true;
-            }],
-            ['focus-out-event', (button) => {
+            })
+            .on('focus-out-event', (button) => {
                 actionText.revealChild = false;
                 actionTextRevealer.revealChild = false;
-            }],
-        ]
+            })
+        ,
     });
 }

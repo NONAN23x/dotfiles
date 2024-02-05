@@ -1,77 +1,92 @@
-const { Gdk, GLib, Gtk, Pango } = imports.gi;
-import { App, Utils, Widget } from '../../../imports.js';
+const { Gtk } = imports.gi;
+import App from 'resource:///com/github/Aylur/ags/app.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
+
 const { Box, Button, Entry, EventBox, Icon, Label, Revealer, Scrollable, Stack } = Widget;
 const { execAsync, exec } = Utils;
 import ChatGPT from '../../../services/chatgpt.js';
 import { MaterialIcon } from "../../../lib/materialicon.js";
 import { setupCursorHover, setupCursorHoverInfo } from "../../../lib/cursorhover.js";
-import { SystemMessage, ChatMessage } from "./chatgpt_chatmessage.js";
+import { SystemMessage, ChatMessage } from "./ai_chatmessage.js";
 import { ConfigToggle, ConfigSegmentedSelection, ConfigGap } from '../../../lib/configwidgets.js';
 import { markdownTest } from '../../../lib/md2pango.js';
 import { MarginRevealer } from '../../../lib/advancedwidgets.js';
 
-export const chatGPTTabIcon = Box({
+Gtk.IconTheme.get_default().append_search_path(`${App.configDir}/assets`);
+
+export const chatGPTTabIcon = Icon({
     hpack: 'center',
     className: 'sidebar-chat-apiswitcher-icon',
-    homogeneous: true,
-    children: [
-        MaterialIcon('forum', 'norm'),
-    ],
+    icon: `openai-symbolic`,
+    setup: (self) => Utils.timeout(513, () => { // stupid condition race
+        const styleContext = self.get_style_context();
+        const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL);
+        const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
+        // console.log(Math.round(Math.max(width, height, 1)));
+        self.size = Math.max(width, height, 1) * 116 / 180;
+        // ↑ Why such a specific proportion? See https://openai.com/brand#logos
+    })
 });
 
-const chatGPTInfo = Box({
-    vertical: true,
-    className: 'spacing-v-15',
-    children: [
-        Icon({
-            hpack: 'center',
-            className: 'sidebar-chat-welcome-logo',
-            icon: `${App.configDir}/assets/openai-logomark.svg`,
-            setup: (self) => Utils.timeout(1, () => {
-                const styleContext = self.get_style_context();
-                const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL);
-                const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
-                self.size = Math.max(width, height, 1) * 116 / 180; // Why such a specific proportion? See https://openai.com/brand#logos
-            })
-        }),
-        Label({
-            className: 'txt txt-title-small sidebar-chat-welcome-txt',
-            wrap: true,
-            justify: Gtk.Justification.CENTER,
-            label: 'ChatGPT',
-        }),
-        Box({
-            className: 'spacing-h-5',
-            hpack: 'center',
-            children: [
-                Label({
-                    className: 'txt-smallie txt-subtext',
-                    wrap: true,
-                    justify: Gtk.Justification.CENTER,
-                    label: 'Powered by OpenAI',
-                }),
-                Button({
-                    className: 'txt-subtext txt-norm icon-material',
-                    label: 'info',
-                    tooltipText: 'Uses gpt-3.5-turbo.\nNot affiliated, endorsed, or sponsored by OpenAI.',
-                    setup: setupCursorHoverInfo,
-                }),
-            ]
-        }),
-    ]
-})
+const ChatGPTInfo = () => {
+    const openAiLogo = Icon({
+        hpack: 'center',
+        className: 'sidebar-chat-welcome-logo',
+        icon: `openai-symbolic`,
+        setup: (self) => Utils.timeout(513, () => { // stupid condition race
+            const styleContext = self.get_style_context();
+            const width = styleContext.get_property('min-width', Gtk.StateFlags.NORMAL);
+            const height = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
+            // console.log(Math.round(Math.max(width, height, 1)));
+            self.size = Math.max(width, height, 1) * 116 / 180;
+            // ↑ Why such a specific proportion? See https://openai.com/brand#logos
+        })
+    });
+    return Box({
+        vertical: true,
+        className: 'spacing-v-15',
+        children: [
+            openAiLogo,
+            Label({
+                className: 'txt txt-title-small sidebar-chat-welcome-txt',
+                wrap: true,
+                justify: Gtk.Justification.CENTER,
+                label: 'Assistant (ChatGPT 3.5)',
+            }),
+            Box({
+                className: 'spacing-h-5',
+                hpack: 'center',
+                children: [
+                    Label({
+                        className: 'txt-smallie txt-subtext',
+                        wrap: true,
+                        justify: Gtk.Justification.CENTER,
+                        label: 'Powered by OpenAI',
+                    }),
+                    Button({
+                        className: 'txt-subtext txt-norm icon-material',
+                        label: 'info',
+                        tooltipText: 'Uses gpt-3.5-turbo.\nNot affiliated, endorsed, or sponsored by OpenAI.',
+                        setup: setupCursorHoverInfo,
+                    }),
+                ]
+            }),
+        ]
+    });
+}
 
-export const chatGPTSettings = MarginRevealer({
+export const ChatGPTSettings = () => MarginRevealer({
     transition: 'slide_down',
     revealChild: true,
-    connections: [
-        [ChatGPT, (self) => Utils.timeout(200, () => {
-            self._hide();
-        }), 'newMsg'],
-        [ChatGPT, (self) => Utils.timeout(200, () => {
-            self._show();
-        }), 'clear'],
-    ],
+    extraSetup: (self) => self
+        .hook(ChatGPT, (self) => Utils.timeout(200, () => {
+            self.attribute.hide();
+        }), 'newMsg')
+        .hook(ChatGPT, (self) => Utils.timeout(200, () => {
+            self.attribute.show();
+        }), 'clear')
+    ,
     child: Box({
         vertical: true,
         className: 'sidebar-chat-settings',
@@ -86,7 +101,7 @@ export const chatGPTSettings = MarginRevealer({
                     { value: 0.50, name: 'Balanced', },
                     { value: 1.00, name: 'Creative', },
                 ],
-                initIndex: 1,
+                initIndex: 2,
                 onChange: (value, name) => {
                     ChatGPT.temperature = value;
                 },
@@ -107,9 +122,9 @@ export const chatGPTSettings = MarginRevealer({
                         },
                     }),
                     ConfigToggle({
-                        icon: 'description',
-                        name: 'Assistant prompt',
-                        desc: 'Tells ChatGPT\n  1. It\'s a sidebar assistant on Linux\n  2. Be short and concise\n  3. Use markdown features extensively\nLeave this off for a vanilla ChatGPT experience.',
+                        icon: 'model_training',
+                        name: 'Enhancements',
+                        desc: 'Tells ChatGPT:\n- It\'s a Linux sidebar assistant\n- Be brief and use bullet points',
                         initValue: ChatGPT.assistantPrompt,
                         onChange: (self, newValue) => {
                             ChatGPT.assistantPrompt = newValue;
@@ -121,14 +136,16 @@ export const chatGPTSettings = MarginRevealer({
     })
 });
 
-export const openaiApiKeyInstructions = Box({
+export const OpenaiApiKeyInstructions = () => Box({
     homogeneous: true,
     children: [Revealer({
         transition: 'slide_down',
         transitionDuration: 150,
-        connections: [[ChatGPT, (self, hasKey) => {
-            self.revealChild = (ChatGPT.key.length == 0);
-        }, 'hasKey']],
+        setup: (self) => self
+            .hook(ChatGPT, (self, hasKey) => {
+                self.revealChild = (ChatGPT.key.length == 0);
+            }, 'hasKey')
+        ,
         child: Button({
             child: Label({
                 useMarkup: true,
@@ -145,7 +162,7 @@ export const openaiApiKeyInstructions = Box({
     })]
 });
 
-export const chatGPTWelcome = Box({
+const chatGPTWelcome = Box({
     vexpand: true,
     homogeneous: true,
     child: Box({
@@ -153,9 +170,9 @@ export const chatGPTWelcome = Box({
         vpack: 'center',
         vertical: true,
         children: [
-            chatGPTInfo,
-            openaiApiKeyInstructions,
-            chatGPTSettings, ``
+            ChatGPTInfo(),
+            OpenaiApiKeyInstructions(),
+            ChatGPTSettings(),
         ]
     })
 });
@@ -163,13 +180,13 @@ export const chatGPTWelcome = Box({
 export const chatContent = Box({
     className: 'spacing-v-15',
     vertical: true,
-    connections: [
-        [ChatGPT, (box, id) => {
+    setup: (self) => self
+        .hook(ChatGPT, (box, id) => {
             const message = ChatGPT.messages[id];
             if (!message) return;
-            box.add(ChatMessage(message, chatGPTView))
-        }, 'newMsg'],
-    ]
+            box.add(ChatMessage(message, 'ChatGPT'))
+        }, 'newMsg')
+    ,
 });
 
 const clearChat = () => {
@@ -197,7 +214,7 @@ export const chatGPTView = Scrollable({
         const vScrollbar = scrolledWindow.get_vscrollbar();
         vScrollbar.get_style_context().add_class('sidebar-scrollbar');
         // Avoid click-to-scroll-widget-to-view behavior
-        Utils.timeout(1, () => { 
+        Utils.timeout(1, () => {
             const viewport = scrolledWindow.child;
             viewport.set_focus_vadjustment(new Gtk.Adjustment(undefined));
         })

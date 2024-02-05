@@ -1,4 +1,5 @@
-import { App, Service, Utils, Widget } from '../../imports.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 const { execAsync, exec } = Utils;
 const { Box, EventBox, Label, Revealer, Overlay } = Widget;
 import { AnimatedCircProg } from '../../lib/animatedcircularprogress.js'
@@ -24,7 +25,9 @@ const ResourceValue = (name, icon, interval, valueUpdateCmd, displayFunc, props 
                     Label({
                         xalign: 1,
                         className: 'titlefont txt-norm txt-onSecondaryContainer',
-                        connections: [[interval, (label) => displayFunc(label)]]
+                        setup: (self) => self
+                            .poll(interval, (label) => displayFunc(label))
+                        ,
                     })
                 ]
             })
@@ -32,11 +35,13 @@ const ResourceValue = (name, icon, interval, valueUpdateCmd, displayFunc, props 
         Overlay({
             child: AnimatedCircProg({
                 className: 'bg-system-circprog',
-                connections: [[interval, (self) => {
-                    execAsync(['bash', '-c', `${valueUpdateCmd}`]).then((newValue) => {
-                        self.css = `font-size: ${Math.round(newValue)}px;`
-                    }).catch(print);
-                }]]
+                extraSetup: (self) => self
+                    .poll(interval, (self) => {
+                        execAsync(['bash', '-c', `${valueUpdateCmd}`]).then((newValue) => {
+                            self.css = `font-size: ${Math.round(newValue)}px;`
+                        }).catch(print);
+                    })
+                ,
             }),
             overlays: [
                 MaterialIcon(`${icon}`, 'hugeass'),
@@ -58,9 +63,9 @@ const resources = Box({
                         label.label = `${output}`
                     }).catch(print);
             }, { hpack: 'end' }),
-        ResourceValue('Swap', 'swap_horiz', 10000, `free | awk '/^Swap/ {printf("%.2f\\n", ($3/$2) * 100)}'`,
+        ResourceValue('Swap', 'swap_horiz', 10000, `free | awk '/^Swap/ {if ($2 > 0) printf("%.2f\\n", ($3/$2) * 100); else print "0";}'`,
             (label) => {
-                execAsync(['bash', '-c', `free -h | awk '/^Swap/ {print $3 " / " $2}' | sed 's/Gi/Gib/g'`])
+                execAsync(['bash', '-c', `free -h | awk '/^Swap/ {if ($2 != "0") print $3 " / " $2; else print "No swap"}' | sed 's/Gi/Gib/g'`])
                     .then((output) => {
                         label.label = `${output}`
                     }).catch(print);
@@ -109,11 +114,14 @@ const distroAndVersion = Box({
                 Label({
                     className: 'bg-distro-name',
                     xalign: 0,
-                    label: '<version>',
+                    label: 'An environment idk',
                     setup: (label) => {
-                        execAsync([`bash`, `-c`, `hyprctl version | grep -oP "Tag: v\\K\\d+\\.\\d+\\.\\d+"`]).then(distro => {
-                            label.label = `Hyprland ${distro}`;
-                        }).catch(print);
+                        // hyprctl will return unsuccessfully if Hyprland isn't running
+                        execAsync([`bash`, `-c`, `hyprctl version | grep -oP "Tag: v\\K\\d+\\.\\d+\\.\\d+"`]).then(version => {
+                            label.label = `Hyprland ${version}`;
+                        }).catch(() => execAsync([`bash`, `-c`, `sway -v | cut -d'-' -f1 | sed 's/sway version /v/'`]).then(version => {
+                            label.label = `Sway ${version}`;
+                        }).catch(print));
                     },
                 }),
             ]
@@ -143,7 +151,7 @@ export default () => Box({
                     const firstChild = child.get_children()[0];
                     firstChild.revealChild = !firstChild.revealChild;
                 }
-                
+
             },
         })
     ],

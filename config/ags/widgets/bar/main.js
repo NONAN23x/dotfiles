@@ -1,53 +1,75 @@
-const { Gdk, Gtk } = imports.gi;
-import { App, Service, Utils, Widget } from '../../imports.js';
-const { execAsync, exec } = Utils;
+const { Gtk } = imports.gi;
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
 
-import { ModuleLeftSpace } from "./leftspace.js";
-import { ModuleMusic } from "./music.js";
-import { ModuleRightSpace } from "./rightspace.js";
-import { ModuleSystem } from "./system.js";
-import ModuleWorkspaces from "./workspaces.js";
-import { RoundedCorner } from "../../lib/roundedcorner.js";
+import WindowTitle from "./spaceleft.js";
+import Indicators from "./spaceright.js";
+import Music from "./music.js";
+import System from "./system.js";
+import { RoundedCorner, enableClickthrough } from "../../lib/roundedcorner.js";
 
-const left = Widget.Box({
-    className: 'bar-sidemodule',
-    children: [
-        ModuleMusic()
-    ],
-});
+const OptionalWorkspaces = async () => {
+    try {
+        return (await import('./workspaces_hyprland.js')).default();
+    } catch {
+        try {
+            return (await import('./workspaces_sway.js')).default();
+        } catch {
+            return null;
+        }
+    }
+};
 
-const center = Widget.Box({
-    children: [
-        ModuleWorkspaces(),
-    ],
-});
-
-const right = Widget.Box({
-    className: 'bar-sidemodule',
-    children: [ModuleSystem()],
-});
-
-export default () => Widget.Window({
-    name: 'bar',
-    anchor: ['top', 'left', 'right'],
-    exclusivity: 'exclusive',
-    visible: true,
-    child: Widget.CenterBox({
+export const Bar = async (monitor = 0) => {
+    const SideModule = (children) => Widget.Box({
+        className: 'bar-sidemodule',
+        children: children,
+    });
+    const barContent = Widget.CenterBox({
         className: 'bar-bg',
-        startWidget: ModuleLeftSpace(),
-        centerWidget: Widget.Box({
-            className: 'spacing-h-4',
-            children: [
-                left,
-                center,
-                right,
-            ]
-        }),
-        endWidget: ModuleRightSpace(),
         setup: (self) => {
             const styleContext = self.get_style_context();
             const minHeight = styleContext.get_property('min-height', Gtk.StateFlags.NORMAL);
             // execAsync(['bash', '-c', `hyprctl keyword monitor ,addreserved,${minHeight},0,0,0`]).catch(print);
-        }
-    }),
+        },
+        startWidget: WindowTitle(),
+        centerWidget: Widget.Box({
+            className: 'spacing-h-4',
+            children: [
+                SideModule([Music()]),
+                Widget.Box({
+                    homogeneous: true,
+                    children: [await OptionalWorkspaces()],
+                }),
+                SideModule([System()]),
+            ]
+        }),
+        endWidget: Indicators(),
+    });
+    return Widget.Window({
+        monitor,
+        name: `bar${monitor}`,
+        anchor: ['top', 'left', 'right'],
+        exclusivity: 'exclusive',
+        visible: true,
+        child: barContent,
+    });
+}
+
+export const BarCornerTopleft = (id = '') => Widget.Window({
+    name: `barcornertl${id}`,
+    layer: 'top',
+    anchor: ['top', 'left'],
+    exclusivity: 'normal',
+    visible: true,
+    child: RoundedCorner('topleft', { className: 'corner', }),
+    setup: enableClickthrough,
+});
+export const BarCornerTopright = (id = '') => Widget.Window({
+    name: `barcornertr${id}`,
+    layer: 'top',
+    anchor: ['top', 'right'],
+    exclusivity: 'normal',
+    visible: true,
+    child: RoundedCorner('topright', { className: 'corner', }),
+    setup: enableClickthrough,
 });

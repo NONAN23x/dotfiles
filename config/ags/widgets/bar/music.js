@@ -1,16 +1,68 @@
-import { Service, Utils, Widget } from '../../imports.js';
+import Widget from 'resource:///com/github/Aylur/ags/widget.js';
+import * as Utils from 'resource:///com/github/Aylur/ags/utils.js';
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
-import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
-import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
+const { Box, Label, Overlay, Revealer } = Widget;
 const { execAsync, exec } = Utils;
 import { AnimatedCircProg } from "../../lib/animatedcircularprogress.js";
+import { MaterialIcon } from '../../lib/materialicon.js';
 import { showMusicControls } from '../../variables.js';
 
 function trimTrackTitle(title) {
-    var cleanedTitle = title;
-    cleanedTitle = cleanedTitle.replace(/【[^】]*】/, '');          // Remove stuff like【C93】 at beginning
-    cleanedTitle = cleanedTitle.replace(/\[FREE DOWNLOAD\]/g, ''); // Remove F-777's [FREE DOWNLOAD]
-    return cleanedTitle.trim();
+    if (!title) return '';
+    const cleanRegexes = [
+        /【[^】]*】/,         // Touhou n weeb stuff
+        /\[FREE DOWNLOAD\]/, // F-777
+    ];
+    cleanRegexes.forEach((expr) => title.replace(expr, ''));
+    return title;
+}
+
+const BarGroup = ({ child }) => Widget.Box({
+    className: 'bar-group-margin bar-sides',
+    children: [
+        Widget.Box({
+            className: 'bar-group bar-group-standalone bar-group-pad-system',
+            children: [child],
+        }),
+    ]
+});
+
+const BarResource = (name, icon, command) => {
+    const resourceCircProg = AnimatedCircProg({
+        className: 'bar-batt-circprog',
+        vpack: 'center',
+        hpack: 'center',
+    });
+    const resourceProgress = Overlay({
+        child: Widget.Box({
+            vpack: 'center',
+            className: 'bar-batt',
+            homogeneous: true,
+            children: [
+                MaterialIcon(icon, 'small'),
+            ],
+        }),
+        overlays: [resourceCircProg]
+    });
+    const resourceLabel = Label({
+        className: 'txt-smallie txt-onSurfaceVariant',
+    });
+    const widget = Box({
+        className: 'spacing-h-4 txt-onSurfaceVariant',
+        children: [
+            resourceLabel,
+            resourceProgress,
+        ],
+        setup: (self) => self
+            .poll(5000, () => execAsync(['bash', '-c', command])
+                .then((output) => {
+                    resourceCircProg.css = `font-size: ${Number(output)}px;`;
+                    resourceLabel.label = `${Math.round(Number(output))}%`;
+                    widget.tooltipText = `${name}: ${Math.round(Number(output))}%`;
+                }).catch(print))
+        ,
+    });
+    return widget;
 }
 
 const TrackProgress = () => {
@@ -23,68 +75,108 @@ const TrackProgress = () => {
     return AnimatedCircProg({
         className: 'bar-music-circprog',
         vpack: 'center', hpack: 'center',
-        connections: [ // Update on change/once every 3 seconds
-            [Mpris, _updateProgress],
-            [3000, _updateProgress]
-        ]
+        extraSetup: (self) => self
+            .hook(Mpris, _updateProgress)
+            .poll(3000, _updateProgress)
+        ,
     })
 }
 
-export const ModuleMusic = () => Widget.EventBox({ // TODO: use cairo to make button bounce smaller on click
-    onScrollUp: () => Hyprland.sendMessage(`dispatch workspace -1`),
-    onScrollDown: () => Hyprland.sendMessage(`dispatch workspace +1`),
-    onPrimaryClickRelease: () => showMusicControls.setValue(!showMusicControls.value),
-    onSecondaryClickRelease: () => execAsync(['bash', '-c', 'playerctl next || playerctl position `bc <<< "100 * $(playerctl metadata mpris:length) / 1000000 / 100"` &']),
-    onMiddleClickRelease: () => execAsync('playerctl play-pause').catch(print),
-    child: Widget.Box({
-        className: 'bar-group-margin bar-sides',
-        children: [
-            Widget.Box({
-                className: 'bar-group bar-group-standalone bar-group-pad-music spacing-h-10',
-                children: [
-                    Widget.Box({ // Wrap a box cuz overlay can't have margins itself
-                        homogeneous: true,
-                        children: [Widget.Overlay({
-                            child: Widget.Box({
-                                vpack: 'center',
-                                className: 'bar-music-playstate',
-                                homogeneous: true,
-                                children: [Widget.Label({
-                                    vpack: 'center',
-                                    className: 'bar-music-playstate-txt',
-                                    justification: 'center',
-                                    connections: [[Mpris, label => {
-                                        const mpris = Mpris.getPlayer('');
-                                        label.label = `${mpris !== null && mpris.playBackStatus == 'Playing' ? 'pause' : 'play_arrow'}`;
-                                    }]],
-                                })],
-                                connections: [[Mpris, label => {
-                                    const mpris = Mpris.getPlayer('');
-                                    if (!mpris) return;
-                                    label.toggleClassName('bar-music-playstate-playing', mpris !== null && mpris.playBackStatus == 'Playing');
-                                    label.toggleClassName('bar-music-playstate', mpris !== null || mpris.playBackStatus == 'Paused');
-                                }]],
-                            }),
-                            overlays: [
-                                TrackProgress(),
-                            ]
-                        })]
+const switchToRelativeWorkspace = async (self, num) => {
+    try {
+        const Hyprland = (await import('resource:///com/github/Aylur/ags/service/hyprland.js')).default;
+        Hyprland.sendMessage(`dispatch workspace ${num > 0 ? '+' : ''}${num}`);
+    } catch {
+        execAsync([`${App.configDir}/scripts/sway/swayToRelativeWs.sh`, `${num}`]).catch(print);
+    }
+}
+
+export default () => {
+    // TODO: use cairo to make button bounce smaller on click, if that's possible
+    const playingState = Widget.Box({ // Wrap a box cuz overlay can't have margins itself
+        homogeneous: true,
+        children: [Widget.Overlay({
+            child: Widget.Box({
+                vpack: 'center',
+                className: 'bar-music-playstate',
+                homogeneous: true,
+                children: [Widget.Label({
+                    vpack: 'center',
+                    className: 'bar-music-playstate-txt',
+                    justification: 'center',
+                    setup: (self) => self.hook(Mpris, label => {
+                        const mpris = Mpris.getPlayer('');
+                        label.label = `${mpris !== null && mpris.playBackStatus == 'Playing' ? 'pause' : 'play_arrow'}`;
                     }),
-                    Widget.Scrollable({
-                        hexpand: true,
-                        child: Widget.Label({
-                            className: 'txt-smallie txt-onSurfaceVariant',
-                            connections: [[Mpris, label => {
-                                const mpris = Mpris.getPlayer('');
-                                if (mpris)
-                                    label.label = `${trimTrackTitle(mpris.trackTitle)} • ${mpris.trackArtists.join(', ')}`;
-                                else
-                                    label.label = 'No media';
-                            }]],
-                        })
-                    })
-                ]
-            })
+                })],
+                setup: (self) => self.hook(Mpris, label => {
+                    const mpris = Mpris.getPlayer('');
+                    if (!mpris) return;
+                    label.toggleClassName('bar-music-playstate-playing', mpris !== null && mpris.playBackStatus == 'Playing');
+                    label.toggleClassName('bar-music-playstate', mpris !== null || mpris.playBackStatus == 'Paused');
+                }),
+            }),
+            overlays: [
+                TrackProgress(),
+            ]
+        })]
+    });
+    const trackTitle = Widget.Scrollable({
+        hexpand: true,
+        child: Widget.Label({
+            className: 'txt-smallie txt-onSurfaceVariant',
+            setup: (self) => self.hook(Mpris, label => {
+                const mpris = Mpris.getPlayer('');
+                if (mpris)
+                    label.label = `${trimTrackTitle(mpris.trackTitle)} • ${mpris.trackArtists.join(', ')}`;
+                else
+                    label.label = 'No media';
+            }),
+        })
+    })
+    const musicStuff = Box({
+        className: 'spacing-h-10',
+        hexpand: true,
+        children: [
+            playingState,
+            trackTitle,
         ]
     })
-});
+    const systemResources = BarGroup({
+        child: Box({
+            children: [
+                BarResource('RAM Usage', 'memory', `free | awk '/^Mem/ {printf("%.2f\\n", ($3/$2) * 100)}'`),
+                Revealer({
+                    revealChild: true,
+                    transition: 'slide_left',
+                    transitionDuration: 200,
+                    child: Box({
+                        className: 'spacing-h-10 margin-left-10',
+                        children: [
+                            BarResource('Swap Usage', 'swap_horiz', `free | awk '/^Swap/ {if ($2 > 0) printf("%.2f\\n", ($3/$2) * 100); else print "0";}'`),
+                            BarResource('CPU Usage', 'settings_motion_mode', `top -bn1 | grep Cpu | awk '{print $2}'`),
+                        ]
+                    }),
+                    setup: (self) => self.hook(Mpris, label => {
+                        const mpris = Mpris.getPlayer('');
+                        self.revealChild = (!mpris);
+                    }),
+                })
+            ],
+        })
+    });
+    return Widget.EventBox({
+        onScrollUp: (self) => switchToRelativeWorkspace(self, -1),
+        onScrollDown: (self) => switchToRelativeWorkspace(self, +1),
+        onPrimaryClickRelease: () => showMusicControls.setValue(!showMusicControls.value),
+        onSecondaryClickRelease: () => execAsync(['bash', '-c', 'playerctl next || playerctl position `bc <<< "100 * $(playerctl metadata mpris:length) / 1000000 / 100"` &']),
+        onMiddleClickRelease: () => execAsync('playerctl play-pause').catch(print),
+        child: Box({
+            className: 'spacing-h-5',
+            children: [
+                BarGroup({ child: musicStuff }),
+                systemResources,
+            ]
+        })
+    });
+}
