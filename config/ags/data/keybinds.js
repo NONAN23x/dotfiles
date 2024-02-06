@@ -49,7 +49,7 @@ export const keybindList = [[
             { "keys": ["", "OR", "", "+", "Tab"], "action": "Toggle overview/launcher" },
             { "keys": ["Ctrl", "", "+", "R"], "action": "Restart AGS" },
             { "keys": ["", "+", "/"], "action": "Toggle this cheatsheet" },
-            { "keys": ["", "+", "N"], "action": "Toggle system sidebar" },
+            { "keys": ["", "+", "H"], "action": "Toggle system sidebar" },
             { "keys": ["", "+", "B", "OR", "", "+", "O"], "action": "Toggle utilities sidebar" },
             { "keys": ["", "+", "K"], "action": "Toggle virtual keyboard" },
             { "keys": ["Ctrl", "Alt", "+", "Del"], "action": "Power/Session menu" },
@@ -101,9 +101,9 @@ export const keybindList = [[
         "icon": "apps",
         "name": "Apps",
         "binds": [
-            { "keys": ["", "+", "T"], "action": "Launch terminal: foot" },
-            { "keys": ["", "+", "W"], "action": "Launch browser: Firefox" },
-            { "keys": ["", "+", "C"], "action": "Launch editor: vscode" },
+            { "keys": ["", "+", "Q"], "action": "Launch terminal: foot" },
+            { "keys": ["", "+", "B"], "action": "Launch browser: Google Chrome" },
+            { "keys": ["", "+", "C"], "action": "Launch calculator" },
             { "keys": ["", "+", "X"], "action": "Launch editor: GNOME Text Editor" },
             { "keys": ["", "+", "I"], "action": "Launch settings: GNOME Control center" }
         ],
@@ -129,6 +129,7 @@ export const keybindList = [[
             { "keys": [">badapple"], "action": "Apply black n' white colorscheme" },
             { "keys": [">color"], "action": "Pick acccent color" },
             { "keys": [">todo"], "action": "Type something after that to add a To-do item" },
+            { "keys": [">blur"], "action": "Blur on or off" },
         ],
         "appeartick": 3
     }
