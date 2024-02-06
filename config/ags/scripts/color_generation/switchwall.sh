@@ -21,8 +21,7 @@ else
     # ags run-js "wallpaper.set('')"
     # sleep 0.1 && ags run-js "wallpaper.set('${imgpath}')" &
     swww img "$imgpath" --transition-step 100 --transition-fps 60 \
-    --transition-type grow --transition-angle 30 --transition-duration 1 \
-    --transition-pos "$cursorposx, $cursorposy_inverted"
+    --transition-type any --transition-duration 2
 fi
 
 # Generate colors for ags n stuff
@@ -32,7 +31,6 @@ wal -q -e -i ${imgpath}
 rm $HOME/.wallpapers/currentWall
 ln -s ${imgpath} $HOME/.wallpapers/currentWall
 pywal-discord
-convert ~/.wallpapers/currentWall -crop 1920x1200+800+500 ~/.config/rofi/bannerImage.jpg
 
 # change cava colors
 # Read the colors from lines 10 and 11 of colors.txt

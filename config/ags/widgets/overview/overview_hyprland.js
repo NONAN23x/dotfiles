@@ -14,7 +14,7 @@ const { execAsync, exec } = Utils;
 import { setupCursorHoverGrab } from "../../lib/cursorhover.js";
 import { dumpToWorkspace, swapWorkspace } from "./actions.js";
 
-const OVERVIEW_SCALE = 0.18;
+const OVERVIEW_SCALE = 0.09;
 const NUM_OF_WORKSPACE_ROWS = 2;
 const NUM_OF_WORKSPACE_COLS = 5;
 const OVERVIEW_WS_NUM_SCALE = 0.09;

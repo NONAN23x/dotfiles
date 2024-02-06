@@ -40,6 +40,15 @@ export function launchCustomCommand(command) {
     else if (args[0] == '>pywal') { // Dark mode
         execAsync([`bash`, `-c`, `mkdir -p ${GLib.get_user_cache_dir()}/ags/user && echo "pywal" > ${GLib.get_user_cache_dir()}/ags/user/colorbackend.txt`]).catch(print);
     }
+    else if (args[0] == '>blur') { // Todo
+    if (args.length !== 2) {
+        return;
+    }
+    if (args[1] !== 'on' && args[1] !== 'off') {
+        return;
+    }
+    execAsync([`bash`, `-c`, `${App.configDir}/scripts/blur_toggle.sh ${args[1]}`, `&`]).catch(print);
+    }
     else if (args[0] == '>todo') { // Todo
         Todo.add(args.slice(1).join(' '));
     }
