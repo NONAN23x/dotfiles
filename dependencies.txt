@@ -1,0 +1,24 @@
+hyprland 
+xdg-desktop-portal-hyprland 
+swww 
+waybar 
+swaync 
+wlogout 
+gtklock 
+kitty 
+swappy 
+grim 
+slurp 
+pamixer 
+brightnessctl 
+network-manager-applet 
+gvfs 
+gvfs-smb 
+file-roller 
+ttf-jetbrains-mono-nerd 
+ttf-nerd-fonts-symbols 
+pywal-git zathura-pywal 
+adw-gtk3 
+lsd 
+neofetch 
+bat
