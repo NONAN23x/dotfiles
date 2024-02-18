@@ -13,6 +13,13 @@ const BATTERY_LOW = 20;
 const WEATHER_CACHE_FOLDER = `${GLib.get_user_cache_dir()}/ags/weather`;
 Utils.exec(`mkdir -p ${WEATHER_CACHE_FOLDER}`);
 
+let WEATHER_CITY = '';
+try {
+    WEATHER_CITY = GLib.getenv('AGS_WEATHER_CITY');
+} catch (e) {
+    print(e);
+}
+
 const BatBatteryProgress = () => {
     const _updateProgress = (circprog) => { // Set circular progress value
         circprog.css = `font-size: ${Math.abs(Battery.percent)}px;`
@@ -135,14 +142,14 @@ const BarGroup = ({ child }) => Widget.Box({
 const BatteryModule = () => Stack({
     transition: 'slide_up_down',
     transitionDuration: 150,
-    items: [
-        ['laptop', Box({
+    children: {
+        'laptop': Box({
             className: 'spacing-h-5', children: [
                 BarGroup({ child: Utilities() }),
                 BarGroup({ child: BarBattery() }),
             ]
-        })],
-        ['desktop', BarGroup({
+        }),
+        'desktop': BarGroup({
             child: Box({
                 hexpand: true,
                 hpack: 'center',
@@ -155,15 +162,24 @@ const BatteryModule = () => Stack({
                 ],
                 setup: (self) => self.poll(900000, async (self) => {
                     const WEATHER_CACHE_PATH = WEATHER_CACHE_FOLDER + '/wttr.in.txt';
-                    Utils.execAsync('curl ipinfo.io')
+                    const updateWeatherForCity = (city) => execAsync(`curl https://wttr.in/${city}?format=j1`)
                         .then(output => {
-                            return JSON.parse(output)['city'].toLowerCase();
-                        })
-                        .then((city) => execAsync(`curl https://wttr.in/${city}?format=j1`)
-                            .then(output => {
-                                const weather = JSON.parse(output);
-                                Utils.writeFile(JSON.stringify(weather), WEATHER_CACHE_PATH)
-                                    .catch(print);
+                            const weather = JSON.parse(output);
+                            Utils.writeFile(JSON.stringify(weather), WEATHER_CACHE_PATH)
+                                .catch(print);
+                            const weatherCode = weather.current_condition[0].weatherCode;
+                            const weatherDesc = weather.current_condition[0].weatherDesc[0].value;
+                            const temperature = weather.current_condition[0].temp_C;
+                            const feelsLike = weather.current_condition[0].FeelsLikeC;
+                            const weatherSymbol = WEATHER_SYMBOL[WWO_CODE[weatherCode]];
+                            self.children[0].label = weatherSymbol;
+                            self.children[1].label = `${temperature}℃ • Feels like ${feelsLike}℃`;
+                            self.tooltipText = weatherDesc;
+                        }).catch((err) => {
+                            try { // Read from cache
+                                const weather = JSON.parse(
+                                    Utils.readFile(WEATHER_CACHE_PATH)
+                                );
                                 const weatherCode = weather.current_condition[0].weatherCode;
                                 const weatherDesc = weather.current_condition[0].weatherDesc[0].value;
                                 const temperature = weather.current_condition[0].temp_C;
@@ -172,27 +188,24 @@ const BatteryModule = () => Stack({
                                 self.children[0].label = weatherSymbol;
                                 self.children[1].label = `${temperature}℃ • Feels like ${feelsLike}℃`;
                                 self.tooltipText = weatherDesc;
-                            }).catch((err) => {
-                                try { // Read from cache
-                                    const weather = JSON.parse(
-                                        Utils.readFile(WEATHER_CACHE_PATH)
-                                    );
-                                    const weatherCode = weather.current_condition[0].weatherCode;
-                                    const weatherDesc = weather.current_condition[0].weatherDesc[0].value;
-                                    const temperature = weather.current_condition[0].temp_C;
-                                    const feelsLike = weather.current_condition[0].FeelsLikeC;
-                                    const weatherSymbol = WEATHER_SYMBOL[WWO_CODE[weatherCode]];
-                                    self.children[0].label = weatherSymbol;
-                                    self.children[1].label = `${temperature}℃ • Feels like ${feelsLike}℃`;
-                                    self.tooltipText = weatherDesc;
-                                } catch (err) {
-                                    print(err);
-                                }
-                            }));
+                            } catch (err) {
+                                print(err);
+                            }
+                        });
+                    if (WEATHER_CITY != '' && WEATHER_CITY != null) {
+                        updateWeatherForCity(WEATHER_CITY);
+                    }
+                    else {
+                        Utils.execAsync('curl ipinfo.io')
+                            .then(output => {
+                                return JSON.parse(output)['city'].toLowerCase();
+                            })
+                            .then(updateWeatherForCity);
+                    }
                 }),
             })
-        })],
-    ],
+        }),
+    },
     setup: (stack) => Utils.timeout(10, () => {
         if (!Battery.available) stack.shown = 'desktop';
         else stack.shown = 'laptop';

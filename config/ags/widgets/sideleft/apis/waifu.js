@@ -72,12 +72,12 @@ const WaifuImage = (taglist) => {
         homogeneous: false,
         transition: 'slide_up_down',
         transitionDuration: 150,
-        items: [
-            ['api', ImageState('api', 'Calling API')],
-            ['download', ImageState('downloading', 'Downloading image')],
-            ['done', ImageState('done', 'Finished!')],
-            ['error', ImageState('error', 'Error')],
-        ]
+        children: {
+            'api': ImageState('api', 'Calling API'),
+            'download': ImageState('downloading', 'Downloading image'),
+            'done': ImageState('done', 'Finished!'),
+            'error': ImageState('error', 'Error'),
+        },
     });
     const downloadIndicator = MarginRevealer({
         vpack: 'center',
@@ -414,6 +414,14 @@ export const sendMessage = (text) => {
             waifuContent.add(newImage);
             Utils.timeout(IMAGE_REVEAL_DELAY, () => newImage.attribute.update(
                 DummyTag(300, 400, 'https://chino.pages.dev/chino', '#B2AEF3'),
+                true
+            ));
+        }
+        else if (text.startsWith('/place')) {
+            const newImage = WaifuImage(['/place']);
+            waifuContent.add(newImage);
+            Utils.timeout(IMAGE_REVEAL_DELAY, () => newImage.attribute.update(
+                DummyTag(400, 600, 'https://placewaifu.com/image/400/600', '#F0A235'),
                 true
             ));
         }

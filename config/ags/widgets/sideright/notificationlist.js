@@ -20,7 +20,7 @@ export default (props) => {
                     vertical: true,
                     className: 'spacing-v-5',
                     children: [
-                        MaterialIcon('notifications_active', 'badonkers'),
+                        MaterialIcon('notifications_active', 'gigantic'),
                         Label({ label: 'No notifications', className: 'txt-small' }),
                     ]
                 }),
@@ -122,10 +122,10 @@ export default (props) => {
     const listContents = Stack({
         transition: 'crossfade',
         transitionDuration: 150,
-        items: [
-            ['empty', notifEmptyContent],
-            ['list', notifList]
-        ],
+        children: {
+            'empty': notifEmptyContent,
+            'list': notifList,
+        },
         setup: (self) => self
             .hook(Notifications, (self) => self.shown = (Notifications.notifications.length > 0 ? 'list' : 'empty'))
         ,
