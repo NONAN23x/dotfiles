@@ -47,6 +47,8 @@ else
     gradience-cli monet -n "pywal" -p ${imgpath} --theme dark
     gradience-cli apply -n "pywal"
     gradience-cli flatpak-overrides -e both
+    killall ags && ags & disown
+    sleep 1 && killall swaync && swaync & disown
 
 fi
 

@@ -13,19 +13,27 @@ const date = Variable("", {
 // then you can simply instantiate one by calling it
 //
 
-function Workspaces() {
-    const activeId = hyprland.active.workspace.bind("id")
-    const workspaces = hyprland.bind("workspaces")
-        .as(ws => ws.map(({ id }) => Widget.Button({
-            on_clicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
-            child: Widget.Label(`${id}`),
-            class_name: activeId.as(i => `${i === id ? "focused" : ""}`),
-        })))
+function StaticWorkspaces() {
+    const activeId = hyprland.active.workspace.bind("id");
+    const workspaceButtons = [];
+
+    for (let i = 1; i <= 10; i++) {
+        // Generate each workspace button
+        const workspaceButton = Widget.Button({
+            on_clicked: () => hyprland.messageAsync(`dispatch workspace ${i}`),
+            child: Widget.Label(`${i}`),
+            // Determine if this workspace is the active one and apply the "focused" class accordingly
+            class_name: activeId.as(active => active === i ? "focused" : ""),
+        });
+        workspaceButtons.push(workspaceButton);
+    }
 
     return Widget.Box({
         class_name: "workspaces",
-        children: workspaces,
-    })
+        children: workspaceButtons,
+        // Assuming horizontal layout for the workspace buttons; adjust as needed
+        vertical: false,
+    });
 }
 
 
@@ -44,6 +52,49 @@ function Clock() {
     })
 }
 
+function VolumeCircularProgress() {
+    const icons = {
+        101: "overamplified",
+        67: "high",
+        34: "medium",
+        1: "low",
+        0: "muted",
+    };
+
+    function getIcon() {
+        const icon = audio.speaker.is_muted ? 0 : [101, 67, 34, 1, 0].find(
+            threshold => threshold <= audio.speaker.volume * 100);
+
+        return `audio-volume-${icons[icon]}-symbolic`;
+    }
+
+    const volumeProgress = Widget.CircularProgress({
+        class_name: "volume-circular-progress",
+        rounded: true,
+        value: audio.speaker.bind("volume"),
+        child: Widget.Icon({
+            icon: Utils.watch(getIcon(), audio.speaker, getIcon),
+            size: 15,
+         }),
+        setup: self => {
+            // Update the progress value and icon when the volume changes
+            self.hook(audio.speaker, () => {
+                self.value = audio.speaker.volume;
+                // self.icon = getIcon();
+            });
+        },
+    });
+
+    // This icon represents the volume level and mute state, updated dynamically.
+    const icon = Widget.Icon({
+        icon: Utils.watch(getIcon(), audio.speaker, getIcon),
+    });
+
+    return Widget.Box({
+        class_name: "volume-circular",
+        children: [volumeProgress],
+    });
+}
 
 function Volume() {
     const icons = {
@@ -65,20 +116,8 @@ function Volume() {
         icon: Utils.watch(getIcon(), audio.speaker, getIcon),
     })
     
-    const progress = Widget.CircularProgress({
-        css: 'min-width: 50px;'  // its size is min(min-height, min-width)
-            + 'min-height: 50px;'
-            + 'font-size: 6px;' // to set its thickness set font-size on it
-            + 'margin: 4px;' // you can set margin on it
-            + 'background-color: #131313;' // set its bg color
-            + 'color: aqua;', // set its fg color
-        rounded: false,
-        inverted: false,
-        startAt: 0.75,
-        value: audio.speaker.volume,
-    })
-
     const slider = Widget.Slider({
+        class_name: "volume-slider",
         hexpand: true,
         draw_value: false,
         on_change: ({ value }) => audio.speaker.volume = value,
@@ -96,22 +135,6 @@ function Volume() {
 
 
 function BatteryLabel() {
-    // const value = battery.bind("percent").as(p => p > 0 ? p / 100 : 0)
-    // const icon = battery.bind("percent").as(p =>
-        // `battery-level-${Math.floor(p / 10) * 10}-symbolic`)
-//
-    // return Widget.Box({
-        // class_name: "battery",
-        // visible: battery.bind("available"),
-        // children: [
-            // Widget.Icon({ icon }),
-            // Widget.LevelBar({
-                // widthRequest: 140,
-                // vpack: "center",
-                // value,
-            // }),
-        // ],
-    // })
     return Widget.CircularProgress({
     css: 'min-width: 34px;'  // its size is min(min-height, min-width)
         + 'min-height: 34px;'
@@ -151,7 +174,6 @@ function Left() {
     return Widget.Box({
         spacing: 8,
         children: [
-            Workspaces(),
             ClientTitle(),
         ],
     })
@@ -162,6 +184,7 @@ function Center() {
         spacing: 8,
         children: [
             // Media(),
+            StaticWorkspaces(),
         ],
     })
 }
@@ -171,7 +194,7 @@ function Right() {
         hpack: "end",
         spacing: 8,
         children: [
-            Volume(),
+            VolumeCircularProgress(),
             BatteryLabel(),
             Clock(),
             SysTray(),
@@ -186,7 +209,7 @@ function Bar(monitor = 0) {
         monitor,
         anchor: ["top", "left", "right"],
         exclusivity: "exclusive",
-        margins: [16, 16, 0, 16],
+        margins: [14, 14, 0, 14],
         child: Widget.CenterBox({
             start_widget: Left(),
             center_widget: Center(),

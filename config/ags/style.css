@@ -1,46 +1,60 @@
+@import url('/home/nonan23x/.cache/wal/colors-waybar.css');
+
 
 * {
-  font-family: "Lexend";
+  font-family: "Gabarito";
   /* min-height: 26px; */
 }
 
 window.bar {
-    background-color: rgba(28, 28, 28, 0.8);
+    background-color: @color0;
+    opacity: 0.8;
     color: @theme_fg_color;
-    border-radius: 18px;
+    border-radius: 24px;
     /* padding: 12px; */
 }
 
 button {
     min-width: 0;
-    padding-top: 0;
-    padding-bottom: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
     background-color: transparent;
+    border-radius: 24px;
+    margin: 4px 2px;
 }
 
 button:active {
-    background-color: @theme_selected_bg_color;
+    background-color: @color9;
 }
 
 button:hover {
-    border-bottom: 3px solid @theme_fg_color;
+    border: 1px solid @color4;
 }
 
 label {
   font-size: 18px;
-    /* font-weight: bold; */
+  color: @color14;
 }
 
+.workspaces button {
+  border-radius: 24px;
+  /* margin: 4px 0px; */
+}
 .workspaces button.focused {
-    border-bottom: 2px solid @theme_selected_bg_color;
+    /* border: 2px solid @color13; */
+    background-color: @color2;
 }
 
 .client-title {
-    color: @theme_selected_bg_color;
+    color: @color14;
 }
 
-.notification {
-    color: yellow;
+.volume-circular {
+  min-height: 34px;
+  min-width: 34px;
+  font-size: 4px;
+  margin: 2px;
+  color: @color9;  
 }
 
 levelbar block,
