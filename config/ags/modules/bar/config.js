@@ -1,4 +1,3 @@
-
 const hyprland = await Service.import("hyprland")
 const audio = await Service.import("audio")
 const battery = await Service.import("battery")
@@ -8,6 +7,10 @@ const date = Variable("", {
     poll: [1000, 'date "+%I:%M %p"'],
 })
 
+const weather = Variable("", {
+    // Poll every 10 minutes (600,000 milliseconds)
+    poll: [600000, '/home/nonan23x/.config/ags/scripts/fetch_weather.sh'],
+});
 // widgets can be only assigned as a child in one container
 // so to make a reuseable widget, make it a function
 // then you can simply instantiate one by calling it
@@ -41,9 +44,16 @@ function ClientTitle() {
     return Widget.Label({
         class_name: "client-title",
         label: hyprland.active.client.bind("title"),
+        truncate: 'end',
+        useMarkup: true,
     })
 }
 
+function Weather() {
+  return Widget.Label({
+    label: weather.bind(),
+  })
+}
 
 function Clock() {
     return Widget.Label({
@@ -51,6 +61,24 @@ function Clock() {
         label: date.bind(),
     })
 }
+
+// function Media() {
+    // const label = Utils.watch("", mpris, "player-changed", () => {
+        // if (mpris.players[0]) {
+            // const { track_artists, track_title } = mpris.players[0]
+            // return `${track_artists.join(", ")} - ${track_title}`
+        // } else {
+            // return "Nothing is playing"
+        // }
+    // })
+
+    // return Widget.Button({
+        // on_primary_click: () => mpris.getPlayer("")?.playPause(),
+        // on_scroll_up: () => mpris.getPlayer("")?.next(),
+        // on_scroll_down: () => mpris.getPlayer("")?.previous(),
+        // child: Widget.Label({ label, truncate:'end', class_name:"media"}),
+    // })
+// }
 
 function VolumeCircularProgress() {
     const icons = {
@@ -183,7 +211,6 @@ function Center() {
     return Widget.Box({
         spacing: 8,
         children: [
-            // Media(),
             StaticWorkspaces(),
         ],
     })
@@ -197,6 +224,7 @@ function Right() {
             VolumeCircularProgress(),
             BatteryLabel(),
             Clock(),
+            Weather(),
             SysTray(),
         ],
     })

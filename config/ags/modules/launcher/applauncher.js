@@ -25,7 +25,7 @@ const AppItem = app => Widget.Button({
     }),
 })
 
-const Applauncher = ({ width = 500, height = 500, spacing = 12 }) => {
+const Applauncher = ({ width = 380, height = 480, spacing = 8 }) => {
     // list of application buttons
     let applications = query("").map(AppItem)
 
@@ -45,7 +45,7 @@ const Applauncher = ({ width = 500, height = 500, spacing = 12 }) => {
     // search entry
     const entry = Widget.Entry({
         hexpand: true,
-        css: `margin-bottom: ${spacing}px;`,
+        css: `margin-bottom: ${spacing}px; border-radius:28px`,
 
         // to launch the first item on Enter
         on_accept: () => {
@@ -104,4 +104,5 @@ export const applauncher = Widget.Window({
         height: 500,
         spacing: 12,
     }),
+    class_name: 'menu'
 })

@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/nonan23x/.wallpapers/currentWall",
+    "alpha": "100",
+    "special": {
+        "background": "#091110",
+        "foreground": "#d9e1b4",
+        "cursor": "#d9e1b4"
+    },
+    "colors": {
+        "color0": "#091110",
+        "color1": "#4C7444",
+        "color2": "#518441",
+        "color3": "#568A4A",
+        "color4": "#6E9E52",
+        "color5": "#8DB55E",
+        "color6": "#A6C86D",
+        "color7": "#d9e1b4",
+        "color8": "#979d7d",
+        "color9": "#4C7444",
+        "color10": "#518441",
+        "color11": "#568A4A",
+        "color12": "#6E9E52",
+        "color13": "#8DB55E",
+        "color14": "#A6C86D",
+        "color15": "#d9e1b4"
+    }
+}

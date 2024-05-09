@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/nonan23x/.wallpapers/b142280fnjvb1.png",
+    "alpha": "100",
+    "special": {
+        "background": "#060104",
+        "foreground": "#e3a8c7",
+        "cursor": "#e3a8c7"
+    },
+    "colors": {
+        "color0": "#060104",
+        "color1": "#5C1349",
+        "color2": "#74144A",
+        "color3": "#665061",
+        "color4": "#9B1A53",
+        "color5": "#9D214C",
+        "color6": "#E72068",
+        "color7": "#e3a8c7",
+        "color8": "#9e758b",
+        "color9": "#5C1349",
+        "color10": "#74144A",
+        "color11": "#665061",
+        "color12": "#9B1A53",
+        "color13": "#9D214C",
+        "color14": "#E72068",
+        "color15": "#e3a8c7"
+    }
+}

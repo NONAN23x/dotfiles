@@ -44,11 +44,16 @@ else
     # ██║╚██╔╝██║██║   ██║██║╚██╗██║██╔══╝     ██║   
     # ██║ ╚═╝ ██║╚██████╔╝██║ ╚████║███████╗   ██║   
     # ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝
-    gradience-cli monet -n "pywal" -p ${imgpath} --theme dark
-    gradience-cli apply -n "pywal"
-    gradience-cli flatpak-overrides -e both
-    killall ags && ags & disown
+    flatpak run --command=gradience-cli com.github.GradienceTeam.Gradience access-file --allow ${imgpath}
+    flatpak run --command=gradience-cli com.github.GradienceTeam.Gradience monet -n "pywal" -p ${imgpath} --theme dark
+    flatpak run --command=gradience-cli com.github.GradienceTeam.Gradience apply -n "pywal"
+    flatpak run --command=gradience-cli com.github.GradienceTeam.Gradience flatpak-overrides -e both
+    # killall ags && ags & disown
     sleep 1 && killall swaync && swaync & disown
+    # ags run-js 'openColorScheme.value = true; Utils.timeout(2000, () => openColorScheme.value = false);'
+    #
+    ags run-js "App.resetCss(); App.applyCss('${HOME}/.config/ags/style.css');"
+
 
 fi
 
