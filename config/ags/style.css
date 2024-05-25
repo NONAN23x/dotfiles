@@ -1,0 +1,86 @@
+@define-color background #181926;
+
+
+* {
+  font-family: "JetBrainsMono Nerd Font";
+}
+
+window.bar {
+    background-color: @background;
+    color: @theme_fg_color;
+    border-radius: 18px;
+}
+
+button {
+    min-width: 14px;
+    min-height: 14px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+
+    border-radius: 24px;
+    margin: 4px 2px;
+    background-color: #494d64;
+}
+
+button:active {
+    background-color: #8087a2;
+}
+
+button:hover {
+    border: 1px solid #b7bdf8;
+}
+
+label {
+  font-size: 14px;
+  color: #b8c0e0;
+  min-height: 24px;
+}
+
+.workspaces {
+  border-radius: 28px;
+  /* border: solid 1px @foreground; */
+  background-color: @color0;
+  /* margin: 8px; */
+}
+.workspaces button {
+  border-radius: 28px;
+  background-color: #6e738d;
+  /* margin: 4px 0px; */
+}
+.workspaces button.focused {
+    /* border: 2px solid @color13; */
+    background-color: #363a4f;
+}
+
+.client-title {
+  border-radius: 28px;
+  background-color: #494d64;
+  color: gray;
+  padding: 4px;
+  margin: 4px;
+}
+
+.volume-circular-progress {
+  min-height: 34px;
+  min-width: 34px;
+  font-size: 4px;
+  margin: 4px 2px;
+  color: @color9;  
+}
+
+.battery-circular-progress {
+  min-height: 34px;
+  min-width: 34px;
+  font-size: 4px;
+  margin: 2px;
+  color: @color9;  
+}
+
+.clock {
+  padding: 4px;
+  margin: 4px;
+}
+levelbar block,
+highlight {
+    padding: 24px;
+}

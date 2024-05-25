@@ -75,6 +75,11 @@
       "default": "none",
       "enum": ["background", "bottom", "top", "overlay", "none"]
     },
+    "control-center-exclusive-zone": {
+      "type": "boolean",
+      "description": "Whether or not the control center should follow the compositors exclusive zones. An example would be setting it to \"false\" to cover your panel/dock.",
+      "default": true
+    },
     "notification-2fa-action": {
       "type": "boolean",
       "description": "If each notification should display a 'COPY \"1234\"' action",
@@ -87,7 +92,7 @@
     },
     "notification-icon-size": {
       "type": "integer",
-      "description": "The notification icon size (in pixels)",
+      "description": "The notification icon size (in pixels). The app icon size is 1/3",
       "default": 64,
       "minimum": 16
     },
@@ -128,6 +133,11 @@
       "description": "If the control center should expand to both edges of the screen",
       "default": true
     },
+    "relative-timestamps": {
+      "type": "boolean",
+      "description": "Display notification timestamps relative to now e.g. \"26 minutes ago\". If false, a local iso8601-formatted absolute timestamp is displayed.",
+      "default": true
+    },
     "control-center-height": {
       "type": "integer",
       "description": "Height of the control center in pixels. Ignored when 'fit-to-screen' is set to 'true'",
@@ -147,7 +157,7 @@
     },
     "image-visibility": {
       "type": "string",
-      "description": "An explanation about the purpose of this instance.",
+      "description": "The notification image visibility when no icon is available.",
       "default": "when-available",
       "enum": ["always", "when-available", "never"]
     },
@@ -285,7 +295,7 @@
       "default": ["inhibitors", "title", "dnd", "notifications"],
       "items": {
         "type": "string",
-        // Sadly can't use regex and enums at the same time. Fix in the future?
+        "$comment": "Sadly can't use regex and enums at the same time. Fix in the future?",
         "pattern": "^[a-zA-Z0-9_-]{1,}(#[a-zA-Z0-9_-]{1,}){0,1}?$"
       }
     },
@@ -293,10 +303,10 @@
       "type": "object",
       "description": "Configure specific widget properties.",
       "additionalProperties": false,
+      "$comment": "New widgets go here in \"patternProperties\" ↓",
       "patternProperties": {
-        // New widgets go here
         "^title(#[a-zA-Z0-9_-]{1,}){0,1}?$": {
-          // References the widget structure from "widgets" below
+          "$comment": "References the widget structure from \"widgets\" below",
           "$ref": "#/widgets/title"
         },
         "^dnd(#[a-zA-Z0-9_-]{1,}){0,1}?$": {
@@ -321,14 +331,14 @@
           "$ref": "#/widgets/backlight"
         },
         "^inhibitors(#[a-zA-Z0-9_-]{1,}){0,1}?$": {
-          // References the widget structure from "widgets" below
+          "$comment": "References the widget structure from \"widgets\" below",
           "$ref": "#/widgets/inhibitors"
         }
       }
     }
   },
   "widgets": {
-    // New widgets go here
+    "$comment": "New widgets go here",
     "title": {
       "type": "object",
       "description": "Control Center Title Widget",
@@ -392,8 +402,14 @@
         },
         "image-radius": {
           "type": "integer",
-          "description": "The border radius of the album art",
+          "description": "The border radius of the album art. Will be overriden by setting the border-radius in the style.css for the \".widget-mpris-album-art\" class",
+
           "default": 12
+        },
+        "blur": {
+          "type": "bool",
+          "description": "Appy the artwork as the MPRIS background and blur it",
+          "default": true
         }
       }
     },
@@ -417,6 +433,22 @@
                 "type": "string",
                 "description": "Command to be executed on click",
                 "default": ""
+              },
+              "type": {
+                "type": "string",
+                "description": "Type of the button; toggle buttons receive the .active css class and an env variable 'SWAYNC_TOGGLE_STATE' is set. See example in the default config.json",
+                "default": "normal",
+                "enum": ["normal", "toggle"]
+              },
+              "update-command": {
+                "type": "string",
+                "description": "Command to be executed on visibility change of cc to update the active state of the toggle button (should echo true or false)",
+                "default": ""
+              },
+              "active": {
+                  "type": "bool",
+                  "description": "Wether the toggle button is active as default or not",
+                  "default": false
               }
             }
           }
@@ -492,6 +524,16 @@
           "type": "boolean",
           "default": false,
           "description": "Show per app volume control"
+        },
+        "show-per-app-icon": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show application icon in per app control"
+        },
+        "show-per-app-label": {
+          "type": "boolean",
+          "default": false,
+          "description": "Show application name in per app control"
         },
         "empty-list-label": {
           "type": "string",

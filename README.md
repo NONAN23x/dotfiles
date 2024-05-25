@@ -1,6 +1,6 @@
 # dotfiles
 
-![alt text](images/output.png "Rice")
+![alt text](assets/images/output.png "Rice")
 
 > Strawberry Branch UwU :)
 
@@ -14,8 +14,3 @@ The above dependencies assume that you already have a working and configured Arc
 > :memo: **Installation:**
 Read the script before you execute it!!!
 `./install.sh`
-
-> :bulb: **Attributions**
-
-- Hybridised [@linuxmobile](https://github.com/linuxmobile) and [@end-4](https://github.com/end-4) dots with my narative and a little magic :)
-- Thanks to [@adi1090x](https://github.com/adii1090x) for the rofi configs !
