@@ -7,12 +7,12 @@
     "layer-shell": true,
     "cssPriority": "application",
     "control-center-margin-top": 16,
-    "control-center-margin-bottom": 16,
-    "control-center-margin-right": 6,
+    "control-center-margin-bottom": 8,
+    "control-center-margin-right": 8,
     "control-center-margin-left": 0,
-    "notification-icon-size": 64,
-    "notification-body-image-height": 100,
-    "notification-body-image-width": 200,
+    "notification-icon-size": 54,
+    "notification-body-image-height": 80,
+    "notification-body-image-width": 180,
     "timeout": 10,
     "timeout-low": 5,
     "timeout-critical": 0,
@@ -70,7 +70,7 @@
                 },
                 {
                     "label": "󰌾",
-                    "command": "gtklock"
+                    "command": "hyprlock"
                 },
                 {
                     "label": "󰏥",
@@ -79,14 +79,6 @@
                 {
                     "label": "󰕾",
                     "command": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
-                },
-                {
-                    "label": "󰍬",
-                    "command": "hyprshade toggle bluefilter"
-                },
-                {
-                    "label": "󰏘",
-                    "command": "bash $HOME/.scripts/wall.sh"
                 }
             ]
         }
