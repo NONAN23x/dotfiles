@@ -1,0 +1,91 @@
+version = 3
+final_space = true
+
+[palette]
+  blue = '#8AADF4'
+  lavender = '#B7BDF8'
+  maroon = '#eba0ac'
+  os = '#ACB0BE'
+  pink = '#ca76cb'
+  text = '#494D88'
+  wight = '#FFFFFF'
+  mauve = '#c6a0f6'
+  green = '#a6d189'
+  red = '#ed8796'
+  teal = '#94e2d5'
+  base = '#1e1e2e'
+  peach = '#f5a97f'
+
+[upgrade]
+  source = 'github'
+  interval = '168h'
+  auto = false
+  notice = true
+
+[transient_prompt]
+  foreground_templates = [
+    "{{if gt .Code 0}}red{{end}}",
+    "{{if eq .Code 0}}magenta{{end}}",
+  ]
+  background = 'transparent'
+  template = '{{ .UserName }}@{{ .HostName }}  '
+
+[secondary_prompt]
+  background = 'transparent'
+  foreground = 'p:wight'
+  template = " "
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    template = ' '
+    foreground = 'p:wight'
+    powerline_symbol = ''
+    background = 'p:pink'
+    type = 'os'
+    style = 'diamond'
+
+  [[blocks.segments]]
+    template = '{{ .UserName }} {{ .HostName }}'
+    foreground = 'p:base'
+    powerline_symbol = ''
+    background = 'p:pink'
+    type = 'session'
+    style = 'diamond'
+
+  [[blocks.segments]]
+    template = ' {{ .Path }}'
+    foreground = 'p:text'
+    powerline_symbol = ''
+    background = 'p:mauve'
+    type = 'path'
+    style = 'powerline'
+
+    [blocks.segments.properties]
+      folder_icon = '  '
+      home_icon = ' ~'
+      style = 'agnoster_short'
+
+  [[blocks.segments]]
+    template = ' {{ .HEAD }}'
+    foreground = 'p:text'
+    powerline_symbol = ''
+    background = 'p:green'
+    type = 'git'
+    style = 'powerline'
+
+    [blocks.segments.properties]
+      branch_icon = ' '
+      cherry_pick_icon = ' '
+      commit_icon = ' '
+      fetch_status = false
+      fetch_upstream_icon = false
+      merge_icon = ' '
+      no_commits_icon = ' '
+      rebase_icon = ' '
+      revert_icon = ' '
+      tag_icon = ' '
