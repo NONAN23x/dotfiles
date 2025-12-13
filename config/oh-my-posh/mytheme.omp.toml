@@ -50,7 +50,7 @@ final_space = true
     style = 'diamond'
 
   [[blocks.segments]]
-    template = '{{ .UserName }} {{ .HostName }}'
+    template = '{{ .UserName }}@{{ .HostName }}'
     foreground = 'p:base'
     powerline_symbol = ''
     background = 'p:pink'
