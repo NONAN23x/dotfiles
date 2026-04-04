@@ -1,0 +1,124 @@
+onsole_title_template = '{{ .Folder }}'
+version = 3
+
+[transient_prompt]
+  foreground_templates = [
+    "{{if gt .Code 0}}red{{end}}",
+    "{{if eq .Code 0}}magenta{{end}}",
+  ]
+  background = 'transparent'
+  template = '{{ .UserName }}@{{ .HostName }}: '
+
+[upgrade]
+  source = 'cdn'
+  interval = '168h'
+  auto = false
+  notice = false
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    leading_diamond = '<#BFA8BF> </> '
+    template = '{{ .UserName }} @ notebook'
+    foreground = '#BBC4B9'
+    type = 'session'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      display_host = true
+
+  [[blocks.segments]]
+    template = '<#fff>{{ .UpstreamIcon }}</>{{ .HEAD }}'
+    foreground = '#BFA8BF'
+    type = 'git'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      branch_icon = ' '
+      fetch_status = true
+      fetch_upstream_icon = true
+      fetch_worktree_count = true
+
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+
+  [[blocks.segments]]
+    foreground = '#fff'
+    type = 'text'
+    style = 'plain'
+
+  [[blocks.segments]]
+    template = ' <#BBC4B9>{{ .FormattedMs }}s</> <#fff>󰇝</>'
+    foreground = '#fff'
+    type = 'executiontime'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      style = 'dallas'
+      threshold = 0.0
+
+  [[blocks.segments]]
+    template = ' {{ .CurrentDate | date .Format }} '
+    foreground = '#BBC4B9'
+    type = 'time'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      time_format = 'Monday <#fff>at</> 3:04 PM'
+
+  [[blocks.segments]]
+    template = ' '
+    type = 'root'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      root_icon = ' '
+
+  [[blocks.segments]]
+    template = ' <#fff></> {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }} '
+    foreground = '#BBC4B9'
+    type = 'node'
+    style = 'diamond'
+
+  # [[blocks.segments]]
+    # template = ' <#fff>󰍛</> {{ round .PhysicalPercentUsed .Precision }}% ({{ (div ((sub .PhysicalTotalMemory .PhysicalAvailableMemory)|float64) 1073741824.0) }}/{{ (div .PhysicalTotalMemory 1073741824.0) }}) GB'
+    # foreground = '#BBC4B9'
+    # type = 'sysinfo'
+    # style = 'diamond'
+
+    # [blocks.segments.properties]
+      # precision = 0
+
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    # leading_diamond = '<#BFA8BF>~</>'
+    template = '  {{ .Path }}'
+    foreground = '#B6D6F2'
+    type = 'path'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      folder_icon = '/'
+      folder_separator_icon = ' / '
+      home_icon = 'home'
+      style = 'agnoster_full'
+
+  [[blocks.segments]]
+    template = ' ~ '
+    foreground = '#BFA8BF'
+    type = 'status'
+    style = 'plain'
+    foreground_templates = ['{{ if gt .Code 0 }}#fff{{ end }}']
+
+    [blocks.segments.properties]
+      always_enabled = true

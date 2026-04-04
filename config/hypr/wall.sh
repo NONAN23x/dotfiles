@@ -41,14 +41,14 @@ wal -q -i ~/.wallpapers/currentWall -p "Material_You"
 pywal-discord
 
 # material you colour scheme for gtk applications
-gradience-cli monet -n "Material_You" -p "/home/nonan23x/.wallpapers/currentWall" --theme dark
+gradience-cli monet -n "Material_You" -p "$HOME/.wallpapers/currentWall" --theme dark
 gradience-cli apply -n "Material_You"
 gradience-cli flatpak-overrides -e both
 
 # generate colors for borders
 dominantCol=$(jq '.colors.color4' $HOME/.config/wal/colorschemes/dark/Material_You.json)
 active_border_color=$(echo "$dominantCol" | tr -d '"#')
-sed -i "s/col.active_border = .*/col.active_border = rgb($active_border_color)/" /home/nonan23x/.config/hypr/colors.conf
+sed -i "s/col.active_border = .*/col.active_border = rgb($active_border_color)/" $HOME/.config/hypr/colors.conf
 
 
 # change cava colors
