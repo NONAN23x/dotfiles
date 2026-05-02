@@ -1,39 +1,47 @@
+console_title_template = '{{ .Folder }}'
 version = 3
-final_space = true
 
 [palette]
-  blue = '#8AADF4'
-  lavender = '#B7BDF8'
+  rosewater = '#f5e0dc'
+  flamingo = '#f2cdcd'
+  pink = '#f5c2e7'
+  mauve = '#cba6f7'
+  red = '#f38ba8'
   maroon = '#eba0ac'
-  os = '#ACB0BE'
-  pink = '#ca76cb'
-  text = '#494D88'
-  wight = '#FFFFFF'
-  mauve = '#c6a0f6'
-  green = '#a6d189'
-  red = '#ed8796'
+  peach = '#fab387'
+  yellow = '#f9e2af'
+  green = '#a6e3a1'
   teal = '#94e2d5'
+  sky = '#89dceb'
+  sapphire = '#74c7ec'
+  blue = '#89b4fa'
+  lavender = '#b4befe'
+  text = '#cdd6f4'
+  subtext1 = '#bac2de'
+  subtext0 = '#a6adc8'
+  overlay2 = '#9399b2'
+  overlay1 = '#7f849c'
+  overlay0 = '#6c7086'
+  surface2 = '#585b70'
+  surface1 = '#45475a'
+  surface0 = '#313244'
   base = '#1e1e2e'
-  peach = '#f5a97f'
-
-[upgrade]
-  source = 'github'
-  interval = '168h'
-  auto = false
-  notice = true
+  mantle = '#181825'
+  crust = '#11111b'
 
 [transient_prompt]
   foreground_templates = [
-    "{{if gt .Code 0}}red{{end}}",
-    "{{if eq .Code 0}}magenta{{end}}",
+    "{{if gt .Code 0}}p:red{{end}}",
+    "{{if eq .Code 0}}p:mauve{{end}}",
   ]
   background = 'transparent'
-  template = '{{ .UserName }}@{{ .HostName }}  '
+  template = '<p:blue>{{ .UserName }}</><p:overlay1>@</><p:teal>{{ .HostName }}</> ❯ '
 
-[secondary_prompt]
-  background = 'transparent'
-  foreground = 'p:wight'
-  template = " "
+[upgrade]
+  source = 'cdn'
+  interval = '168h'
+  auto = false
+  notice = false
 
 [[blocks]]
   type = 'prompt'
@@ -41,51 +49,173 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
-    leading_diamond = ''
-    template = ' '
-    foreground = 'p:wight'
-    powerline_symbol = ''
-    background = 'p:pink'
-    type = 'os'
-    style = 'diamond'
-
-  [[blocks.segments]]
-    template = '{{ .UserName }}@{{ .HostName }}'
-    foreground = 'p:base'
-    powerline_symbol = ''
-    background = 'p:pink'
-    type = 'session'
-    style = 'diamond'
-
-  [[blocks.segments]]
-    template = ' {{ .Path }}'
+    template = '{{ if .SSHSession }}󰣀 {{ end }}<p:blue>{{ .UserName }}</><p:overlay1> @ </><p:teal>{{ .HostName }}</> '
     foreground = 'p:text'
-    powerline_symbol = ''
-    background = 'p:mauve'
-    type = 'path'
-    style = 'powerline'
+    background = 'transparent'
+    type = 'session'
+    style = 'plain'
 
     [blocks.segments.properties]
-      folder_icon = '  '
-      home_icon = ' ~'
-      style = 'agnoster_short'
+      display_host = true
 
   [[blocks.segments]]
-    template = ' {{ .HEAD }}'
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '󰾆 <p:green>{{ round .PhysicalPercentUsed .Precision }}%</>'
     foreground = 'p:text'
-    powerline_symbol = ''
-    background = 'p:green'
+    background = 'p:surface1'
+    type = 'sysinfo'
+    style = 'diamond'
+    timeout = 100
+
+    [blocks.segments.cache]
+      duration = '10s'
+      strategy = 'device'
+
+    [blocks.segments.properties]
+      precision = 0
+
+  [[blocks.segments]]
+    template = '  '
+    background = 'transparent'
+    type = 'text'
+    style = 'plain'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '󰔛 <p:flamingo>{{ .FormattedMs }}s</>'
+    foreground = 'p:text'
+    background = 'p:surface1'
+    type = 'executiontime'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      style = 'dallas'
+      threshold = 1000
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '󰞀'
+    foreground = 'p:crust'
+    background = 'p:red'
+    type = 'root'
+    style = 'diamond'
+
+    [blocks.segments.properties]
+      root_icon = ' '
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '󰎙 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}'
+    foreground = 'p:crust'
+    background = 'p:teal'
+    type = 'node'
+    style = 'diamond'
+    timeout = 100
+
+    [blocks.segments.properties]
+      cache_duration = '5m'
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '󰌠 {{ .Full }}'
+    foreground = 'p:crust'
+    background = 'p:sapphire'
+    type = 'python'
+    style = 'diamond'
+    timeout = 100
+
+    [blocks.segments.properties]
+      cache_duration = '5m'
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '󰟓 {{ .Full }}'
+    foreground = 'p:crust'
+    background = 'p:blue'
+    type = 'go'
+    style = 'diamond'
+    timeout = 100
+
+    [blocks.segments.properties]
+      cache_duration = '5m'
+
+  [[blocks.segments]]
+    template = '  󰃭 <p:lavender>{{ .CurrentDate | date .Format }}</> '
+    foreground = 'p:text'
+    background = 'transparent'
+    type = 'time'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      time_format = 'Monday <#f2cdcd>at</> 3:04 PM'
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    template = '󰉋 {{ .Path }} '
+    foreground = 'p:blue'
+    background = 'transparent'
+    type = 'path'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      folder_icon = '/'
+      folder_separator_icon = ' / '
+      home_icon = 'home'
+      style = 'agnoster_full'
+
+  [[blocks.segments]]
+    template = ' '
+    background = 'transparent'
+    type = 'text'
+    style = 'plain'
+
+  [[blocks.segments]]
+    leading_diamond = ''
+    trailing_diamond = ''
+    template = '<p:rosewater>{{ .UpstreamIcon }}</>{{ .HEAD }}{{if .BranchStatus}} {{ .BranchStatus }}{{ end }}'
+    foreground = 'p:text'
+    background = 'p:surface0'
+    background_templates = [
+      '{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:maroon{{ end }}',
+      '{{ if gt .Ahead 0 }}p:teal{{ end }}',
+      '{{ if gt .Behind 0 }}p:peach{{ end }}'
+    ]
     type = 'git'
-    style = 'powerline'
+    style = 'diamond'
+    timeout = 200
+
+    [blocks.segments.cache]
+      duration = '2s'
+      strategy = 'folder'
 
     [blocks.segments.properties]
       branch_icon = ' '
-      cherry_pick_icon = ' '
-      commit_icon = ' '
       fetch_status = false
-      fetch_upstream_icon = false
-      merge_icon = ' '
-      no_commits_icon = ' '
-      rebase_icon = ' '
-      revert_icon = ' '
-      tag_icon = ' '
+      fetch_upstream_icon = true
+
+  [[blocks.segments]]
+    template = ' ❯ '
+    foreground = 'p:mauve'
+    type = 'status'
+    style = 'plain'
+    foreground_templates = [
+      '{{ if gt .Code 0 }}p:red{{ end }}',
+      '{{ if and (eq .Code 0) .Root }}p:yellow{{ end }}'
+    ]
+
+    [blocks.segments.properties]
+      always_enabled = true
