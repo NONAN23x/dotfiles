@@ -20,11 +20,11 @@ version = 3
 
 [transient_prompt]
   foreground_templates = [
-    "{{ if gt .Code 0 }}p:love{{ end }}",
-    "{{ if eq .Code 0 }}p:iris{{ end }}",
+    "{{ if gt .Code 0 }}#eb6f92{{ end }}",
+    "{{ if eq .Code 0 }}#c4a7e7{{ end }}",
   ]
   background = 'transparent'
-  template = '{{ if .SSHSession }}<p:foam>󰣀 {{ .UserName }}@{{ .HostName }}</> {{ else }}<p:iris>{{ .UserName }}</> {{ end }}<p:muted>❯</> '
+  template = '{{ .UserName }}@{{ .HostName }} ❯ '
 
 [upgrade]
   source = 'cdn'
