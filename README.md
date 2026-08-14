@@ -2,6 +2,8 @@
 
 Personal Linux dotfiles for a KDE-first workflow with optional Hyprland support. The repository contains the terminal, shell, prompt, editor, multiplexer, and file manager configuration used in this setup.
 
+![Long terminal setup](assets/images/output.png "Long terminal setup")
+
 ![Terminal setup](assets/images/redRose.png "Terminal setup")
 
 > The screenshots show an earlier rice. The `main` branch contains the current configurations. The `icicle-jellypop` branch keeps the older wallpaper-focused setup.
